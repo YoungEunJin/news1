@@ -11,7 +11,7 @@
 <title>아침 7시 브리핑</title>
 <meta name="description" content="매일 아침 정리하는 국내외 뉴스 카드뉴스와 오늘의 경제 개념">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 /* Layout: one reading column. Masthead, four tabs (날짜별 / 주제별 / 이슈 타래 / 경제 개념).
    Each day opens with a swipeable card-news strip; days older than a week fold into weekly bundles. */
@@ -114,7 +114,16 @@ details.tv summary{cursor:pointer}
 .mast h1{font-family:var(--display);font-weight:800;font-size:clamp(32px,9vw,46px);line-height:1.15;margin:.15em 0 .2em;text-wrap:balance}
 .mast p{margin:0;color:var(--muted);font-size:14.5px}
 .mast .meta{margin-top:10px;font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
-.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:6px;flex-wrap:wrap;padding-block:10px;border-bottom:1px solid var(--line)}
+.navbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-block:10px;display:grid;gap:10px}
+.sec{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sec button{font:inherit;text-align:left;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);border-radius:12px;padding:8px 12px;cursor:pointer;display:grid;gap:1px;min-width:0}
+.sec button b{font-weight:800;font-size:16px;letter-spacing:-.02em}
+.sec button span{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sec button[aria-selected="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.sec button[aria-selected="true"] b{color:var(--accent)}
+.sec button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.navbar.en .tabs{display:none}
 .tabs button{font:inherit;font-size:13.5px;color:var(--fg);border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 13px;cursor:pointer}
 .tabs button[aria-selected="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
 .tabs button:focus-visible,.chips button:focus-visible,.cn-nav button:focus-visible,.card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -198,7 +207,7 @@ details.week .day:last-child{border-bottom:0}
 .concepts ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
 .concepts li a{display:flex;gap:10px;align-items:baseline;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:8px;color:var(--fg);text-decoration:none;font-size:14.5px;min-width:0}
 .concepts li a:hover{border-color:var(--accent)}
-.day,[id^="c-"],[id^="a-"],.issue{scroll-margin-top:64px}
+.day,[id^="c-"],[id^="a-"],.issue,#weekly{scroll-margin-top:136px}
 
 /* ---- category illustrations ---- */
 :root{--k0b:#E3ECF6;--k0f:#2D68A8;--k1b:#E8E4F7;--k1f:#5B4BC4;--k2b:#E2F2EA;--k2f:#1E7A4C;--k3b:#F6E6DC;--k3f:#B5622B;--k4b:#F3E9D2;--k4f:#8A6A12;--k5b:#DDEFF2;--k5f:#1F7C88;--k6b:#E6E9F7;--k6f:#3B4FA8;--k7b:#F7E3EC;--k7f:#B0436E;--k8b:#E0F0F7;--k8f:#1F6E99}
@@ -344,7 +353,108 @@ h4{font-weight:700;letter-spacing:-.015em}
 .modal p{margin:0;font-size:13.5px;color:var(--muted)}
 .modal button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:10px;background:var(--accent);color:var(--on-accent);cursor:pointer}
 
+/* ---- english study ---- */
+:root{--mark:#FFE9A8;--serif:"Source Serif 4",Georgia,"Times New Roman",serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--mark:#5A4A12}}
+:root[data-theme="dark"]{--mark:#5A4A12}
+.vbox{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:6px}
+.vhead{display:flex;align-items:baseline;gap:8px;margin-bottom:10px}
+.vhead b{font-weight:800;font-size:16px}
+.vhead span{font-size:13px;color:var(--muted)}
+.vlist{list-style:none;margin:0;padding:0;display:grid}
+.vlist li{display:grid;grid-template-columns:3.6em 1fr;gap:10px;padding:8px 0;border-top:1px dashed var(--line);font-size:14.5px;min-width:0}
+.vlist .vt{font-family:var(--serif);font-weight:700;font-size:16px}
+.vlist .vm{color:var(--muted);margin-left:6px;font-size:13.5px}
+.vlist a{color:inherit;text-decoration:none;min-width:0}
+.vlist a:hover .vt{color:var(--accent)}
+.vmore{font:inherit;font-size:13px;margin-top:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:999px;padding:4px 12px;cursor:pointer}
+.en-day{padding-block:24px 8px;border-bottom:2px solid var(--fg);scroll-margin-top:90px}
+.en-date{font-family:var(--display);font-weight:800;letter-spacing:-.03em;font-size:clamp(20px,5.5vw,26px);margin:0}
+.en-focus{margin:8px 0 0;font-family:var(--serif);font-size:19px;font-weight:600;line-height:1.4}
+.en-focus span{font-family:var(--body);font-size:11.5px;font-weight:700;color:var(--on-accent);background:var(--accent);border-radius:4px;padding:1px 7px;margin-right:8px;vertical-align:3px}
+.en-day>.lede{margin:6px 0 0;color:var(--muted);font-size:14.5px}
+.en-chips{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0 0;padding:0;list-style:none}
+.en-chips li{font-family:var(--serif);font-size:14px;background:var(--mark);color:var(--fg);border-radius:6px;padding:2px 9px}
+.en-day details.full section{display:flex;flex-direction:column;gap:14px;padding-block:18px;border-bottom:1px solid var(--line)}
+.en-day details.full section h3{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.025em;margin:0}
+.en-day h4{font-family:var(--serif);font-weight:700;font-size:19px;line-height:1.3;margin:2px 0 4px}
+.en-day h5{font-size:15px;margin:6px 0 4px}
+.x-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.x-intro{color:var(--muted)}
+.x-news{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.x-news::before{display:none}
+.x-en{font-family:var(--serif);font-size:17px;line-height:1.65;margin:0}
+.x-ko{margin:0}
+.x-diff{font-size:13.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px;margin:0}
+.x-src{font-size:13.5px;display:flex;flex-direction:column;gap:2px}
+.x-src span{color:var(--muted)}
+.x-src a,.en-day a{color:var(--accent);word-break:break-word}
+.x-step{border-top:2px solid var(--fg);padding-top:12px;display:flex;flex-direction:column;gap:10px}
+.x-step p{margin:0}
+.x-article{font-family:var(--serif);font-size:18px;line-height:1.75;display:flex;flex-direction:column;gap:12px}
+.x-meta{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.en-day ol,.en-day ul.x-vocab,.en-day ol.x-shadow{margin:0}
+.x-vocab{list-style:none;padding:0;display:flex;flex-direction:column;gap:12px}
+.x-vocab li{display:grid;gap:3px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.x-term{font-family:var(--serif);font-weight:700;font-size:18px}
+.x-term small{font-family:var(--body);font-weight:500;font-size:14.5px;color:var(--accent);margin-left:6px}
+.x-ex{font-family:var(--serif);font-style:italic}
+.x-exko{font-size:13.5px;color:var(--muted)}
+.x-shadow{list-style:none;padding:0;display:flex;flex-direction:column;gap:12px}
+.x-shadow li{background:var(--accent-soft);border-radius:10px;padding:12px 14px}
+.x-s{font-family:var(--serif);font-size:18px;line-height:1.7}
+.x-s b{background:var(--mark);padding:0 2px;border-radius:2px}
+.x-t{font-size:13.5px;color:var(--muted);margin-top:4px}
+.x-speak{background:var(--surface);border:1px solid var(--accent);border-radius:12px;padding:16px}
+.x-q{font-family:var(--serif);font-size:19px;font-weight:600;margin:0}
+.en-day details:not(.full){background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+.en-day details:not(.full) summary{cursor:pointer;font-weight:700;color:var(--accent)}
+
+
+
+/* ==== Palette 2026: theme = Pantone Cloud Dancer (11-4201, #F0EEE9) + ink;
+        contrast pair = raspberry (news) vs emerald (english) ==== */
+:root{--paper:#F0EEE9;--ink:#1E1D1B;
+  --bg:#F0EEE9;--surface:#FBFAF7;--fg:#1E1D1B;--muted:#66625C;--line:#DAD6CE;--chip:#E7E3DB;
+  --accent:#C2306A;--accent-soft:#F6E0E8;--on-accent:#FFFFFF;--warm:#A82A5C;--warm-soft:#EDE6DA;
+  --cover-bg:#1E1D1B;--cover-fg:#F0EEE9;--cover-mute:#A9A49B;
+  --news:#C2306A;--news-soft:#F6E0E8;--eng:#1C7A58;--eng-soft:#DCEEE5}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#1E1D1B;--ink:#F0EEE9;
+  --bg:#141312;--surface:#1F1E1C;--fg:#F0EEE9;--muted:#A9A49B;--line:#34322F;--chip:#2B2927;
+  --accent:#F27CA6;--accent-soft:#3A1D29;--on-accent:#2A0A16;--warm:#F59BBC;--warm-soft:#2A2622;
+  --cover-bg:#2A2826;--cover-fg:#F0EEE9;--cover-mute:#A9A49B;
+  --news:#F27CA6;--news-soft:#3A1D29;--eng:#5FCB9E;--eng-soft:#173027;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#1E1D1B;--ink:#F0EEE9;
+  --bg:#141312;--surface:#1F1E1C;--fg:#F0EEE9;--muted:#A9A49B;--line:#34322F;--chip:#2B2927;
+  --accent:#F27CA6;--accent-soft:#3A1D29;--on-accent:#2A0A16;--warm:#F59BBC;--warm-soft:#2A2622;
+  --cover-bg:#2A2826;--cover-fg:#F0EEE9;--cover-mute:#A9A49B;
+  --news:#F27CA6;--news-soft:#3A1D29;--eng:#5FCB9E;--eng-soft:#173027;color-scheme:dark}
+/* english scope uses the contrast color */
+.sec button[data-sec="english"],body.en-mode #p-english,body.en-mode .totop,body.en-mode .tabs{--accent:var(--eng);--accent-soft:var(--eng-soft)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .sec button[data-sec="english"],:root:not([data-theme="light"]) body.en-mode #p-english,:root:not([data-theme="light"]) body.en-mode .totop{--on-accent:#04231A}}
+:root[data-theme="dark"] .sec button[data-sec="english"],:root[data-theme="dark"] body.en-mode #p-english,:root[data-theme="dark"] body.en-mode .totop{--on-accent:#04231A}
+.sec button[data-sec="news"]{--accent:var(--news);--accent-soft:var(--news-soft)}
+/* masthead = theme block (ink + cloud dancer), neutral, no section color */
+.mast{background:var(--ink);color:var(--paper);border-radius:20px;padding:22px 20px 20px;margin-top:6px;border-bottom:0}
+.mast .kicker{color:var(--paper);opacity:.7}
+.mast h1{color:var(--paper)}
+.mast .hook{color:var(--paper)}
+.mast .sub{color:var(--paper);opacity:.72}
+.mast .meta span{background:transparent;border-color:color-mix(in srgb,var(--paper) 30%,transparent);color:var(--paper)}
+.mast .meta b{color:var(--paper)}
+.navbar{margin-top:12px}
+
 .site-foot{font-size:12.5px;color:var(--muted);padding-block:18px 8px;border-top:1px solid var(--line);margin-top:24px}
+.hbars{display:grid;gap:9px}
+.hbar{display:grid;grid-template-columns:minmax(0,8.5em) 1fr 3.4em;gap:8px;align-items:center;font-size:13px;cursor:default}
+.hbar .lbl{color:var(--muted);line-height:1.35}
+.hbar .tr{display:block;height:12px;background:var(--grid);border-radius:4px;overflow:hidden}
+.hbar .fl{display:block;height:100%;min-width:3px;background:var(--deem);border-radius:4px}
+.hbar.hl .fl{background:var(--s1)}
+.hbar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.hbar:focus{outline:2px solid var(--accent);outline-offset:2px}
+.quiz{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:12px}
+.quiz summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:14px;margin-top:6px}
 @media (prefers-reduced-motion:reduce){details.full>summary::before{transition:none}.cn-track{scroll-behavior:auto}}
 </style>
 
@@ -353,22 +463,654 @@ h4{font-weight:700;letter-spacing:-.015em}
   <div class="kicker">MORNING NEWS · DAILY 07:00</div>
   <h1>아침 7시 브리핑</h1>
   <p class="hook">커피 식기 전에 끝나는 뉴스.</p>
-  <p class="sub">카드 몇 장 넘기면 오늘 세상 정리 끝.<br>경제 개념은 하루에 딱 하나씩, 쌓이는 맛으로.</p>
-  <div class="meta" id="meta">지금까지 10일치 브리핑</div>
+  <p class="sub">카드 몇 장 넘기면 오늘 세상 정리 끝.<br>경제 개념 하나, 영어 표현 다섯 개는 덤.</p>
+  <div class="meta" id="meta">지금까지 14일치 브리핑</div>
 </header>
-<div class="tabs" role="tablist" aria-label="보기 방식">
+<div class="navbar">
+<div class="sec" role="tablist" aria-label="섹션">
+  <button role="tab" type="button" data-sec="news" aria-selected="true"><b>뉴스 브리핑</b><span>국내외 뉴스 · 경제 개념</span></button>
+  <button role="tab" type="button" data-sec="english" aria-selected="false"><b>영어 공부</b><span>영어 뉴스 · 표현 · 쉐도잉</span></button>
+</div>
+<div class="tabs" role="tablist" aria-label="뉴스 보기 방식">
   <button role="tab" id="t-date" aria-controls="p-date" aria-selected="true">날짜별</button>
   <button role="tab" id="t-topic" aria-controls="p-topic" aria-selected="false">주제별</button>
   <button role="tab" id="t-issue" aria-controls="p-issue" aria-selected="false">이슈 타래</button>
   <button role="tab" id="t-concept" aria-controls="p-concept" aria-selected="false">경제 개념</button>
 </div>
+</div>
 
 <div id="p-date" role="tabpanel" aria-labelledby="t-date">
 <div id="weekly"></div>
 <!--DAYS:START-->
+<!--DAY 2026-10-16 START-->
+<div class="day" id="d-2026-10-16">
+  <div class="day-head"><h2 class="day-title">2026년 10월 16일 금요일</h2><span class="new">최신</span></div>
+  <p class="lede">어제(15일) 코스피가 7.57% 폭락해 5,554까지 떨어졌어. 코스피·코스닥 둘 다 서킷브레이커로 20분씩 거래가 멈췄고, 10월 2일 7,000선에서 7거래일 만에 약 21%가 날아갔어. 미국 물가가 예상보다 높게 나온 게 불을 붙였지. 정부 44개 기관의 세종 이전 계획, 인천 흉기난동 뒤 범죄 대책, 호르무즈 선박 침몰까지 금요일 아침 핵심만. 참, 청년미래적금 2차 신청은 오늘 마감이야.</p>
+  <div class="tiles" aria-label="오늘의 숫자">
+  <div class="tile"><span class="tag">경제</span><div class="lb">코스피 종가 (15일)</div><div class="v">5,554</div><div class="d">−7.57%, 7거래일 연속 하락</div></div>
+  <div class="tile"><span class="tag">경제</span><div class="lb">외국인 순매도 (15일)</div><div class="v">4.8<small>조 원</small></div><div class="d">8거래일 연속, 10월 누적 17.8조</div></div>
+  <div class="tile"><span class="tag">해외</span><div class="lb">미국 9월 소비자물가</div><div class="v">3.7<small>%</small></div><div class="d">예상 3.6%, 8월 3.4%</div></div>
+  <div class="tile"><span class="tag">국내</span><div class="lb">세종 2차 이전 기관</div><div class="v">44<small>곳</small></div><div class="d">공무원 약 9,929명, 2031년까지</div></div>
+</div>
+  <div class="five">
+  <h3>오늘 꼭 기억할 5줄</h3>
+  <ol>
+    <li>코스피가 7.57% 폭락해 5,554로 마감했어. 장중 8% 넘게 빠지며 코스피·코스닥에 서킷브레이커가 동시에 걸렸고(올해 5번째), 외국인은 8거래일 연속 팔아 10월에만 17.8조 원을 팔았어. 금융위는 "빚내서 투자하는 건 위험하다"고 경고했어.</li>
+    <li>방아쇠는 미국 9월 물가: 3.7%로 예상(3.6%)보다 높았어. 휘발유가 한 달 새 9.1% 뛴 영향이 크고, 이달 말(27~28일) 연준 금리 인상 가능성이 커졌어.</li>
+    <li>정부가 금융위·개인정보위·방미통위 등 44개 기관(약 9,900명)을 세종으로 옮기는 2차 이전 계획을 내놨어. 내년 상반기 6곳부터 시작해 2031년까지.</li>
+    <li>인천 흉기난동(9명 피해, 19세 여성 의식불명) 범인이 전자발찌 착용자로 드러나, 청와대가 범죄 대책회의를 열었어. 29세 이하 고용보험 가입자는 49개월째 줄었어.</li>
+    <li>오늘의 경제 개념은 '서킷브레이커'. 지수가 8% 넘게 떨어지면 시장 전체를 20분 멈추는 비상 브레이크야. 멈췄다고 그날 장이 끝나는 건 아니야.</li>
+  </ol>
+</div>
+  <details class="full" open><summary>전체 브리핑 접기/펼치기</summary>
+<section>
+  <h3>📰 오늘의 주요 뉴스</h3>
+
+  <div class="group">국내</div>
+
+  <article id="a-2026-10-16-1" data-cat="경제·증시" data-issue="코스피 흐름" data-me="신용·미수로 산 주식은 급락장에 강제로 팔릴 수 있어. 빚투는 피하기.">
+    <h4><span class="upd">새 전개</span>'검은 목요일' 코스피 7.57% 폭락 5,554… 코스피·코스닥 서킷브레이커 동시 발동</h4>
+    <p>14일 소폭(−0.44%) 내렸던 코스피가 15일엔 454.59포인트(7.57%) 떨어진 5,554.22로 마감했어. 코스닥도 7.65% 내린 760.82. 오전엔 사이드카가, 낮 12시 20~30분대엔 두 시장 모두 장중 8% 넘게 빠져 서킷브레이커<span class="term">(시장 전체 거래를 20분 멈추는 장치)</span>가 걸렸어. 동시 발동은 7월 29일 이후 처음이고 올해 5번째래. 7거래일 연속 하락으로, 10월 2일 7,000선에서 약 21% 빠졌어.</p>
+    <div class="fig" role="group" aria-label="코스피 최근 7거래일 하루 하락률 막대 차트">
+      <p class="fig-t">7거래일 연속 하락, 15일 낙폭이 가장 컸어</p>
+      <p class="fig-s">코스피 일별 하락률 · 단위: % · 같은 축척</p>
+      <div class="hbars">
+        <div class="hbar" tabindex="0" data-tip="10월 6일 · −0.89% (6,941.39)"><span class="lbl">10월 6일</span><span class="tr"><span class="fl" style="width:calc(0.89 / 7.57 * 100%)"></span></span><span class="n">−0.89</span></div>
+        <div class="hbar" tabindex="0" data-tip="10월 7일 · −1.98% (6,803.90)"><span class="lbl">10월 7일</span><span class="tr"><span class="fl" style="width:calc(1.98 / 7.57 * 100%)"></span></span><span class="n">−1.98</span></div>
+        <div class="hbar" tabindex="0" data-tip="10월 8일 · −2.62% (6,625.93)"><span class="lbl">10월 8일</span><span class="tr"><span class="fl" style="width:calc(2.62 / 7.57 * 100%)"></span></span><span class="n">−2.62</span></div>
+        <div class="hbar" tabindex="0" data-tip="10월 12일 · −3.65% (6,384.24)"><span class="lbl">10월 12일</span><span class="tr"><span class="fl" style="width:calc(3.65 / 7.57 * 100%)"></span></span><span class="n">−3.65</span></div>
+        <div class="hbar" tabindex="0" data-tip="10월 13일 · −5.46% (6,035.35)"><span class="lbl">10월 13일</span><span class="tr"><span class="fl" style="width:calc(5.46 / 7.57 * 100%)"></span></span><span class="n">−5.46</span></div>
+        <div class="hbar" tabindex="0" data-tip="10월 14일 · 약 −0.44% (6,008.81, 15일 종가와 낙폭으로 계산)"><span class="lbl">10월 14일</span><span class="tr"><span class="fl" style="width:calc(0.44 / 7.57 * 100%)"></span></span><span class="n">−0.44</span></div>
+        <div class="hbar hl" tabindex="0" data-tip="10월 15일 · −7.57% (5,554.22), 서킷브레이커 발동"><span class="lbl">10월 15일</span><span class="tr"><span class="fl" style="width:100%"></span></span><span class="n">−7.57</span></div>
+      </div>
+      <details class="tv"><summary>표로 보기</summary>
+        <div class="tbl"><table><tr><th>날짜</th><th>종가</th><th>하락률</th></tr><tr><td>10월 6일</td><td>6,941.39</td><td>−0.89%</td></tr><tr><td>10월 7일</td><td>6,803.90</td><td>−1.98%</td></tr><tr><td>10월 8일</td><td>6,625.93</td><td>−2.62%</td></tr><tr><td>10월 12일</td><td>6,384.24</td><td>−3.65%</td></tr><tr><td>10월 13일</td><td>6,035.35</td><td>−5.46%</td></tr><tr><td>10월 14일</td><td>6,008.81</td><td>약 −0.44% (계산값)</td></tr><tr><td>10월 15일</td><td>5,554.22</td><td>−7.57%</td></tr></table></div>
+      </details>
+    </div>
+    <p>외국인이 4.82조 원을 팔고 개인(2.15조)·기관(2.00조)이 샀어. 삼성전자 −9.48%(210,000원), SK하이닉스 −11.06%, 삼성전기 −15.36%. 원인으로는 ① 미국 9월 물가가 예상보다 높아 금리가 더 오래 높을 거란 우려 ② 미국 AI 클라우드 기업 코어위브의 채권 금리가 뛰며(13%대→15%대) 'AI 투자 돈줄' 걱정이 커진 것 ③ 중국 메모리 업체 추격 우려가 꼽혀. 공포지수(VKOSPI)는 장중 57.22로 6주 만에 최고였어. 금융위원회는 긴급 점검회의를 열고 "과도한 빚과 신용에 기댄 투자는 위험하다"며 불공정거래엔 무관용으로 대응하겠다고 했어.</p>
+    <p class="why"><b>왜 중요?</b> 한 주 만에 시가총액이 1,000조 원 넘게 줄었어. 반도체 대형주 바닥을 확인하기 전까진 변동성이 클 거란 게 증권가 시각이야.</p>
+    <p class="src">출처: <a href="https://www.newspim.com/news/view/20261015001061" target="_blank" rel="noopener">뉴스핌 – 마감시황</a> (2026-10-15), <a href="https://www.fnnews.com/news/202610151828353191" target="_blank" rel="noopener">파이낸셜뉴스 – 공포지수</a> (2026-10-15), <a href="https://supple.kr/news/cmv9a87ap005tlxjcx8p3h0kr" target="_blank" rel="noopener">서플 – 급락 원인</a> (2026-10-15), <a href="https://www.hankookilbo.com/news/article/A2026101516110000918" target="_blank" rel="noopener">한국일보 – 금융당국 긴급회의</a> (2026-10-15)</p>
+  </article>
+
+  <article id="a-2026-10-16-2" data-cat="정치·외교" data-me="공공기관·공무원 준비 중이면 지원 기관 근무지(세종)를 미리 확인하기.">
+    <h4>금융위·개인정보위도 세종 간다… 44개 기관 약 1만 명 '2차 이전' 계획</h4>
+    <p>행정안전부가 13일 중앙행정기관 44곳(정원 약 9,929명)을 세종으로 옮기는 2차 이전 계획을 발표했어. 내년 상반기 방송미디어통신위원회·개인정보보호위원회·원자력안전위원회·국가인권위원회·국가교육위원회·재외동포청 6곳이 먼저 가고, 하반기엔 금융위원회 등 19곳이 차례로 옮겨. 수사·보안 기능 때문에 따로 건물이 필요한 17곳(약 6,934명)은 새로 지어서 2031년까지 이전해.</p>
+    <p>법무부·성평등가족부도 포함됐지만 행정수도 특별법 개정이 돼야 시기가 정해져. 예산은 내년 임차·이사 지원 약 897억 원, 독립 청사 신축에 약 3.1조 원이 들 것으로 추산됐어. 대통령 세종 집무실은 2029년, 국회 세종의사당은 2033년 완공 목표야. 인천에 있던 재외동포청은 개청 4년 만에 옮기게 돼 지역 반발도 나오고 있어.</p>
+    <p class="why"><b>왜 중요?</b> 1차(43곳, 약 1.5만 명)에 이은 대규모 이전이라 수도권 집중 완화의 시험대야. 공공기관 취업 준비생에겐 근무지가 바뀌는 문제이기도 해.</p>
+    <p class="src">출처: <a href="https://news.mtn.co.kr/news-detail/2026101313590468863" target="_blank" rel="noopener">머니투데이방송(MTN)</a> (2026-10-13), <a href="https://biz.sbs.co.kr/amp/article/20000339664" target="_blank" rel="noopener">SBS Biz</a> (2026-10-13), <a href="https://www.24news.kr/news/articleView.html?idxno=310786" target="_blank" rel="noopener">한국뉴스 – 재외동포청 이전 논란</a> (2026-10-15)</p>
+  </article>
+
+  <article id="a-2026-10-16-3" data-cat="사회·문화" data-issue="인천 흉기 난동" data-me="위급할 땐 112, 문자 신고(112로 문자)도 된다는 것 기억하기.">
+    <h4>인천 흉기난동범, 전자발찌 차고 범행… 청와대 '약자 대상 범죄' 대책회의</h4>
+    <p>13일 인천 남동구 구월동의 대형 상가에서 50대 최모 씨가 흉기를 휘둘러 9명이 다쳤어(보도 시점별로 8~9명). 19세 여성은 심정지 뒤 수술을 받았지만 사흘째 의식을 찾지 못했다고 보도됐어. 최 씨는 2004년부터 여러 차례 흉기 범죄를 저질렀고 2015년 살인미수로 징역 4년과 전자발찌 10년 명령을 받은 사람이야. 9월엔 병원 앞 1인 시위 중 흉기를 들고 있다 신고됐고 6일 경찰 조사까지 받았지만 구속되진 않았어.</p>
+    <p>이재명 대통령은 13일 인천경찰청을 찾아 전자발찌 관리·감독 재점검을 지시했고, 청와대는 15일 저녁 법무부·경찰청 등이 참여하는 '이상동기·관계성·사회적 약자 범죄 대책회의'를 열었어. 전자감독 개선, 피해자 보호, 정신건강 응급 대응, 학교 폭력예방 교육 등이 안건이야. 최 씨의 구속 여부는 16일 오후 법원 심사로 결정돼.</p>
+    <p class="why"><b>왜 중요?</b> 위험 신호가 여러 번 있었는데도 막지 못했다는 점에서 전자발찌·경찰 대응 체계가 바뀔 가능성이 커.</p>
+    <p class="src">출처: <a href="https://www.hankookilbo.com/news/article/A2026101511050002111" target="_blank" rel="noopener">한국일보</a> (2026-10-15), <a href="https://www.newsis.com/view/NISX20261013_0003824609" target="_blank" rel="noopener">뉴시스</a> (2026-10-13), <a href="https://weekly.khan.co.kr/article/202610132227001" target="_blank" rel="noopener">주간경향</a> (2026-10-13), <a href="https://www.newspim.com/news/view/20261015001171" target="_blank" rel="noopener">뉴스핌 – 대책회의</a> (2026-10-15)</p>
+  </article>
+
+  <article id="a-2026-10-16-4" data-cat="경제·증시" data-me="졸업 전 인턴·현장실습으로 경력 한 줄이라도 미리 만들어 두기.">
+    <h4>청년 고용보험 가입자 49개월째 감소… 제조업은 반도체 덕에 두 달째 늘어</h4>
+    <p>고용노동부가 14일 발표한 9월 고용행정통계를 보면, 고용보험 상시 가입자는 1,593만 명으로 1년 전보다 28.8만 명(1.8%) 늘었어. 하지만 29세 이하는 5.48만 명 줄어, 2022년 9월부터 49개월 연속 감소야. 제조업 가입자는 385.3만 명으로 8천 명 늘며 두 달째 증가했는데, 외국인 고용허가제 인력을 빼면 오히려 4천 명 줄었어.</p>
+    <p class="why"><b>왜 중요?</b> 성장률 전망은 올라가는데 청년이 들어갈 '정규 일자리' 통로는 계속 좁아지는 'K자' 흐름을 보여줘.</p>
+    <p class="src">출처: <a href="https://view.asiae.co.kr/article/2026101411115729467" target="_blank" rel="noopener">아시아경제</a> (2026-10-14)</p>
+  </article>
+
+  <article id="a-2026-10-16-5" data-cat="정치·외교" data-issue="국정감사" data-me="내 관심 분야(청년·교육) 국감 질의는 상임위 영상으로 직접 찾아보면 더 정확해.">
+    <h4>국감 반환점… 대법관 재제청·DMZ 지뢰 공방에 '쇼츠 국감' 비판도</h4>
+    <p>국정감사가 절반을 넘었어. 15일 법사위에선 조희대 대법원장의 대법관 재제청 거부를 두고 여야가 다시 맞붙었고, 국방위에선 DMZ 지뢰 폭발 사건을 놓고 야당 공세가 이어졌어. 국토위는 부동산 정책을 다뤘어. 한편 한 의원의 노무현 전 대통령 관련 '부엉이바위' 발언으로 고성이 오가며 고발·윤리위 제소까지 번졌고, 짧은 영상용 자극적 장면만 노린다는 '쇼츠 국감' 비판이 나와.</p>
+    <p>야당은 이재용 삼성전자 회장·최태원 SK 회장을 '호남 반도체 클러스터 압박 의혹'으로, 대통령실 전 참모들을 단일종목 레버리지 ETF 문제 등으로 증인 신청했지만 여당이 거부했어. 증인 공방은 막바지 운영위 국감까지 이어질 전망이야.</p>
+    <p class="why"><b>왜 중요?</b> 국감은 정부 정책을 따지는 1년에 한 번 기회인데, 정쟁에 묻히면 정책 검증이 약해져.</p>
+    <p class="src">출처: <a href="https://www.fnnews.com/news/202610151331447011" target="_blank" rel="noopener">파이낸셜뉴스</a> (2026-10-15)</p>
+  </article>
+
+  <div class="group">해외</div>
+
+  <article id="a-2026-10-16-6" data-cat="국제" data-issue="미국 물가와 금리" data-me="미국 여행·직구는 환율과 유류할증료까지 같이 따져 보기.">
+    <h4>미국 9월 물가 3.7% '예상 초과'… 휘발유 한 달 새 9.1%↑, 이달 금리 인상 가능성 커져</h4>
+    <p>미국 노동부가 14일(현지시간) 발표한 9월 소비자물가지수(CPI)는 1년 전보다 3.7% 올라 8월(3.4%)과 시장 예상(3.6%)을 넘었어. 변동이 큰 식품·에너지를 뺀 근원물가도 2.6%로 예상(2.5%)보다 높았어. 휘발유가 한 달 새 9.1% 뛰어 월간 상승분의 절반 이상을 차지했고, 에너지는 1년 새 20.4%, 항공요금은 22.4% 올랐어. 전쟁 전 갤런당 2.98달러였던 휘발유값은 4.33달러야.</p>
+    <div class="fig" role="group" aria-label="미국 소비자물가 상승률 8월, 9월, 예상치 비교 막대 차트">
+      <p class="fig-t">미국 물가, 8월보다도 시장 예상보다도 높았어</p>
+      <p class="fig-s">전년 대비 상승률 · 단위: % · 같은 축척</p>
+      <div class="hbars">
+        <div class="hbar" tabindex="0" data-tip="8월 소비자물가 · 3.4%"><span class="lbl">8월 전체</span><span class="tr"><span class="fl" style="width:calc(3.4 / 3.7 * 100%)"></span></span><span class="n">3.4</span></div>
+        <div class="hbar" tabindex="0" data-tip="9월 시장 예상치(FactSet) · 3.6%"><span class="lbl">9월 예상</span><span class="tr"><span class="fl" style="width:calc(3.6 / 3.7 * 100%)"></span></span><span class="n">3.6</span></div>
+        <div class="hbar hl" tabindex="0" data-tip="9월 소비자물가 · 3.7%"><span class="lbl">9월 전체</span><span class="tr"><span class="fl" style="width:100%"></span></span><span class="n">3.7</span></div>
+        <div class="hbar" tabindex="0" data-tip="8월 근원물가 · 2.4%"><span class="lbl">8월 근원</span><span class="tr"><span class="fl" style="width:calc(2.4 / 3.7 * 100%)"></span></span><span class="n">2.4</span></div>
+        <div class="hbar hl" tabindex="0" data-tip="9월 근원물가 · 2.6% (예상 2.5%)"><span class="lbl">9월 근원</span><span class="tr"><span class="fl" style="width:calc(2.6 / 3.7 * 100%)"></span></span><span class="n">2.6</span></div>
+      </div>
+      <details class="tv"><summary>표로 보기</summary>
+        <div class="tbl"><table><tr><th>구분</th><th>8월</th><th>9월 예상</th><th>9월 실제</th></tr><tr><td>소비자물가(전체)</td><td>3.4%</td><td>3.6%</td><td>3.7%</td></tr><tr><td>근원물가</td><td>2.4%</td><td>2.5%</td><td>2.6%</td></tr></table></div>
+      </details>
+    </div>
+    <p>연준(미국 중앙은행)은 9월에 2023년 이후 처음 금리를 올려 3.75~4%로 만들었고, 남은 회의는 10월 27~28일과 12월 8~9일이야. 시장이 보는 10월 추가 인상 확률은 20%에서 50%로 뛰었다고 캐피털이코노믹스가 전했어. 15일 한국 증시 폭락의 주요 원인 중 하나로 꼽혔어.</p>
+    <p class="why"><b>왜 중요?</b> 미국 금리가 더 오르면 달러로 돈이 몰려 원화가 약해지고 한국 증시에서 외국인 돈이 빠지기 쉬워.</p>
+    <p class="src">출처: <a href="https://www.cbsnews.com/news/september-cpi-report-inflation-energy-costs/" target="_blank" rel="noopener">CBS News</a> (현지시간 2026-10-14), <a href="https://www.cnbc.com/2026/10/14/cpi-inflation-report-september-2026.html" target="_blank" rel="noopener">CNBC</a> (현지시간 2026-10-14)</p>
+  </article>
+
+  <article id="a-2026-10-16-7" data-cat="국제" data-issue="이란·호르무즈와 유가" data-me="기름값 오르면 택배비·배달비 같은 생활 물가도 따라 오를 수 있어.">
+    <h4><span class="upd">새 전개</span>호르무즈서 화물선 2척 결국 침몰… 일주일 새 상선 공격 12건 '최다'</h4>
+    <p>호르무즈 해협 일대에서 공격받은 UAE 해운사 화물선 2척(케이프 다오, GFS 프라이드)이 침몰했다고 월스트리트저널 등이 보도했어. 케이프 다오는 9월 23일 오만 앞바다에서 발사체 2발을 맞아 선원 1명이 숨졌던 배고, GFS 프라이드는 폭발 하루 뒤 가라앉았는데 선원은 대피했어. 이란 혁명수비대는 침몰 장면으로 보이는 영상을 공개하며 "위험한 항로를 지났다"고 주장했어. 이번 전쟁에서 호르무즈 선박 침몰은 3월 이후 처음이야.</p>
+    <p>선박 추적업체 윈드워드AI에 따르면 지난 한 주 호르무즈 주변 상선 공격은 12건으로 전쟁 시작 뒤 주간 최다야. 브렌트유는 하루 106.06달러까지 올랐다가 104달러대로 내려왔어. 유엔은 예멘 내전 격화로 약 80만 명이 구호를 못 받게 됐다고 밝혔고, 세계 비료 해상 운송의 약 3분의 1이 지나는 해협이라 식량 가격 우려도 커지고 있어.</p>
+    <p class="why"><b>왜 중요?</b> 공격이 '피격'에서 '침몰'로 커지면서 보험료·운임이 오르고, 기름값과 물가에 계속 부담이 돼.</p>
+    <p class="src">출처: <a href="https://www.hankyung.com/article/2026101547561" target="_blank" rel="noopener">한국경제</a> (2026-10-15), <a href="https://view.asiae.co.kr/article/2026101509535544149" target="_blank" rel="noopener">아시아경제</a> (2026-10-15), <a href="https://www.democracynow.org/2026/10/15/headlines" target="_blank" rel="noopener">Democracy Now!</a> (현지시간 2026-10-15)</p>
+  </article>
+
+  <article id="a-2026-10-16-8" data-cat="국제" data-issue="우크라이나 전쟁과 휴전" data-me="유럽 여행 계획 있으면 항공권은 유가 흐름 보며 일찍 잡는 게 유리할 수 있어.">
+    <h4><span class="upd">새 전개</span>젤렌스키 "러 정유시설 공격 재개"… 美 정보 차단·스타링크 제한에 정면 반발</h4>
+    <p>볼로디미르 젤렌스키 우크라이나 대통령이 파이낸셜타임스(FT) 인터뷰에서 "러시아 정유시설 공격 제한은 끝났다"고 밝혔어. 미국 요청으로 사흘간 러시아 에너지 시설 공격을 멈췄지만 그동안 러시아는 우크라이나 에너지 시설을 계속 때렸다는 거야. 그는 미국이 조기경보 정보 공유를 끊고, 군용 스타링크(스타쉴드) 속도를 제한해 드론 작전을 방해한 건 "의도적 결정"이라고 비판했어.</p>
+    <p>젤렌스키는 미국산 패트리엇 요격미사일을 더 받으면 다시 공격을 멈출 수 있다는 조건을 내걸었고, 지난 한 주 러시아 공격으로 민간인 100명 넘게 숨졌다고 했어. 15일엔 러시아 랴잔 정유공장에 우크라이나 드론 공격으로 불이 났다는 보도가 나왔고, 트럼프 대통령은 스타링크 문제와 관련해 "스페이스X를 통제할 권한이 없다"고 했다고 전해졌어.</p>
+    <p class="why"><b>왜 중요?</b> 트럼프가 띄운 '에너지 휴전'이 사실상 깨지면서 미국-우크라이나 관계도 흔들리고 있어. 유가에도 위로 압력이야.</p>
+    <p class="src">출처: <a href="https://www.m-economynews.com/news/article.html?no=71727" target="_blank" rel="noopener">M이코노미뉴스(FT 인터뷰 인용)</a> (2026-10-15), <a href="https://www.news1.kr/world/europe/6321578" target="_blank" rel="noopener">뉴스1</a> (2026-10-15), <a href="https://www.justsecurity.org/160924/early-edition-october-15-2026/" target="_blank" rel="noopener">Just Security – 랴잔 정유공장 등</a> (현지시간 2026-10-15)</p>
+  </article>
+</section>
+<section>
+  <h3>🎓 내 관심 분야 <small>AI · 여행</small></h3>
+
+  <article id="a-2026-10-16-9" data-cat="AI·테크" data-issue="오픈AI" data-me="AI 챗봇 답은 맞장구일 수 있어. 건강·법률 같은 중요한 건 꼭 다시 확인하기.">
+    <h4><span class="upd">새 전개</span>미국 8개 주, 오픈AI 일제히 소송… "챗GPT 안전성 속였다"</h4>
+    <p>아이오와·캔자스·네브래스카·웨스트버지니아·아칸소·애리조나·아이다호·몬태나 8개 주 법무장관이 각 주 법원에 오픈AI를 소비자보호법 위반으로 제소했어. 챗GPT가 사용자 말에 지나치게 맞장구치도록 설계돼 청소년 등 취약한 사용자에게 위험한 행동을 부추길 수 있는데도 부모와 대중에게 안전하다고 오해하게 했다는 주장이야. 주들은 벌금과 법원이 강제하는 안전장치를 요구했어. 오픈AI는 앞선 플로리다 소송 때 "업계 최고 수준의 보호 장치를 갖췄다"고 반박했어.</p>
+    <p class="why"><b>AI·사업기획 관점:</b> 지난 브리핑의 '직원 도청 기소'와는 별개로, 이번엔 제품 자체의 책임이 쟁점이야. AI 서비스를 기획할 땐 '얼마나 똑똑한가'만큼 '미성년자 보호·안전 설계'가 법적 비용을 좌우하는 시대가 됐다는 신호야. 모두 소송 제기 단계의 주장이야. (참고: 이 브리핑을 쓰는 Claude는 경쟁사 앤트로픽 모델이라 보도 내용 그대로 전달했어.)</p>
+    <p class="src">출처: <a href="https://www.lex18.com/science-and-tech/artificial-intelligence/openai-faces-lawsuits-from-8-states-over-chatgpts-impact-on-children" target="_blank" rel="noopener">LEX18(Scripps)</a> (현지시간 2026-10-15), <a href="https://www.commondreams.org/news/openai-lawsuit" target="_blank" rel="noopener">Common Dreams</a> (현지시간 2026-10-14), <a href="https://thehill.com/policy/technology/6149365-states-sue-openai-safety/" target="_blank" rel="noopener">The Hill</a></p>
+  </article>
+
+  <article id="a-2026-10-16-10" data-cat="여행" data-me="제주에서 대만·일본 가는 직항이 늘어 &#x27;제주 경유 여행&#x27;도 선택지가 돼.">
+    <h4>제주공항 국제선 303만 명 돌파… 대만·일본·싱가포르 노선 60% 안팎 급증</h4>
+    <p>한국공항공사 제주공항에 따르면 10일 기준 올해 국제선 이용객이 303만 1,529명으로 작년 1년치(302만 9,280명)를 이미 넘어 2년 연속 역대 최다를 기록했어. 1~9월 노선별로 중국(홍콩·마카오 포함) 205만 명(+17.3%)이 가장 많지만, 대만 49.5만 명(+60.1%), 일본 21.6만 명(+59.6%), 싱가포르 12.6만 명(+65.1%)의 증가세가 훨씬 가팔랐어. 국제선 운항도 1만 8,023편으로 24.3% 늘었어.</p>
+    <p class="why"><b>여행 산업 관점:</b> 제주 인바운드가 '중국 의존'에서 대만·일본·동남아로 넓어지고 있다는 게 포인트야. 한 시장이 흔들려도 버틸 수 있는 '시장 다변화'가 관광 사업 기획의 핵심 전략이라는 걸 보여줘.</p>
+    <p class="src">출처: <a href="https://www.seoul.co.kr/news/society/2026/10/15/20261015500117" target="_blank" rel="noopener">서울신문</a> (2026-10-15)</p>
+  </article>
+  <p class="src">뷰티 분야는 15일 개막한 K-뷰티엑스포(679개사, 역대 최대)가 지난 브리핑에서 소개한 그대로 진행 중이라, 수출 상담 결과가 나오면 다시 다룰게.</p>
+</section>
+<section id="c-2026-10-16">
+  <h3>💰 오늘의 경제 개념</h3>
+  <p class="concept-name">서킷브레이커 (주식시장 비상 브레이크)</p>
+  <div class="step"><div class="k">쉬운 뜻</div><div>주가지수가 하루에 너무 많이 떨어지면 거래소가 <b>시장 전체 거래를 잠깐 멈추는 제도</b>야. 전기가 과하게 흐르면 차단기(circuit breaker)가 내려가는 것처럼, 공포에 휩쓸린 '팔자' 주문을 식히는 시간을 주는 거지. 한국은 전날보다 <b>8%</b> 넘게 떨어져 1분 이어지면 1단계(20분 정지), <b>15%</b>면 2단계(20분 정지), <b>20%</b>면 3단계로 그날 장을 끝내. 비슷한 '사이드카'는 선물 가격이 5% 움직일 때 컴퓨터 자동매매(프로그램 매매)만 5분 멈추는 더 작은 브레이크야.</div></div>
+  <div class="step"><div class="k">일상 속</div><div>단체 채팅방에서 "그 가게 망한대!"라는 말이 돌면 다들 확인도 안 하고 환불하러 달려가지. 이때 반장이 "20분만 다들 멈추고 사실부터 확인하자"고 하는 게 서킷브레이커야. 소문이 틀렸다면 20분 뒤엔 차분해지고, 진짜라면 그 뒤에 다시 판단하면 돼. 멈춘다고 문제가 사라지는 게 아니라, '판단할 시간'을 버는 거야.</div></div>
+  <div class="step"><div class="k">숫자 예시</div><div>
+    <p style="margin:0 0 6px">전날 지수가 6,000이라고 해 볼게(설명용 가상 수치).</p>
+    <div class="fig" role="group" aria-label="서킷브레이커 단계별 하락 기준과 15일 실제 낙폭 비교 막대 차트" style="margin-top:0">
+      <p class="fig-t">어디까지 떨어지면 멈출까?</p>
+      <p class="fig-s">전날 대비 하락률 · 단위: % · 같은 축척 (15일 값은 실제 보도 수치)</p>
+      <div class="hbars">
+        <div class="hbar" tabindex="0" data-tip="사이드카 기준 · 코스피200 선물 5% 변동(1분 지속) → 프로그램 매매 5분 정지"><span class="lbl">사이드카(선물)</span><span class="tr"><span class="fl" style="width:calc(5 / 20 * 100%)"></span></span><span class="n">5</span></div>
+        <div class="hbar" tabindex="0" data-tip="15일 코스피 종가 · −7.57% (재개 뒤 일부 회복)"><span class="lbl">15일 코스피 종가</span><span class="tr"><span class="fl" style="width:calc(7.57 / 20 * 100%)"></span></span><span class="n">7.57</span></div>
+        <div class="hbar hl" tabindex="0" data-tip="1단계 · 8% 하락 1분 지속 → 20분 정지 (6,000이면 5,520)"><span class="lbl">1단계</span><span class="tr"><span class="fl" style="width:calc(8 / 20 * 100%)"></span></span><span class="n">8</span></div>
+        <div class="hbar" tabindex="0" data-tip="15일 코스닥 장중 · −8.01% → 1단계 발동"><span class="lbl">15일 코스닥 장중</span><span class="tr"><span class="fl" style="width:calc(8.01 / 20 * 100%)"></span></span><span class="n">8.01</span></div>
+        <div class="hbar hl" tabindex="0" data-tip="2단계 · 15% 하락 → 20분 정지 (6,000이면 5,100)"><span class="lbl">2단계</span><span class="tr"><span class="fl" style="width:calc(15 / 20 * 100%)"></span></span><span class="n">15</span></div>
+        <div class="hbar hl" tabindex="0" data-tip="3단계 · 20% 하락 → 당일 장 종료 (6,000이면 4,800)"><span class="lbl">3단계</span><span class="tr"><span class="fl" style="width:100%"></span></span><span class="n">20</span></div>
+      </div>
+      <details class="tv"><summary>표로 보기</summary>
+        <div class="tbl"><table><tr><th>단계</th><th>하락 기준</th><th>전날 6,000일 때</th><th>조치</th></tr><tr><td>1단계</td><td>−8%</td><td>5,520</td><td>20분 정지 후 재개</td></tr><tr><td>2단계</td><td>−15%</td><td>5,100</td><td>20분 정지 후 재개</td></tr><tr><td>3단계</td><td>−20%</td><td>4,800</td><td>그날 장 종료</td></tr></table></div>
+      </details>
+    </div>
+    <p style="margin:6px 0 0">각 단계는 하루 한 번만, 장 시작 5분 뒤부터 마감 40분 전까지만 걸려. 2·3단계는 앞 단계보다 1%p 이상 더 떨어져야 해.</p>
+  </div></div>
+  <div class="step"><div class="k">오늘 뉴스</div><div>15일 코스닥이 낮 12시 23분쯤 8.01% 빠지며 1단계가 먼저 걸렸고, 이어 코스피도 걸려 두 시장이 20분씩 멈췄어. 재개 뒤 코스피는 낙폭을 조금 줄여 −7.57%로 끝났지. 그런데 브레이크는 속도를 늦출 뿐 방향을 바꾸진 못해. 물가·금리·AI 투자 걱정이라는 '원인'이 그대로면, 다음 날에도 흔들릴 수 있어. 어제 배운 '경제성장률'처럼 경제가 커져도 주가는 기대에 따라 이렇게 급하게 움직일 수 있다는 것도 함께 기억해 둬.</div></div>
+  <div class="step"><div class="k">한 문장</div><div class="memo">"서킷브레이커는 '판단할 시간'을 주는 비상 브레이크 — 시장을 닫는 게 아니라 20분 식히는 것."</div></div>
+  <div class="quiz">
+    <p style="margin:0"><b>O/X 퀴즈</b> 서킷브레이커가 발동되면 그날 주식시장은 바로 문을 닫는다.</p>
+    <details><summary>정답 보기</summary><p style="margin:4px 0 0"><b>X</b> — 1·2단계는 20분 멈춘 뒤 다시 열려. 그날 장을 끝내는 건 20% 넘게 빠진 3단계뿐이야.</p></details>
+  </div>
+  <p class="src" style="margin-top:8px">참고: <a href="https://www.tossbank.com/articles/circuit-breaker" target="_blank" rel="noopener">토스뱅크 – 서킷브레이커 발동 조건 정리</a>, <a href="https://supple.kr/news/cmv9a87ap005tlxjcx8p3h0kr" target="_blank" rel="noopener">서플 – 15일 발동 시각</a> (2026-10-15). 6,000 기준 숫자는 설명용 가상 수치야.</p>
+</section>
+  <p class="note">뉴스는 보도 내용을 요약한 것이고, 특정 종목의 매수·매도를 추천하지 않아. 날짜는 모두 한국시간 기준이며, 해외 보도는 현지 날짜를 함께 표시했어. 10월 15일자 브리핑은 발행되지 않아, 14일 브리핑 이후 소식을 묶었어. 15일 외국인 순매도는 매체·집계 시점에 따라 3.6조~4.8조 원으로 다르게 보도돼 마감 기준(뉴스핌)을 썼고, 14일 코스피 하락률은 15일 종가와 낙폭으로 계산한 값이야. 급락 원인은 시장 분석으로 한 가지로 단정할 수 없어. 인천 사건 피해자 수는 보도 시점별로 8~9명으로 엇갈려. 호르무즈 공격 주체는 이란 혁명수비대 주장·보도 기준이고, 젤렌스키 발언은 FT 인터뷰를 인용한 국내 보도 기준이야. 오픈AI 소송은 제기 단계의 주장이야.</p>
+  </details>
+</div>
+<!--DAY 2026-10-16 END-->
+<!--DAY 2026-10-14 START-->
+<div class="day" id="d-2026-10-14">
+  <div class="day-head"><h2 class="day-title">2026년 10월 14일 수요일</h2></div>
+  <p class="lede">코스피가 하루에 5.46% 빠져 6,035로 주저앉았어(장중엔 6천 붕괴, 사이드카 발동). 그런데 같은 날 IMF는 올해 한국 성장률 전망을 3.3%로 확 올렸어 — 경제는 좋다는데 주가는 왜? 국감에선 개인정보 유출이 도마에 올랐고, 밖에선 사우디가 예멘 후티 석유시설을 때리며 전쟁이 커지는 중이야. 수요일 아침 핵심만.</p>
+  <div class="tiles" aria-label="오늘의 숫자">
+  <div class="tile"><span class="tag">경제</span><div class="lb">코스피 종가 (13일)</div><div class="v">6,035</div><div class="d">−5.46%, 5거래일 연속 하락</div></div>
+  <div class="tile"><span class="tag">경제</span><div class="lb">외국인 순매도 (13일)</div><div class="v">4.5<small>조 원</small></div><div class="d">개인 2.2조·기관 1.7조 순매수</div></div>
+  <div class="tile"><span class="tag">경제</span><div class="lb">IMF 올해 한국 성장률 전망</div><div class="v">3.3<small>%</small></div><div class="d">7월 2.6%에서 +0.7%p</div></div>
+  <div class="tile"><span class="tag">해외</span><div class="lb">리야드 공항 운항 중단</div><div class="v">17<small>일까지</small></div><div class="d">후티 공격 뒤 폐쇄 연장</div></div>
+</div>
+  <div class="five">
+  <h3>오늘 꼭 기억할 5줄</h3>
+  <ol>
+    <li>코스피가 5.46% 폭락해 6,035로 마감했어. 장중엔 5,911까지 밀려 매도 사이드카가 걸렸고, 외국인이 4.5조 원을 팔았어. SK하이닉스 −10%, 삼성전자 −7.4%. 10월 2일(7,003)보다 약 14% 빠진 상태야.</li>
+    <li>IMF가 올해 한국 성장률 전망을 2.6% → 3.3%로 올렸어. 반도체 수출 덕에 6년 만에 세계 평균(3.1%)을 넘는 전망이야. 내년은 2.8%.</li>
+    <li>개인정보위 국감: 올해 1~8월 유출 신고가 579건으로 작년 1년치보다 이미 29.5% 많아. 위원장은 "IT에 비해 보안 투자가 너무 부족했다"고 인정했어. 청년미래적금 2차 신청은 16일(금) 마감이야.</li>
+    <li>사우디 주도 연합군이 예멘 후티의 석유시설을 공습하며 반격에 나섰고, 리야드 공항은 17일까지 닫혀. 호르무즈에선 배 2척이 또 맞았어. 미국에선 오픈AI 사무실에 몰래 녹음기를 숨긴 혐의로 직원이 기소됐고.</li>
+    <li>오늘의 경제 개념은 '경제성장률'. 성장률 전망이 오르면 '경제가 더 빨리 커진다'는 뜻 — 그런데 주가는 성장률이 아니라 '앞으로의 기대'를 따라 움직여서 같은 날 반대로 갈 수도 있어.</li>
+  </ol>
+</div>
+  <details class="full"><summary>전체 브리핑 펼쳐 보기</summary>
+<section>
+  <h3>📰 오늘의 주요 뉴스</h3>
+
+  <div class="group">국내</div>
+
+  <article id="a-2026-10-14-1" data-cat="경제·증시" data-issue="코스피 흐름" data-me="주식·ETF 처음이면 이런 날 &#x27;물타기&#x27;보다 내 위험 한도부터 점검하기.">
+    <h4><span class="upd">새 전개</span>코스피 5.46% 폭락 6,035… 장중 6천 붕괴, 두 달 만에 '사이드카'</h4>
+    <p>어제 다룬 3.65% 급락에 이어 13일엔 낙폭이 더 커졌어. 코스피는 348.89포인트(5.46%) 내린 6,035.35로 마감했고, 장중엔 5,911.11(−7.41%)까지 밀렸어. 오전 9시 47분엔 매도 사이드카<span class="term">(선물이 급락할 때 프로그램 매도 주문을 5분간 멈추는 안전장치)</span>가 걸렸는데 8월 이후 약 두 달 만이야. 8월 19일(−5.80%) 이후 가장 큰 하루 하락이고, 5거래일 연속 내렸어.</p>
+    <div class="fig" role="group" aria-label="코스피 최근 5거래일 하루 하락률 막대 차트">
+      <p class="fig-t">5거래일 연속, 하루 낙폭이 계속 커졌어</p>
+      <p class="fig-s">코스피 일별 하락률 · 단위: % · 같은 축척</p>
+      <div class="hbars">
+        <div class="hbar" tabindex="0" data-tip="10월 6일 · −0.89% (6,941.39)"><span class="lbl">10월 6일</span><span class="tr"><span class="fl" style="width:calc(0.89 / 5.46 * 100%)"></span></span><span class="n">−0.89</span></div>
+        <div class="hbar" tabindex="0" data-tip="10월 7일 · −1.98% (6,803.90)"><span class="lbl">10월 7일</span><span class="tr"><span class="fl" style="width:calc(1.98 / 5.46 * 100%)"></span></span><span class="n">−1.98</span></div>
+        <div class="hbar" tabindex="0" data-tip="10월 8일 · −2.62% (6,625.93)"><span class="lbl">10월 8일</span><span class="tr"><span class="fl" style="width:calc(2.62 / 5.46 * 100%)"></span></span><span class="n">−2.62</span></div>
+        <div class="hbar" tabindex="0" data-tip="10월 12일 · −3.65% (6,384.24)"><span class="lbl">10월 12일</span><span class="tr"><span class="fl" style="width:calc(3.65 / 5.46 * 100%)"></span></span><span class="n">−3.65</span></div>
+        <div class="hbar hl" tabindex="0" data-tip="10월 13일 · −5.46% (6,035.35), 장중 5,911.11"><span class="lbl">10월 13일</span><span class="tr"><span class="fl" style="width:100%"></span></span><span class="n">−5.46</span></div>
+      </div>
+      <details class="tv"><summary>표로 보기</summary>
+        <div class="tbl"><table><tr><th>날짜</th><th>종가</th><th>하락률</th></tr><tr><td>10월 6일</td><td>6,941.39</td><td>−0.89%</td></tr><tr><td>10월 7일</td><td>6,803.90</td><td>−1.98%</td></tr><tr><td>10월 8일</td><td>6,625.93</td><td>−2.62%</td></tr><tr><td>10월 12일</td><td>6,384.24</td><td>−3.65%</td></tr><tr><td>10월 13일</td><td>6,035.35</td><td>−5.46%</td></tr></table></div>
+      </details>
+    </div>
+    <p>외국인이 4.51조 원을 팔았고 개인(2.23조)·기관(1.69조)이 샀어. SK하이닉스는 10.09%, 삼성전자는 7.39%(232,000원) 내렸고 SK스퀘어는 12.91% 빠졌어. 원인으로는 메모리 경쟁 심화 우려가 꼽혀. 중국 메모리 업체 CXMT<span class="term">(창신메모리)</span>가 주말에 "데이터를 더 작은 공간에 담는 새 칩 구조에서 큰 진전을 냈다"고 밝힌 뒤 미국 마이크론, 일본 키옥시아(장중 최대 −13.3%), 소프트뱅크(−8.5%)까지 세계 반도체주가 함께 밀렸어. 삼성전자 자사주 매입이 끝나 외국인 매도를 받아줄 '큰손'이 줄어든 것도 부담이야. 원·달러 환율은 장 막판 1,344원대 중반까지 올라 전날의 원화 강세가 하루 만에 꺾였어.</p>
+    <p class="why"><b>왜 중요?</b> 10월 2일 7,003에서 약 14% 빠져, 이제 '조정'을 넘어 'AI 반도체 붐이 꺾이나'를 시장이 시험하는 국면이야. 이번 주 미국 물가 지표가 다음 고비야.</p>
+    <p class="src">출처: <a href="https://www.seoul.co.kr/news/economy/securities/2026/10/13/20261013500225" target="_blank" rel="noopener">서울신문 – 마감시황</a> (2026-10-13), <a href="https://www.fnnews.com/news/202610131539091949" target="_blank" rel="noopener">파이낸셜뉴스</a> (2026-10-13), <a href="https://finance.yahoo.com/technology/articles/global-chip-selloff-deepens-ai-085657296.html" target="_blank" rel="noopener">Investing.com(야후파이낸스 게재) – 세계 반도체주</a> (현지시간 2026-10-13)</p>
+  </article>
+
+  <article id="a-2026-10-14-2" data-cat="경제·증시" data-me="성장률이 올라도 청년 취업 체감은 따로 놀 수 있어. 채용 공고 흐름을 같이 보기.">
+    <h4>IMF, 올해 한국 성장률 2.6%→3.3% 상향… 6년 만에 세계 평균 넘는다</h4>
+    <p>국제통화기금(IMF)이 13일 발표한 10월 세계경제전망에서 한국의 올해 성장률 전망을 3.3%로, 7월(2.6%)보다 0.7%p 올렸어. 1·4월엔 1.9%였으니 두 번 연속 크게 올린 거야. 내년 전망도 2.8%로 0.3%p 올렸어. 반도체 중심의 수출 호조가 중동 전쟁의 악영향보다 크다는 판단이고, IMF는 한국·대만을 'AI 하드웨어 핵심 교역국'으로 꼽았어.</p>
+    <div class="fig" role="group" aria-label="IMF의 한국 올해 성장률 전망 변화 막대 차트">
+      <p class="fig-t">IMF의 '올해 한국 성장률' 전망, 이렇게 바뀌었어</p>
+      <p class="fig-s">발표 시점별 2026년 성장률 전망 · 단위: % · 같은 축척</p>
+      <div class="hbars">
+        <div class="hbar" tabindex="0" data-tip="1월·4월 전망 · 1.9%"><span class="lbl">1월·4월</span><span class="tr"><span class="fl" style="width:calc(1.9 / 3.3 * 100%)"></span></span><span class="n">1.9</span></div>
+        <div class="hbar" tabindex="0" data-tip="7월 전망 · 2.6%"><span class="lbl">7월</span><span class="tr"><span class="fl" style="width:calc(2.6 / 3.3 * 100%)"></span></span><span class="n">2.6</span></div>
+        <div class="hbar hl" tabindex="0" data-tip="10월 전망 · 3.3% (세계 평균 3.1%)"><span class="lbl">10월</span><span class="tr"><span class="fl" style="width:100%"></span></span><span class="n">3.3</span></div>
+        <div class="hbar" tabindex="0" data-tip="참고: 10월 IMF 세계 성장률 전망 3.1%"><span class="lbl">참고: 세계 평균</span><span class="tr"><span class="fl" style="width:calc(3.1 / 3.3 * 100%)"></span></span><span class="n">3.1</span></div>
+      </div>
+      <details class="tv"><summary>표로 보기</summary>
+        <div class="tbl"><table><tr><th>발표 시점</th><th>2026년 한국 성장률 전망</th></tr><tr><td>1월·4월</td><td>1.9%</td></tr><tr><td>7월</td><td>2.6%</td></tr><tr><td>10월</td><td>3.3%</td></tr><tr><td>참고: 10월 세계 전망</td><td>3.1%</td></tr></table></div>
+      </details>
+    </div>
+    <p>세계 성장률 전망은 3.1%(+0.1%p), 선진국 평균은 2.1%야. 한국이 세계 평균을 넘는 건 2020년 이후 처음이라는 보도야. 다만 IMF는 올해 세계 물가 상승률을 4.7%로 보며 물가를 위험 요인으로 꼽았고, 혜택이 반도체 대기업에 몰리고 자영업자·청년은 체감하기 어렵다는 'K자형' 지적도 나와.</p>
+    <p class="why"><b>왜 중요?</b> 정부 목표(3.0%) 달성이 유력해졌다는 신호야. 같은 날 코스피가 폭락한 건 '지금 경제'와 '앞으로의 기대'가 다르게 움직일 수 있다는 걸 보여줘.</p>
+    <p class="src">출처: <a href="https://www.fnnews.com/news/202610131824008836" target="_blank" rel="noopener">파이낸셜뉴스</a> (2026-10-13), <a href="https://view.asiae.co.kr/article/2026101309464167512" target="_blank" rel="noopener">아시아경제</a> (2026-10-13), <a href="https://www.hankookilbo.com/news/article/A2026101309520003531" target="_blank" rel="noopener">한국일보</a> (2026-10-13)</p>
+  </article>
+
+  <article id="a-2026-10-14-3" data-cat="금융·보안" data-issue="국정감사" data-me="안 쓰는 앱·사이트는 탈퇴하고, 같은 비밀번호 돌려쓰기 끊기.">
+    <h4>개인정보위 국감 "올해 유출 신고 벌써 작년보다 30% 많아"… 위원장 "보안 투자 부족했다"</h4>
+    <p>13일 국회 정무위원회의 개인정보보호위원회 국감에서 유출 사고 대응이 집중 추궁됐어. 박성훈 의원 자료에 따르면 올해 1~8월 유출 신고는 579건으로, 작년 1년치(447건)보다 이미 29.5% 많아. 그런데 개인정보위가 현장조사를 나간 건 33건(5.7%)뿐이고, 2년 넘게 결론이 안 난 사건도 30건 안팎이래. 8월 정부24 유출을 한 달 넘게 늦게 알렸다는 지적, 공공기관 189곳 중 184곳이 보안인증이 확인 안 된 외부 도구로 개인정보를 받고 있다는 조사 결과도 나왔어.</p>
+    <p>송경희 위원장은 "IT 발전에 투자한 것에 비해 보안 투자는 굉장히 부족했다"며 국내 보호 체계가 뒤처진 걸 인정했어. AI로 공격 속도·범위가 커졌는데 접근권한 관리·암호화·이상 트래픽 탐지 같은 기본을 안 지켜 대형 사고가 났다고 했고, 징벌적 과징금과 조사 실효성 강화를 약속했어. 이날 티빙·KT·힐링페이퍼(강남언니) 관계자도 증인으로 나왔어.</p>
+    <p class="why"><b>왜 중요?</b> 은행·공공·플랫폼 유출이 이어지는데 감독 기관의 조사 속도가 못 따라간다는 게 드러났어. 기업 보안 투자 의무와 제재 수위가 세질 가능성이 커.</p>
+    <p class="src">출처: <a href="https://www.etoday.co.kr/news/view/2635306" target="_blank" rel="noopener">이투데이</a> (2026-10-13), <a href="https://view.asiae.co.kr/article/2026101310233838986" target="_blank" rel="noopener">아시아경제</a> (2026-10-13)</p>
+  </article>
+
+  <article id="a-2026-10-14-4" data-cat="정치·외교" data-issue="검찰 개혁" data-me="수사기관이 정치에서 독립적인지는 결국 수사 결과를 믿을 수 있느냐의 문제야.">
+    <h4>李 대통령 "중수청·공소청장 국무회의 참석은 헌법상 당연"… 독립성 논란에 정면 반박</h4>
+    <p>이재명 대통령은 13일 국무회의에서 "수사기관장이 국무회의에 참석하면 안 된다는 지적은 동의하기 어렵다"고 했어. 지난 6일 국무회의에 공소청·중대범죄수사청·경찰 수장(직무대행)이 참석하자, 일부 야당과 법조계가 수사기관의 정치적 중립을 해칠 수 있다고 비판한 데 대한 답이야.</p>
+    <p>이 대통령은 "개별 사건에 이래라저래라 하는 건 바람직하지 않지만, 국정 방향과 정책은 공유해야 한다"며, 정부조직법상 대통령이 모든 중앙행정기관장을 지휘·감독하니 참석은 헌법과 법률상 당연하다고 했어. 원래 검찰총장·경찰청장은 중립성 때문에 국무회의에 나오지 않는 게 관례였는데, 올해 1월부터 참석하기 시작했어.</p>
+    <p class="why"><b>왜 중요?</b> 검찰청을 없애고 만든 새 수사기관이 '정부와 얼마나 거리를 둬야 하나'가 쟁점으로 떠올랐어. 중수청장 인사청문회와 함께 논쟁이 이어질 거야.</p>
+    <p class="src">출처: <a href="https://www.newspim.com/news/view/20261013000525" target="_blank" rel="noopener">뉴스핌</a> (2026-10-13), <a href="https://www.news1.kr/politics/president/6318071" target="_blank" rel="noopener">뉴스1</a> (2026-10-13), <a href="https://www.fnnews.com/news/202610131154105687" target="_blank" rel="noopener">파이낸셜뉴스</a> (2026-10-13)</p>
+  </article>
+
+  <article id="a-2026-10-14-5" data-cat="금융·보안" data-me="소득 요건 맞으면 이번 주 안에 신청해 둬야 해. 월 1천 원부터 가능.">
+    <h4>청년미래적금 2차 신청, 16일(금) 마감… 월 50만 원까지, 정부가 6~12% 얹어줘</h4>
+    <p>금융위원회가 내놓은 청년미래적금 2차 가입 신청이 이번 주 금요일(16일)에 끝나. 12일부터는 출생연도와 상관없이 누구나 신청할 수 있어. 대상은 1991년 11월 17일~2007년 11월 27일생(대략 만 19~34세, 병역기간 최대 6년은 나이에서 빼줌)이고, 작년 총급여 6천만 원 이하 등 소득 요건과 가구 중위소득 200% 이하 요건이 있어. 승인되면 11월 16~27일에 계좌를 열어.</p>
+    <p>매달 최대 50만 원을 3년 동안 넣으면 정부가 넣은 돈의 6%(일반형), 중소기업 재직자 등은 12%(우대형)를 더 얹어 주고 이자엔 세금이 안 붙어. 50만 원씩 꽉 채우면 정부 기여금이 일반형 약 108만 원, 우대형 약 216만 원이야. 청년도약계좌 가입자는 특별중도해지로 갈아탈 수 있는데, 도약계좌를 먼저 깨면 혜택을 못 받으니 순서를 꼭 지켜야 해.</p>
+    <p class="why"><b>왜 중요?</b> 3년짜리라 중간에 깨면 정부 기여금을 잃을 수 있어. 내가 매달 꾸준히 낼 수 있는 금액으로 정하는 게 핵심이야.</p>
+    <p class="src">출처: <a href="https://m.dailian.co.kr/news/view/1690987" target="_blank" rel="noopener">데일리안</a> (2026-09-16), <a href="https://www.tossbank.com/articles/youth-future-saving-2nd" target="_blank" rel="noopener">토스뱅크 – 금융위 발표 정리</a>, <a href="https://www.24news.kr/news/articleView.html?idxno=310592" target="_blank" rel="noopener">한국뉴스 – 13일 주요뉴스</a> (2026-10-13)</p>
+  </article>
+
+  <div class="group">해외</div>
+
+  <article id="a-2026-10-14-6" data-cat="국제" data-issue="이란·호르무즈와 유가" data-me="중동 경유 유럽행 항공편은 결항·우회 가능성 꼭 확인하기.">
+    <h4><span class="upd">새 전개</span>사우디, 예멘 후티 석유시설 공습으로 반격… 리야드 공항 17일까지 폐쇄, 호르무즈선 배 2척 또 피격</h4>
+    <p>어제 다룬 리야드 공항 공격 이후 사우디가 반격에 나섰어. 사우디 주도 연합군은 13일(현지시간) 수도 사나를 포함한 예멘 서부의 후티 석유시설을 공습했다고 확인했고, 앞서 사나 일부 지역 주민들에게 대피 경고를 했어. 후티는 아람코 시설과 리야드 공항을 다시 치겠다고 위협했고, 연합군은 다란 등을 노린 미사일·드론을 요격했다고 밝혔어. 공항 공격 사망자는 매체마다 13~18명 이상으로 집계가 엇갈려.</p>
+    <p>리야드 킹칼리드 공항 운항 중단은 17일까지 연장됐고, 영국은 리야드 등 일부 지역 여행 자제를 권고했어. 트럼프 대통령은 참전 여부를 밝히지 않았고, 후티는 미국이 끼어들면 "신속하고 고통스러운 대응"을 하겠다고 했어. 같은 날 호르무즈 해협에선 유조선과 컨테이너선이 정체불명 발사체에 맞았다고 영국 해사기구가 밝혔어. 브렌트유는 12일 2주 만의 최고치(배럴당 105달러대)를 찍은 뒤 13일 장 초반 104달러대로 내려왔어.</p>
+    <p class="why"><b>왜 중요?</b> 이란 전쟁이 사우디-후티 전면전으로 번지면서 세계 최대 산유국의 석유시설과 하늘길이 직접 위험해졌어. 유가가 100달러 아래로 내려오기 어려운 이유야.</p>
+    <p class="src">출처: <a href="https://www.cbsnews.com/live-updates/iran-war-us-trump-saudi-arabia-houthi/" target="_blank" rel="noopener">CBS News 라이브</a> (현지시간 2026-10-13), <a href="https://www.aljazeera.com/news/2026/10/12/houthi-missile-attack-targets-saudi-capital-riyadh-for-third-day-in-a-row" target="_blank" rel="noopener">Al Jazeera</a> (현지시간 2026-10-12), <a href="https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-13-2026" target="_blank" rel="noopener">TheStreet – 유가</a> (현지시간 2026-10-13)</p>
+  </article>
+
+  <article id="a-2026-10-14-7" data-cat="AI·테크" data-issue="오픈AI" data-me="테크 기업 인턴·입사 땐 보안 서약이 진짜 무겁게 다뤄진다는 것.">
+    <h4>오픈AI 임원 회의실에 몰래 녹음기… 사우디 국적 직원 기소</h4>
+    <p>미국 법무부는 13일(현지시간) 오픈AI 엔지니어 압둘라흐만 알포잔(35)을 도청 혐의로 기소했다고 밝혔어. 검찰에 따르면 그는 샌프란시스코 사무실 임원 회의실 TV 뒤 USB 포트에 휴지로 감싼 녹음 장치를 몰래 꽂아 뒀고, 회사가 9월 30일쯤 이를 발견했어. 장치 안 내용은 암호화돼 있었어. 10월 5일엔 그가 두고 간 가방에서 비슷한 장치가 하나 더 나왔대. 9일 체포됐고, 유죄면 최대 징역 5년이야.</p>
+    <p>검찰은 그가 업무용 도구로 건물 주소·회의실·임원 위치를 알아봤고, 배우자와 연결된 챗봇 계정에서 녹음기 설치 방법을 물었다고 주장했어. 같은 날 별도로, 애플이 낸 영업비밀 소송에서 법원이 오픈AI에 애플 출신 지원자 면접 기록을 넘기라고 명령했다는 보도도 나왔어. 모두 혐의·주장 단계야.</p>
+    <p class="why"><b>왜 중요?</b> AI 기술이 국가·기업 경쟁의 핵심이 되면서, 연구실 '내부자' 보안이 해킹만큼 큰 위험이 됐다는 걸 보여줘.</p>
+    <p class="src">출처: <a href="https://justice.gov/opa/pr/saudi-national-arrested-installing-surreptitious-audio-recording-device-openai" target="_blank" rel="noopener">미국 법무부 발표</a> (현지시간 2026-10-13), <a href="https://techcrunch.com/2026/10/13/judge-orders-openai-to-turn-over-hiring-records-in-apple-trade-secrets-case" target="_blank" rel="noopener">TechCrunch – 애플 소송</a> (현지시간 2026-10-13)</p>
+  </article>
+
+  <article id="a-2026-10-14-8" data-cat="국제" data-me="남아시아 여행·봉사 계획 있으면 외교부 여행경보부터 확인.">
+    <h4>파키스탄, 임란 칸 정당이 집권한 주에 비상사태… 주정부 해산</h4>
+    <p>아시프 알리 자르다리 파키스탄 대통령이 11일(현지시간) 아프가니스탄과 맞닿은 북서부 카이베르파크툰크와주에 비상사태를 선포하고 주정부를 해산했어. 이 주는 수감 중인 임란 칸 전 총리의 정당(PTI)이 다스리던 유일한 곳이야. 이제 연방이 임명한 주지사와 11명 자문위원회가 주를 운영해.</p>
+    <p>정부는 주정부가 칸 석방 운동에 매달리느라 테러 대응을 소홀히 해 무장세력 폭력이 크게 늘었다고 주장했어. PTI는 칸 석방을 요구하며 수도 이슬라마바드 행진을 준비해 왔고, 이번 조치를 "위장된 쿠데타"라고 반발했어. 주총리 등이 구금됐다는 건 PTI 쪽 주장이고 독립적으로 확인되지 않았어.</p>
+    <p class="why"><b>왜 중요?</b> 핵무기를 가진 나라에서 야당이 가진 유일한 지방정부를 중앙이 거둬들인 거라, 정치 불안과 무장세력 활동이 함께 커질 수 있어.</p>
+    <p class="src">출처: <a href="https://www.itv.com/news/2026-10-11/pakistani-president-suspends-provincial-government-led-by-khans-party" target="_blank" rel="noopener">ITV News(AP)</a> (현지시간 2026-10-11), <a href="https://www.aljazeera.com/news/2026/10/11/pakistan-imposes-emergency-rule-in-khyber-pakhtunkhwa" target="_blank" rel="noopener">Al Jazeera</a> (현지시간 2026-10-11)</p>
+  </article>
+</section>
+<section>
+  <h3>🎓 내 관심 분야 <small>AI · 사업기획</small></h3>
+
+  <article id="a-2026-10-14-9" data-cat="AI·테크" data-me="AI 구독 고를 때 &#x27;최신 모델이 무료에도 오나&#x27;를 꼭 비교해 봐.">
+    <h4>구글, 새 AI '제미나이 4 아르곤' 유료 구독자에게 풀었다… 검색 AI 모드에도</h4>
+    <p>구글이 13일(현지시간) 9월 30일 공개했던 '제미나이 4 아르곤'을 일반 사용자에게 넓혔어. 그동안은 사이버 보안 전문가 등 일부 테스터만 썼는데, 이제 구글 AI 프로·울트라 구독자는 제미나이 앱과 검색의 'AI 모드'에서 고를 수 있고, 개발자는 유료 API로, 울트라 구독자는 코딩 도구 '안티그래비티'에서 쓸 수 있어. 무료 사용자의 기본 모델은 그대로야. 구글은 여러 단계짜리 작업, 대화 중 지시 따르기, 문체 지시 따르기가 이전 모델보다 낫다고 주장했어.</p>
+    <p class="why"><b>AI·사업기획 관점:</b> 최고 성능 모델은 '유료 구독자 먼저'가 업계 공식이 됐어. 어제 본 메타의 구독형 AI까지, 빅테크가 무료로 사용자를 모은 뒤 최신 모델로 유료 전환을 끌어내는 전략이야. 서비스 기획에선 '무엇을 무료로, 무엇을 유료로 둘지'가 핵심 설계 포인트라는 걸 보여줘. (참고: 이 브리핑을 쓰는 Claude는 경쟁사 앤트로픽 모델이라, 보도 내용 그대로 전달했어.)</p>
+    <p class="src">출처: <a href="https://www.searchenginejournal.com/google-gemini-4-argon-ai-mode/592806/" target="_blank" rel="noopener">Search Engine Journal</a> (현지시간 2026-10-13)</p>
+  </article>
+  <p class="src">뷰티·여행 분야는 최근 브리핑에서 다룬 수출·관광 통계 말고 새로 달라진 소식이 확인되지 않아 오늘은 쉬어.</p>
+</section>
+<section id="c-2026-10-14">
+  <h3>💰 오늘의 경제 개념</h3>
+  <p class="concept-name">경제성장률 (GDP 성장률)</p>
+  <div class="step"><div class="k">쉬운 뜻</div><div>한 나라가 1년 동안 새로 만들어 낸 물건·서비스의 총가치를 <b>GDP(국내총생산)</b>라고 해. 이 GDP가 작년보다 몇 % 커졌는지가 <b>경제성장률</b>이야. 보통은 물가 오른 효과를 뺀 '실질' 성장률을 써. 성장률 3%는 "경제 규모가 1년 새 3% 커졌다"는 뜻이지.</div></div>
+  <div class="step"><div class="k">일상 속</div><div>학교 앞 떡볶이 가게가 작년엔 1년 매출 1억 원이었는데 올해 1억 300만 원을 벌었다면 '3% 성장'이야. 그런데 내년에 '2% 성장'이 예상된다고 망하는 게 아니야. 여전히 커지는데, 커지는 속도가 느려질 뿐이지. 성장률은 '크기'가 아니라 '커지는 속도'라는 게 헷갈리는 포인트야.</div></div>
+  <div class="step"><div class="k">숫자 예시</div><div>
+    <p style="margin:0 0 6px">어떤 나라의 GDP가 올해 2,500조 원이라고 해 볼게(설명용 가상 수치).</p>
+    <div class="tbl"><table>
+      <tr><th>내년 성장률</th><th>내년 GDP</th><th>늘어난 몫</th></tr>
+      <tr><td>3.3%</td><td>약 2,582.5조 원</td><td>+82.5조</td></tr>
+      <tr><td>2.8%</td><td>2,570조 원</td><td>+70조</td></tr>
+      <tr><td>0%</td><td>2,500조 원</td><td>그대로</td></tr>
+      <tr><td>−1%</td><td>2,475조 원</td><td>−25조 (역성장)</td></tr>
+    </table></div>
+    <p style="margin:6px 0 0">성장률이 3.3%에서 2.8%로 낮아져도 경제는 여전히 70조 원 커져. 경제 규모가 실제로 줄어드는 건 성장률이 마이너스일 때야.</p>
+  </div></div>
+  <div class="step"><div class="k">오늘 뉴스</div><div>① IMF가 올해 한국 성장률 전망을 3.3%로 올리고 내년은 2.8%로 봤어. 내년이 더 낮지만 '경제가 줄어든다'가 아니라 '조금 덜 빨리 큰다'는 뜻이야. ② 그런데 같은 날 코스피는 5% 넘게 빠졌지. 성장률은 지난 1년의 '결과'에 가깝고, 주가는 앞으로의 이익에 대한 '기대'(10월 9일에 배운 선반영)로 움직여서, 메모리 경쟁 우려가 커지자 성장률 상향과 반대로 갔어. ③ 그리고 평균 성장률이 높아도 반도체 대기업에 몰리면 자영업자·청년은 체감이 다를 수 있다는 'K자형' 지적도 같이 기억해 둬.</div></div>
+  <div class="step"><div class="k">한 문장</div><div class="memo">"성장률은 경제의 '크기'가 아니라 '커지는 속도' — 낮아져도 플러스면 경제는 여전히 커진다."</div></div>
+  <div class="quiz">
+    <p style="margin:0"><b>O/X 퀴즈</b> 내년 성장률 전망이 3.3%에서 2.8%로 낮아지면, 내년 한국 경제 규모는 올해보다 줄어든다.</p>
+    <details><summary>정답 보기</summary><p style="margin:4px 0 0"><b>X</b> — 2.8%만큼 여전히 커져. 커지는 속도가 느려질 뿐이고, 규모가 줄어드는 건 성장률이 마이너스일 때야.</p></details>
+  </div>
+  <p class="src" style="margin-top:8px">참고: <a href="https://www.fnnews.com/news/202610131824008836" target="_blank" rel="noopener">파이낸셜뉴스 – IMF 전망</a> (2026-10-13), <a href="https://view.asiae.co.kr/article/2026101309464167512" target="_blank" rel="noopener">아시아경제</a> (2026-10-13). 표의 GDP 숫자는 설명용 가상 수치야.</p>
+</section>
+  <p class="note">뉴스는 보도 내용을 요약한 것이고, 특정 종목의 매수·매도를 추천하지 않아. 날짜는 모두 한국시간 기준이며, 해외 보도는 현지 날짜를 함께 표시했어. 코스피 하락 원인(CXMT 기술 진전 등)은 시장 분석으로, 한 가지 이유로 단정할 수 없어. 리야드 공항 공격 사망자는 매체별로 집계가 엇갈리고, 연합군 공습 피해 규모는 독립적으로 확인되지 않았어. 오픈AI 직원 사건은 기소 단계의 혐의이고, 파키스탄 주총리 구금은 PTI 측 주장이야. 제미나이 4 아르곤의 성능은 회사 측 주장이야. 청년미래적금 세부 조건은 금융위원회 등 공식 안내에서 다시 확인해.</p>
+  </details>
+</div>
+<!--DAY 2026-10-14 END-->
+<!--DAY 2026-10-13 START-->
+<div class="day" id="d-2026-10-13">
+  <div class="day-head"><h2 class="day-title">2026년 10월 13일 화요일</h2></div>
+  <p class="lede">북한이 9일 만에 또 탄도미사일을 쐈고(일부 900km 넘게 비행), 신현송 한은 총재는 첫 국감에서 추가 금리 인상 문을 열어뒀어. 코스피는 외국인 2조 매도에 3.65% 급락했는데 원화는 오히려 2년 만에 가장 강해졌고. 밖에선 '경기 안정 이론'의 홀·우드퍼드가 노벨경제학상을 받았고, 러시아는 트럼프의 '에너지 휴전' 발표 뒤에도 우크라 에너지 시설을 때렸어. 화요일 아침 핵심만.</p>
+  <div class="tiles" aria-label="오늘의 숫자">
+  <div class="tile"><span class="tag">국내</span><div class="lb">北 탄도미사일 비행거리</div><div class="v">900<small>km+</small></div><div class="d">올해 16번째, 9일 만의 발사</div></div>
+  <div class="tile"><span class="tag">경제</span><div class="lb">코스피 종가 (12일)</div><div class="v">6,384</div><div class="d">−3.65%, 4거래일 연속 하락</div></div>
+  <div class="tile"><span class="tag">경제</span><div class="lb">원·달러 환율 (12일)</div><div class="v">1,335.1<small>원</small></div><div class="d">2024년 10월 이후 최저 = 원화 강세</div></div>
+  <div class="tile"><span class="tag">사회</span><div class="lb">예술요원 중 국내대회 출신</div><div class="v">86.6<small>%</small></div><div class="d">최근 5년, 병무청 국감 자료</div></div>
+</div>
+  <div class="five">
+  <h3>오늘 꼭 기억할 5줄</h3>
+  <ol>
+    <li>북한이 12일 아침 평양 일대에서 동해로 탄도미사일 여러 발을 쐈어. 일부는 900km 넘게 날았고 올해 16번째야. 우리 군이 극초음속 활공체 첫 시험발사를 공개한 지 나흘 만이야.</li>
+    <li>신현송 한은 총재 첫 국감: "선제 인상으로 시간을 벌었다", 추가 인상은 "물가 흐름이 가장 중요". 다음 금리 결정은 22일이야.</li>
+    <li>코스피는 외국인 2조 원 매도에 3.65% 급락해 6,384, 4거래일 연속 하락. 그런데 원·달러 환율은 1,335원으로 원화가 2년 만에 가장 강해졌어.</li>
+    <li>노벨경제학상은 로버트 홀·마이클 우드퍼드 — 중앙은행이 금리를 정할 때 쓰는 모델의 토대를 놓았어. 러시아는 트럼프의 '에너지 휴전' 발표 뒤에도 우크라 발전소·가스시설을 공격했고.</li>
+    <li>오늘의 경제 개념은 '포워드 가이던스'. 중앙은행이 "앞으로 이렇게 할게"라고 미리 말하는 것만으로 시장이 움직여 — 우드퍼드가 이론을 세웠고, 신 총재가 어제 강조한 '미리 방향 주기'가 바로 이거야.</li>
+  </ol>
+</div>
+  <details class="full"><summary>전체 브리핑 펼쳐 보기</summary>
+<section>
+  <h3>📰 오늘의 주요 뉴스</h3>
+
+  <div class="group">국내</div>
+
+  <article id="a-2026-10-13-1" data-cat="북한·안보" data-issue="북한 미사일 발사" data-me="입대 앞뒀거나 군 복무 중인 친구가 있다면 접경 긴장 소식은 남 일이 아니야.">
+    <h4>北, 9일 만에 동해로 탄도미사일 여러 발… 일부 900km 비행, 韓 극초음속 시험 나흘 만</h4>
+    <p>합동참모본부에 따르면 북한은 12일 오전 9시 20분쯤 평양 일대에서 동해로 탄도미사일 여러 발을 쐈고, 그중 일부는 900km 넘게 날아갔어. 올해 16번째 탄도미사일 발사이고, 3일 이후 9일 만이야. 일본 방위성은 9시 20분과 9시 40분쯤 두 차례 발사가 있었고 모두 일본 배타적경제수역(EEZ)<span class="term">(자기 나라 해안에서 약 370km까지의 바다)</span> 밖에 떨어진 걸로 봤어. 정확한 기종과 발수는 한미가 분석 중이야.</p>
+    <p>우리 군이 8일 국산 극초음속 활공체(HGV)<span class="term">(마하 5 이상으로 날며 방향을 틀어 방공망을 피하는 무기)</span> 첫 시험발사를 공개한 지 나흘 만이라, 합참은 "의도적인 미사일 능력 과시"로 보고 DMZ 지뢰를 '정전협정 위반'으로 규정한 데 대한 반발일 수도 있다고 했어. 국가안보실은 곧바로 긴급회의를 열어 "유엔 안보리 결의 위반"이라며 즉각 중단을 촉구했어.</p>
+    <p class="why"><b>왜 중요?</b> 지뢰·담화에 이어 미사일까지, 북한의 대응이 말에서 행동으로 옮겨가고 있어. 남북이 극초음속 무기로 맞불을 놓는 모양새라 긴장이 쉽게 안 풀릴 수 있어.</p>
+    <p class="src">출처: <a href="https://www.seoul.co.kr/news/politics/north/2026/10/13/20261013006001" target="_blank" rel="noopener">서울신문</a> (2026-10-13), <a href="https://fnnews.com/news/202610121450048728" target="_blank" rel="noopener">파이낸셜뉴스 – 日 "EEZ 밖 낙하"</a> (2026-10-12), <a href="https://www.newspim.com/news/view/20261012000544" target="_blank" rel="noopener">뉴스핌 – 안보실 긴급회의</a> (2026-10-12)</p>
+  </article>
+
+  <article id="a-2026-10-13-2" data-cat="경제·증시" data-issue="국정감사" data-me="22일 금리가 또 오르면 학자금·전세대출 이자도 따라 오를 수 있어.">
+    <h4><span class="upd">새 전개</span>신현송 첫 국감 "선제 인상으로 시간 벌었다"… 추가 인상은 "물가 흐름이 가장 중요"</h4>
+    <p>어제 예고한 한은 국감 결과야. 신현송 한국은행 총재는 12일 재정경제기획위원회에서 7·8월 연속 인상(현재 연 3.00%)을 두고 "주요국보다 조금 먼저 움직여 시간을 벌었고, 경제적 비용을 줄였다"고 했어. 미 연준(9월 인상)보다 먼저 올린 덕에 시장에 끌려다니며 올리는 것보다 비용이 적었다는 거야. "가래로 막을 걸 호미로 막는다"는 표현도 썼어. 추가 인상 여부엔 "인플레이션 추이가 가장 중요하다"며 물가·성장·금융안정 전망을 보고 시기와 속도를 정하겠다고 했어. 올해 남은 결정은 이달 22일과 11월이야.</p>
+    <p>어제 다룬 '통화·재정 엇박자' 쟁점에 대해선, 정부 내년 예산이 성장률을 0.5%p, 물가를 0.06%p 끌어올릴 걸로 추정했어. 이전지출<span class="term">(지원금처럼 정부가 개인에게 바로 나눠주는 돈)</span> 비중이 커서 물가 영향은 크지 않을 수 있다는 설명이야. 개인 투자자 사이에 번진 레버리지 단일종목 ETF<span class="term">(한 종목 주가 움직임의 2배 등으로 움직이는 고위험 상품)</span>에 대해선 "경고를 충분히 못 했다"고 사과했어.</p>
+    <p class="why"><b>왜 중요?</b> 총재가 '추가 인상'을 사실상 열어두면서 22일 결정이 대출 이자의 다음 분기점이 됐어. 정부 확장 예산의 물가 영향은 작다고 본 것도 포인트야.</p>
+    <p class="src">출처: <a href="https://www.etoday.co.kr/news/view/2634633" target="_blank" rel="noopener">이투데이</a> (2026-10-12), <a href="https://www.mt.co.kr/economy/2026/10/12/2026101216251135014" target="_blank" rel="noopener">머니투데이</a> (2026-10-12), <a href="https://www.news1.kr/economy/trend/6316973" target="_blank" rel="noopener">뉴스1</a> (2026-10-12)</p>
+  </article>
+
+  <article id="a-2026-10-13-3" data-cat="경제·증시" data-issue="국정감사" data-me="내가 받는 쿠폰 할인, 그 비용을 누가 내는지가 어제 국감의 쟁점이었어.">
+    <h4><span class="upd">새 전개</span>공정위 국감, 쿠팡 '조사 거부' 집중 추궁… 공정위원장 "무겁게 본다"</h4>
+    <p>같은 날 정무위원회 공정거래위원회 국감에선 쿠팡이 표적이 됐어. 쿠팡은 8월 공정위 현장조사에 응하지 않았고, 다른 오픈마켓(네이버·SSG닷컴·G마켓·11번가)이 낸 정산 자료도 아직 안 냈다는 지적이 나왔어. 증인으로 나온 주성원 쿠팡 부사장은 "거부가 아니라 절차적 권리 구제"라고 했고, 할인쿠폰 비용을 납품업체에 떠넘긴다는 의혹엔 "쿠폰 비용은 쿠팡이 전액 부담한다"고 반박했어.</p>
+    <p>개인정보 유출 피해자 50명에게 1인 10만 원을 주라는 소비자분쟁조정위원회 조정안을 거부하고 쿠팡 이용권을 제안한 것, 최근 2년 8개월 동안 18번의 서비스 장애도 도마에 올랐어. 주병기 공정위원장은 "조사 거부를 무겁게 본다"며 조사 불응 제재를 강화하고, 반복 담합엔 과징금을 깎아주지 않겠다고 했어. "쿠팡은 성장한 만큼 을의 권익을 보호해야 한다"고도 했고.</p>
+    <p class="why"><b>왜 중요?</b> 공정위가 조사 거부 자체를 제재하는 쪽으로 가면 플랫폼 기업과의 힘겨루기가 커져. 납품업체·입점업체 거래 조건이 바뀌는 계기가 될 수 있어.</p>
+    <p class="src">출처: <a href="https://www.newsis.com/view/NISX20261012_0003822855" target="_blank" rel="noopener">뉴시스</a> (2026-10-12), <a href="https://www.fntimes.com/html/view.php?ud=202610121511053857b5b890e35c_18" target="_blank" rel="noopener">한국금융신문 – 공정위원장</a> (2026-10-12), <a href="https://www.fntimes.com/html/view.php?ud=202610121823294157b5b890e35c_18" target="_blank" rel="noopener">한국금융신문 – 쿠팡 답변</a> (2026-10-12)</p>
+  </article>
+
+  <article id="a-2026-10-13-4" data-cat="경제·증시" data-issue="코스피 흐름" data-me="원화가 강해지면 해외여행·직구가 싸져. 엔화는 거의 19년 만에 가장 싸졌어.">
+    <h4><span class="upd">새 전개</span>코스피 3.65% 급락 6,384… 그런데 원화는 2년 만에 가장 강해졌다</h4>
+    <p>연휴 뒤 다시 열린 12일, 코스피는 241.69포인트(3.65%) 내린 6,384.24로 마감했어. 4거래일 연속 하락이고, 8월 11일 이후 최저, 9월 2일 이후 가장 큰 하루 낙폭이야. 외국인이 약 2조 원을 팔았고 개인이 약 1.46조 원을 샀어. 삼성전자 −4.39%, SK하이닉스 −4.52%였고 코스닥은 4.83% 빠진 849.19였어.</p>
+    <div class="fig" role="group" aria-label="코스피 최근 4거래일 하루 하락률 막대 차트">
+      <p class="fig-t">하루 낙폭이 날마다 커졌어</p>
+      <p class="fig-s">코스피 일별 하락률 · 단위: % · 같은 축척</p>
+      <div class="hbars">
+        <div class="hbar" tabindex="0" data-tip="10월 6일 · −0.89% (6,941.39)"><span class="lbl">10월 6일</span><span class="tr"><span class="fl" style="width:calc(0.89 / 3.65 * 100%)"></span></span><span class="n">−0.89</span></div>
+        <div class="hbar" tabindex="0" data-tip="10월 7일 · −1.98% (6,803.90)"><span class="lbl">10월 7일</span><span class="tr"><span class="fl" style="width:calc(1.98 / 3.65 * 100%)"></span></span><span class="n">−1.98</span></div>
+        <div class="hbar" tabindex="0" data-tip="10월 8일 · −2.62% (6,625.93)"><span class="lbl">10월 8일</span><span class="tr"><span class="fl" style="width:calc(2.62 / 3.65 * 100%)"></span></span><span class="n">−2.62</span></div>
+        <div class="hbar hl" tabindex="0" data-tip="10월 12일 · −3.65% (6,384.24)"><span class="lbl">10월 12일</span><span class="tr"><span class="fl" style="width:100%"></span></span><span class="n">−3.65</span></div>
+      </div>
+      <details class="tv"><summary>표로 보기</summary>
+        <div class="tbl"><table><tr><th>날짜</th><th>종가</th><th>하락률</th></tr><tr><td>10월 6일</td><td>6,941.39</td><td>−0.89%</td></tr><tr><td>10월 7일</td><td>6,803.90</td><td>−1.98%</td></tr><tr><td>10월 8일</td><td>6,625.93</td><td>−2.62%</td></tr><tr><td>10월 12일</td><td>6,384.24</td><td>−3.65%</td></tr></table></div>
+      </details>
+    </div>
+    <p>이유로는 오픈AI 매출 실망에서 시작된 미국 AI 기업 성장 우려, 중국 메모리 업체의 점유율 확대 가능성, 높은 미국 장기금리가 꼽혀. 그동안 시장을 받쳐 준 삼성전자(약 15조 원)의 자사주 매입이 끝났고 SK하이닉스도 이번 주 마무리될 예정이라 '큰손'이 빠지는 것도 부담이야. 반대로 원·달러 환율은 7.7원 내린 1,335.1원으로 2024년 10월 4일 이후 가장 낮았어(원화 강세). 원·엔 환율도 100엔당 843.29원으로 약 18년 9개월 만의 최저야. 외국인이 주식을 팔면 보통 원화가 약해지는데, 수출 기업들이 번 달러를 대거 팔면서 오히려 원화가 강해졌대.</p>
+    <p class="why"><b>왜 중요?</b> 사상 최대 수출·실적에도 주가가 빠지는 건, 시장이 이제 'AI 붐이 얼마나 갈까'를 의심하기 시작했다는 신호야. 원화 강세는 수입 물가엔 도움이지만 수출 기업 이익엔 부담이야.</p>
+    <p class="src">출처: <a href="https://www.newspim.com/news/view/20261012001236" target="_blank" rel="noopener">뉴스핌 – 마감시황</a> (2026-10-12), <a href="https://m.go.seoul.co.kr/news/economy/securities/2026/10/13/20261013031003" target="_blank" rel="noopener">서울신문 – 환율 2년 만에 최저</a> (2026-10-13), <a href="https://fnnews.com/news/202610121518291365" target="_blank" rel="noopener">파이낸셜뉴스</a> (2026-10-12)</p>
+  </article>
+
+  <article id="a-2026-10-13-5" data-cat="사회·문화" data-me="음악·무용 전공이나 운동선수 친구라면 병역 계획이 통째로 달라질 수 있어.">
+    <h4>예술 병역특례 문턱 높인다… 국제대회 '2위 이상→1위만', 국내대회는 통폐합</h4>
+    <p>병무청이 12일 국회 국방위원회 국감에서 예술요원<span class="term">(대회 입상으로 군 복무 대신 예술 활동을 하며 대체 복무하는 제도)</span> 기준을 강화하겠다고 밝혔어. 국제 예술대회는 지금 '2위 이상'이면 되는데 앞으로 '1위'만 인정하고, 인정 대회 목록도 권위·심사 공정성을 따져 다시 짜. 국내 전통예술 대회는 부문을 합치고, 대회당 편입 인원을 2~3명에서 1명으로 줄여. 최근 5년 예술요원의 86.6%가 국내대회 입상자였다는 게 근거야. 11월 중순 연구용역을 거쳐 12월까지 훈령을 고칠 계획이야.</p>
+    <p>체육요원도 손본다고 했어. 나고야 아시안게임 금메달로 특례를 받은 축구 대표팀 일부 선수의 언행이 논란이 되면서, 대회가 끝난 뒤 11일 동안 특례 관련 민원이 23건 들어왔다는 자료가 나왔어(최근 5년 전체는 13건). 병무청은 '사회적 수용성'을 반영해 기준을 바꾸겠다고 했고, 국방부는 예술·체육요원 제도를 단계적으로 줄이거나 없애는 방안도 검토 중인 것으로 보도됐어.</p>
+    <p class="why"><b>왜 중요?</b> "왜 누구는 군대 안 가도 되나"라는 공정성 질문이 제도 개편으로 이어졌어. 예술·체육 진로를 준비하는 사람에겐 병역 계획 자체가 바뀔 수 있어.</p>
+    <p class="src">출처: <a href="https://www.kmib.co.kr/article/view.asp?arcid=9000021712&amp;code=61111911&amp;sid1=pol" target="_blank" rel="noopener">국민일보</a> (2026-10-12), <a href="https://www.segye.com/newsView/20261012520509" target="_blank" rel="noopener">세계일보 – 민원 급증</a> (2026-10-12), <a href="https://news.sbs.co.kr/news/endPage.do?news_id=N1008793066" target="_blank" rel="noopener">SBS</a> (2026-10-12)</p>
+  </article>
+
+  <div class="group">해외</div>
+
+  <article id="a-2026-10-13-6" data-cat="경제·증시" data-me="한은 총재가 어제 말한 '미리 방향 주기', 그 원리를 만든 사람이 받은 상이야.">
+    <h4>노벨경제학상에 홀·우드퍼드… "중앙은행이 쓰는 경기 안정 모델의 토대"</h4>
+    <p>스웨덴 왕립과학원은 12일(현지시간) 미국 스탠퍼드대 로버트 홀(83)과 컬럼비아대 마이클 우드퍼드(71)에게 노벨경제학상을 준다고 발표했어. 1970년대 오일쇼크 때 기존 케인스식 모델이 잘 맞지 않자, 두 사람은 소비자·기업의 선택과 기대에서 출발하는 새 거시경제 모델<span class="term">(나라 경제 전체를 설명하는 틀)</span>을 만들어 통화·재정정책이 경기 출렁임을 어떻게 줄일 수 있는지 보여줬어. 위원회는 "지금 전 세계 중앙은행과 정부가 쓰는 모델의 안정적인 이론 토대"라고 평가했어.</p>
+    <p>홀은 '소비는 예측하기 어렵게 움직인다'는 소비 이론과 노동시장 연구로 유명하고, 미국 경기침체 시작·끝을 공식 판정하는 위원회를 이끌었어. 우드퍼드는 중앙은행이 앞으로의 정책을 미리 알려 기대를 움직이는 '포워드 가이던스'의 이론적 토대를 놓았고, 2003년 책 『이자와 가격』은 현대 통화정책의 교과서로 꼽혀. 상금은 1,200만 크로나를 나눠 받아.</p>
+    <p class="why"><b>왜 중요?</b> 오일쇼크에서 출발한 연구가, 이란 전쟁 고유가 속에 금리를 올리는 지금 중앙은행들의 판단 근거가 되고 있어. 아래 오늘의 경제 개념과 바로 이어져.</p>
+    <p class="src">출처: <a href="https://www.aljazeera.com/news/2026/10/12/nobel-economics-prize-awarded-to-robert-hall-and-michael-%E2%81%A0woodford" target="_blank" rel="noopener">Al Jazeera</a> (현지시간 2026-10-12), <a href="https://www.seoul.co.kr/news/peoples/2026/10/13/20261013023002" target="_blank" rel="noopener">서울신문</a> (2026-10-13), <a href="https://www.hankookilbo.com/news/article/A2026101220180003991" target="_blank" rel="noopener">한국일보</a> (2026-10-12)</p>
+  </article>
+
+  <article id="a-2026-10-13-7" data-cat="국제" data-issue="우크라이나 전쟁과 휴전" data-me="휴전이 진짜 되면 경유·난방비가 숨 돌릴 수 있는데, 아직은 아니야.">
+    <h4><span class="upd">새 전개</span>트럼프 '에너지 휴전' 발표 하루 만에… 러시아, 우크라 발전소·가스시설 공격</h4>
+    <p>어제 다룬 트럼프 대통령의 "러·우 에너지 휴전 즉시 발효" 선언 이후, 러시아는 하르키우 발전소와 국영 에너지회사 나프토가즈의 하르키우주 가스 생산시설을 공격해 불이 났어. 젤렌스키 대통령은 "러시아가 이미 휴전을 어겼다"며 미국이 러시아가 지키도록 나서 달라고 했고, 러시아가 동의하지 않으면 대응하겠다고 경고했어.</p>
+    <p>크렘린의 페스코프 대변인은 에너지 휴전 논의는 "진행 중"이라면서도, 젤렌스키가 제안한 '60일 휴전 뒤 선거' 안은 거부했어. 러시아가 원하는 건 휴전이 아니라 장기적 평화라는 이유야. 마크롱 프랑스 대통령도 "러시아 쪽에서 에너지 휴전은 보이지 않는다"고 했어. 국제유가는 트럼프의 러시아산 경유 공급 발표와 휴전 기대에 12일 브렌트유가 1.5% 내린 배럴당 약 103달러로 집계됐어.</p>
+    <p class="why"><b>왜 중요?</b> '발표'와 '현실'이 하루 만에 엇갈렸어. 유가가 휴전 기대에 내렸던 만큼, 휴전이 무산되면 다시 오를 수 있어.</p>
+    <p class="src">출처: <a href="https://www.aljazeera.com/news/2026/10/12/ukraines-zelenskyy-accuses-russia-of-violating-trumps-energy-ceasefire" target="_blank" rel="noopener">Al Jazeera</a> (현지시간 2026-10-12), <a href="https://kyivindependent.com/kremlin-has-nothing-to-say-on-trumps-energy-ceasefire-rejects-zelenskys-truce-proposal-2/" target="_blank" rel="noopener">Kyiv Independent</a> (2026-10-12), <a href="https://hdfcsky.com/news/brent-crude-oil-price-today-october-12-2026-brent-falls-1-5percent-to-103-wti-drops-1-8percent-to-90-2-middle-east-risks-persist" target="_blank" rel="noopener">HDFC Sky – 유가</a> (2026-10-12)</p>
+  </article>
+
+  <article id="a-2026-10-13-8" data-cat="AI·테크" data-me="AI도 '무료'보다 '구독'이 기본이 돼 가. 과제용 AI 구독료 비교할 때가 왔어.">
+    <h4>메타, 새 AI '뮤즈 원더' 공개… 오픈AI·앤트로픽에 정면 도전</h4>
+    <p>메타가 12일(현지시간) 자사 역대 가장 뛰어난 AI라며 '뮤즈 원더(Muse Wonder)'와 '뮤즈 원더 풀'을 공개했어. 14개월 전 AI 조직을 통째로 다시 짠 뒤 나온 결과물이래. 뮤즈 원더는 메타의 개인 AI 에이전트 '뮤즈'에 먼저 구독자 대상으로 들어가고, 뮤즈 원더 풀은 AI 코딩 도구 '뮤즈 코드' 구독자가 쓸 수 있어. 메타는 코딩, 금융·법률 질문 같은 작업에서 ChatGPT·Claude와 맞먹는다고 주장했어.</p>
+    <p>로이터에 따르면 발표 뒤 메타 주가는 오후 거래에서 약 4% 올랐어. 저커버그가 지난 1년간 막대한 돈을 쏟고 연구자를 공격적으로 데려온 만큼, 구독 수익으로 AI 투자비를 메울 수 있을지가 관건이고 개인정보 우려도 함께 나와. 성능 비교 수치나 가격은 기사에 나오지 않았어. (참고: 이 브리핑을 쓰는 Claude도 앤트로픽 모델이라, 보도 내용 그대로 전달했어.)</p>
+    <p class="why"><b>왜 중요?</b> AI 시장이 오픈AI·앤트로픽·구글에 메타까지 '구독형 에이전트'로 맞붙는 4파전이 됐어. 무료로 뿌리던 메타가 유료 구독으로 돈을 벌려 한다는 게 전략 변화의 포인트야.</p>
+    <p class="src">출처: <a href="https://www.investing.com/news/stock-market-news/meta-releases-muse-wonder-ai-models-to-challengeanthropic-and-openai-4945058" target="_blank" rel="noopener">Reuters(Investing.com 게재)</a> (현지시간 2026-10-12), <a href="https://qz.com/meta-muse-wonder-ai-model-launch-101226" target="_blank" rel="noopener">Quartz</a> (현지시간 2026-10-12)</p>
+  </article>
+</section>
+<section>
+  <h3>🎓 내 관심 분야 <small>K-뷰티</small></h3>
+
+  <article id="a-2026-10-13-9" data-cat="뷰티" data-issue="K-뷰티 수출" data-me="뷰티 해외영업·MD에 관심 있으면 이런 수출상담회가 그 직무의 실제 현장이야.">
+    <h4>15~17일 킨텍스 'K-뷰티엑스포' 역대 최대… 60개국 바이어 220곳과 1:1 수출상담</h4>
+    <p>중부일보에 따르면 올해로 18회인 'K-뷰티엑스포 코리아'가 15~17일 경기 고양 킨텍스에서 열려. 15개국 679개사(국내 597, 해외 82)가 1,088개 부스를 차리는데, 참가사는 작년의 약 1.3배, 전시 면적은 약 1.4배야. KOTRA 해외무역관을 통해 60개국 해외 바이어 약 220곳을 불러 1:1 수출상담을 하고, 현장 방문까지 합쳐 해외 바이어 1만 명 이상이 올 걸로 주최 측은 내다봐. 국내 유통사 33곳과의 입점 상담, 중국 온라인 플랫폼 진출 설명회도 열려.</p>
+    <p class="why"><b>뷰티 산업 관점:</b> 9월 월 수출 최대 기록 이후, 이제 관건은 '누구에게 어떻게 파느냐'야. 해외 바이어를 직접 연결하는 이런 상담회는 수출 경험이 없는 중소·인디 브랜드가 첫 판로를 뚫는 통로가 돼.</p>
+    <p class="src">출처: <a href="https://www.joongboo.com/news/articleView.html?idxno=363739030" target="_blank" rel="noopener">중부일보</a> (2026-10-12)</p>
+  </article>
+  <p class="src">AI 분야는 위 '메타 뮤즈 원더' 뉴스에서 다뤘고, 여행 분야는 최근 브리핑에서 다룬 관광 통계 말고 새로 달라진 소식이 확인되지 않아 오늘은 쉬어.</p>
+</section>
+<section id="c-2026-10-13">
+  <h3>💰 오늘의 경제 개념</h3>
+  <p class="concept-name">포워드 가이던스 (선제적 안내)</p>
+  <div class="step"><div class="k">쉬운 뜻</div><div>중앙은행이 "앞으로 금리를 이렇게 할 거야"라고 <b>미리 말로 알려주는 것</b>이야. 사람들은 앞으로의 금리를 예상해서 대출·투자·소비를 정하니까, 실제로 금리를 바꾸기 전에 말만으로도 시장 금리와 사람들 행동이 먼저 움직여. 중앙은행의 '말'이 또 하나의 정책 도구가 되는 거지.</div></div>
+  <div class="step"><div class="k">일상 속</div><div>교수님이 2주 전에 "다음 달 셋째 주에 퀴즈 본다"고 공지하면 다들 미리 조금씩 준비해서 퀴즈 날 큰 혼란이 없지. 반대로 아무 말 없다가 갑자기 깜짝 퀴즈를 내면 강의실이 난리가 나. 금리도 똑같아서, 미리 신호를 주면 충격이 여러 날에 나눠지고 실제 인상 날은 조용히 지나가.</div></div>
+  <div class="step"><div class="k">숫자 예시</div><div>
+    <p style="margin:0 0 6px">기준금리를 0.5%p 올리는 상황을 두 가지로 비교해 볼게(설명용 가상 수치).</p>
+    <div class="fig" role="group" aria-label="깜짝 인상과 예고 뒤 인상의 하루 시장금리 변동 비교 차트">
+      <p class="fig-t">예고하면 '인상 당일 충격'이 작아져</p>
+      <p class="fig-s">인상 발표 당일 시장금리 하루 변동 · 단위: %p · 가상 수치 · 같은 축척</p>
+      <div class="hbars">
+        <div class="hbar hl" tabindex="0" data-tip="깜짝 인상 · 당일 시장금리 +0.50%p (가상)"><span class="lbl">깜짝 인상</span><span class="tr"><span class="fl" style="width:100%"></span></span><span class="n">+0.50</span></div>
+        <div class="hbar" tabindex="0" data-tip="미리 예고한 뒤 인상 · 당일 +0.10%p, 나머지 +0.40%p는 예고 기간에 나눠 반영 (가상)"><span class="lbl">예고 뒤 인상</span><span class="tr"><span class="fl" style="width:calc(0.10 / 0.50 * 100%)"></span></span><span class="n">+0.10</span></div>
+      </div>
+      <details class="tv"><summary>표로 보기</summary>
+        <div class="tbl"><table><tr><th></th><th>예고 기간 동안</th><th>인상 당일</th><th>합계</th></tr><tr><td>깜짝 인상</td><td>0</td><td>+0.50%p</td><td>+0.50%p</td></tr><tr><td>예고 뒤 인상</td><td>+0.40%p</td><td>+0.10%p</td><td>+0.50%p</td></tr></table></div>
+      </details>
+    </div>
+    <p style="margin:6px 0 0">결국 오르는 폭(0.5%p)은 같아. 차이는 '한 번에 맞느냐, 나눠서 맞느냐'야. 미리 알면 기업·가계가 대출 계획을 조정할 시간이 생겨서 경제가 덜 휘청여.</p>
+  </div></div>
+  <div class="step"><div class="k">오늘 뉴스</div><div>① 신현송 총재는 국감에서 "주요국보다 먼저 올리고 시장에 분명한 방향을 줘서, 나중에 더 큰 조정을 막았다"고 했어. 실제로 인상 효과의 상당 부분이 5~6월에 이미 시장에 반영됐다고 했는데, 그게 바로 포워드 가이던스 효과야(10월 9일에 배운 '선반영'과 같은 원리). ② 추가 인상엔 "인플레이션 추이가 가장 중요하다"고 했는데, 이렇게 "물가가 이러면 이렇게 하겠다"는 조건을 다는 것도 포워드 가이던스의 한 방식이야. ③ 그리고 바로 그날, 이 개념의 이론적 토대를 놓은 마이클 우드퍼드가 노벨경제학상을 받았어.</div></div>
+  <div class="step"><div class="k">한 문장</div><div class="memo">"중앙은행의 말도 정책이다 — 미리 알려주면 같은 인상도 충격이 작아진다."</div></div>
+  <div class="quiz">
+    <p style="margin:0"><b>O/X 퀴즈</b> 포워드 가이던스는 중앙은행이 실제로 기준금리를 바꾼 뒤에야 시장 금리에 영향을 준다.</p>
+    <details><summary>정답 보기</summary><p style="margin:4px 0 0"><b>X</b> — 미리 말하는 것만으로 사람들의 기대가 바뀌어 시장 금리가 먼저 움직여.</p></details>
+  </div>
+  <p class="src" style="margin-top:8px">참고: <a href="https://www.etoday.co.kr/news/view/2634633" target="_blank" rel="noopener">이투데이 – 신현송 국감</a> (2026-10-12), <a href="https://www.seoul.co.kr/news/peoples/2026/10/13/20261013023002" target="_blank" rel="noopener">서울신문 – 노벨경제학상</a> (2026-10-13). 숫자 예시는 설명용 가상 수치야.</p>
+</section>
+  <p class="note">뉴스는 보도 내용을 요약한 것이고, 특정 종목의 매수·매도를 추천하지 않아. 날짜는 모두 한국시간 기준이며, 해외 보도는 현지 날짜를 함께 표시했어. 북한 미사일의 정확한 발수·기종은 한미 당국이 분석 중이야. 국방부의 예술·체육요원 단계적 폐지 검토는 보도 단계로 공식 확정되지 않았어. 12일 브렌트유 가격은 인도 금융매체 HDFC Sky 집계 기준이고, 메타 뮤즈 원더의 성능은 회사 측 주장이야.</p>
+  </details>
+</div>
+<!--DAY 2026-10-13 END-->
+<!--DAY 2026-10-12 START-->
+<div class="day" id="d-2026-10-12">
+  <div class="day-head"><h2 class="day-title">2026년 10월 12일 월요일</h2></div>
+  <p class="lede">국감 2주차가 오늘 시작돼. 신현송 한은 총재가 처음 국감에 서고, 공정위 국감엔 쿠팡·배민·정유 4사가 불려 나와. 해킹은 은행을 넘어 교회·대학·공공기관까지 번져 누적 100만 명을 넘었고. 밖에선 사우디 리야드 공항이 후티 공격에 12명이 숨졌고, 트럼프는 '러·우 에너지 휴전'을 깜짝 발표했어. 월요일 아침 핵심만.</p>
+  <div class="tiles" aria-label="오늘의 숫자">
+  <div class="tile"><span class="tag">국내</span><div class="lb">한국은행 기준금리</div><div class="v">3.00<small>%</small></div><div class="d">7·8월 연속 인상 뒤, 다음 결정 22일</div></div>
+  <div class="tile"><span class="tag">국내</span><div class="lb">해킹 누적 유출 신고</div><div class="v">100<small>만 명+</small></div><div class="d">금융·공공·대학·교회 합산 보도</div></div>
+  <div class="tile"><span class="tag">해외</span><div class="lb">리야드 공항 공격 사망자</div><div class="v">12<small>명</small></div><div class="d">부상 약 300명, 이번 주 세 번째</div></div>
+  <div class="tile"><span class="tag">경제</span><div class="lb">내년 정부 총지출(예산안)</div><div class="v">820.9<small>조 원</small></div><div class="d">올해 본예산보다 +12.8%</div></div>
+</div>
+  <div class="five">
+  <h3>오늘 꼭 기억할 5줄</h3>
+  <ol>
+    <li>오늘 국감 2주차 시작. 신현송 한은 총재가 첫 국감에서 7·8월 연속 금리 인상(현재 연 3.00%)의 효과와 추가 인상 여부를 검증받고, 공정위 국감엔 쿠팡·배민·정유 4사 경영진이 증인으로 나와.</li>
+    <li>해킹이 금융권 밖으로 번졌어. 교육 시스템 업체 한 곳이 뚫리면서 국방부·기아 노조 등 약 20곳이 함께 털렸고, 교회 한 곳은 교인 최대 85만 명 정보 유출 가능성을 조사 중이야. 누적 유출 신고는 100만 명을 넘었어.</li>
+    <li>중수청 출범 9일 만에 윤호중 행안부 장관이 임은정 광주중수청장 감찰을 지시했어. 초대 청장 후보자를 공개 비판했다는 이유야.</li>
+    <li>사우디 리야드 공항이 후티 공격에 또 맞아 최소 12명이 숨지고 약 300명이 다쳤어. 트럼프는 후티 상대 작전 합류를 "검토하겠다"고 했고, 따로 "러·우 에너지 휴전 즉시 발효"를 선언했지만 러시아 쪽 확인은 아직 없어.</li>
+    <li>오늘의 경제 개념은 '통화정책과 재정정책'. 한은은 금리로 브레이크를 밟는데 정부 내년 예산은 12.8% 늘어 — 둘의 방향이 엇갈리는 게 오늘 한은 국감 쟁점 중 하나야.</li>
+  </ol>
+</div>
+  <details class="full"><summary>전체 브리핑 펼쳐 보기</summary>
+<section>
+  <h3>📰 오늘의 주요 뉴스</h3>
+
+  <div class="group">국내</div>
+
+  <article id="a-2026-10-12-1" data-cat="경제·증시" data-issue="국정감사" data-me="학자금 대출 이자랑 배달앱 수수료, 둘 다 오늘 국감 테이블에 올라.">
+    <h4><span class="upd">오늘</span>국감 2주차… 신현송 한은 총재 첫 출석, 쿠팡·배민·정유 4사는 공정위 국감에</h4>
+    <p>국정감사가 오늘(12일)부터 2주차에 들어가. 재정경제기획위원회에선 신현송 한국은행 총재가 취임 뒤 처음 국감에 나와. 한은은 물가를 잡으려고 7월과 8월 연달아 기준금리를 올려 지금 연 3.00%야. 연속 인상의 효과와 추가 인상 필요성, 취약계층 이자 부담, 정부의 확장 예산과 엇박자가 나는 건 아닌지가 쟁점이야. 다음 금리 결정은 22일이야.</p>
+    <p>같은 날 정무위원회의 공정거래위원회 국감엔 홈플러스 대표, 쿠팡 총괄부사장, 배달의민족 부사장, 정유 4사 대표 등이 증인으로 불렸어. 쿠팡은 할인쿠폰 비용을 납품업체에 떠넘겼다는 의혹과 공정위 현장조사 거부 논란, 배민은 수수료와 최혜대우<span class="term">(경쟁 앱보다 나은 조건을 입점 가게에 요구하는 것)</span> 의혹, 정유 4사는 이란 전쟁 직후 유가 폭등 때의 담합 혐의(7월 기소)가 다뤄져.</p>
+    <p class="why"><b>왜 중요?</b> 한은 국감은 대출 이자가 더 오를지 가늠할 자리고, 공정위 국감은 매일 쓰는 쇼핑·배달 앱의 가격 구조를 따지는 자리야.</p>
+    <p class="src">출처: <a href="https://fnnews.com/news/202610111136066770" target="_blank" rel="noopener">파이낸셜뉴스 – 국감 2주차</a> (2026-10-11), <a href="https://edaily.co.kr/News/Read?mediaCodeNo=257&amp;newsId=01525206645611608" target="_blank" rel="noopener">이데일리 – 한은 국감 미리보기</a> (2026-10-10), <a href="https://etoday.co.kr/news/view/2634316" target="_blank" rel="noopener">이투데이 – 공정위 국감</a> (2026-10-11)</p>
+  </article>
+
+  <article id="a-2026-10-12-2" data-cat="금융·보안" data-issue="금융권 해킹" data-me="학교·교회·동아리 사이트 비번 재사용 끊고, 문자 속 링크는 누르지 말기.">
+    <h4><span class="upd">새 전개</span>해킹, 금융권 넘어 공공·대학·교회로… 누적 유출 100만 명 넘어</h4>
+    <p>은행·저축은행에서 시작된 해킹이 전방위로 번졌어. 파이낸셜뉴스에 따르면 9월 19일 온라인 학습관리 시스템 업체 '맑은소프트'가 뚫리면서, 이 업체에 시스템 관리를 맡긴 국방부·국민권익위 교육원·기아 노조 등 약 20곳이 함께 피해를 봤어. 시스템을 바꾼 뒤에도 옛 데이터가 업체 서버에 그대로 남아 있던 곳도 있었대.</p>
+    <p>여의도순복음교회는 교인 최대 85만 명의 정보가 해외 서버로 빠져나갔을 가능성을 자체 분석 중이고, 서울사이버대 학생·교직원 정보도 유출돼 조사 중이야. 한전은 직원 약 2만 4천 명 정보가 공개 웹페이지에 노출됐다가 지워졌고. 보도에 따르면 누적 유출 신고 규모는 100만 명을 넘었어. 수사 과정에서 중국어 오픈소스 침투테스트 도구<span class="term">(원래는 보안 점검용으로 시스템 약점을 찾는 프로그램)</span>와 AI 코딩 도구를 함께 쓴 흔적이 나왔다는데, AI가 얼마나 쓰였는지는 아직 확인 중이야.</p>
+    <div class="fig" role="group" aria-label="기관별 개인정보 유출 규모 막대 차트">
+      <p class="fig-t">한 곳의 피해가 은행 수십 곳보다 클 수도</p>
+      <p class="fig-s">기관별 유출(가능성 포함) 규모 · 단위: 만 명 · 같은 축척</p>
+      <div class="hbars">
+        <div class="hbar hl" tabindex="0" data-tip="여의도순복음교회 · 최대 85만 명 (유출 가능성, 교회 자체 분석 중)"><span class="lbl">여의도순복음교회 (최대·가능성)</span><span class="tr"><span class="fl" style="width:100%"></span></span><span class="n">85</span></div>
+        <div class="hbar" tabindex="0" data-tip="예가람저축은행 · 약 4만 명"><span class="lbl">예가람저축은행</span><span class="tr"><span class="fl" style="width:calc(4 / 85 * 100%)"></span></span><span class="n">4</span></div>
+        <div class="hbar" tabindex="0" data-tip="신한은행 · 약 2만 5천 명"><span class="lbl">신한은행</span><span class="tr"><span class="fl" style="width:calc(2.5 / 85 * 100%)"></span></span><span class="n">2.5</span></div>
+        <div class="hbar" tabindex="0" data-tip="한국전력 · 직원 약 2만 4천 명 (웹페이지 노출 후 삭제)"><span class="lbl">한국전력 (노출)</span><span class="tr"><span class="fl" style="width:calc(2.4 / 85 * 100%)"></span></span><span class="n">2.4</span></div>
+      </div>
+      <details class="tv"><summary>표로 보기</summary>
+        <div class="tbl"><table><tr><th>기관</th><th>규모</th><th>비고</th></tr><tr><td>여의도순복음교회</td><td>최대 약 85만 명</td><td>유출 가능성, 자체 분석 중</td></tr><tr><td>예가람저축은행</td><td>약 4만 명</td><td>확인된 유출</td></tr><tr><td>신한은행</td><td>약 2만 5천 명</td><td>확인된 유출</td></tr><tr><td>한국전력</td><td>약 2만 4천 명</td><td>공개 웹페이지 노출 후 삭제</td></tr></table></div>
+      </details>
+    </div>
+    <p>과기정통부·한국인터넷진흥원(KISA)은 24시간 비상 대응에 들어갔고, 교육부는 산하 약 400개 기관에 긴급 보안 점검을 요청했어.</p>
+    <p class="why"><b>왜 중요?</b> 업체 한 곳이 뚫리자 그 업체를 쓰던 기관 수십 곳이 줄줄이 털린 '공급망 해킹'이야. 내 정보가 어디에 남아 있는지조차 모르는 상황이 된 거지.</p>
+    <p class="src">출처: <a href="https://www.fnnews.com/news/202610110858331062" target="_blank" rel="noopener">파이낸셜뉴스</a> (2026-10-11), <a href="https://www.daily25news.com/news/articleView.html?idxno=7636" target="_blank" rel="noopener">데일리25 – 주간 정리(로이터 인용)</a> (2026-10-11)</p>
+  </article>
+
+  <article id="a-2026-10-12-3" data-cat="정치·외교" data-issue="검찰 개혁" data-me="새 수사기관이 흔들리면 고소·고발 사건 처리가 늦어질 수 있어.">
+    <h4>중수청 출범 9일 만에… 윤호중 행안장관, 임은정 광주중수청장 '1호 감찰' 지시</h4>
+    <p>10월 2일 검찰청이 없어지며 생긴 중대범죄수사청<span class="term">(중수청, 부패·경제 등 큰 범죄를 수사하는 새 기관)</span>에서 첫 내부 갈등이 터졌어. 윤호중 행정안전부 장관은 11일 X(옛 트위터)에 "임 청장은 중수청을 수사하는 기관이 아니라 정치하는 기관으로 착각하고 있는 것 같다"며 감찰을 지시하겠다고 했어. 임은정 광주중수청장이 5일 페이스북에 김지용 초대 중수청장 후보자를 공개적으로 반대하는 글을 올린 게 이유야.</p>
+    <p>임 청장은 "안타깝고 서글프다"는 반응을 냈어. 조국혁신당은 감찰이 부적절하다고 했고, 국민의힘은 인사 실패라고 주장했어. 중수청은 아직 정식 청장 없이 직무대행 체제야.</p>
+    <p class="why"><b>왜 중요?</b> 검찰을 없애고 만든 새 수사기관이 출범하자마자 '수장 인선'을 두고 내부 반발과 감찰이 맞붙었어. 김지용 후보자 인사청문회가 다음 고비야.</p>
+    <p class="src">출처: <a href="https://www.news1.kr/society/court-prosecution/6316032" target="_blank" rel="noopener">뉴스1</a> (2026-10-11), <a href="https://www.fnnews.com/news/202610111850177537" target="_blank" rel="noopener">파이낸셜뉴스</a> (2026-10-11), <a href="https://news.sbs.co.kr/news/endPage.do?news_id=N1008791919" target="_blank" rel="noopener">SBS 8뉴스 예고</a> (2026-10-11)</p>
+  </article>
+
+  <article id="a-2026-10-12-4" data-cat="경제·증시" data-me="가족 이사·분양 계획 있으면 &#x27;기존 계약은 약정대로&#x27; 원칙 기억해 두기.">
+    <h4>이 대통령 "이미 분양받은 사람은 약정대로 대출되게 지시했다"</h4>
+    <p>이재명 대통령이 11일 X에서, 정부의 부동산 대출 규제로 기존 분양계약자가 피해를 볼 수 있다는 지적에 "대출약정을 하고 이미 분양받은 경우에는 당초 약정대로 대출이 가능하도록 지시했었다"고 답했어. 현장에서 지켜지지 않는 곳이 있다면 대출이 되도록 조치하겠다고도 했어.</p>
+    <p>수도권 공급 부족에 대해선 2022년 대선·지방선거 이후 인허가와 착공이 급감한 탓이라며 곧 정상화될 거라고 했고, 집값과 대출 규제만 보지 말고 금리·경매 건수·주택담보대출 연체율·공급 속도도 같이 봐야 한다고 했어.</p>
+    <p class="why"><b>왜 중요?</b> 대출 규제가 바뀌면 이미 계약한 사람의 잔금 계획까지 흔들릴 수 있어서, 대통령이 직접 '기존 계약은 보호'라는 선을 그은 거야. 은행 창구에서 실제로 지켜지는지가 관건이야.</p>
+    <p class="src">출처: <a href="https://www.newspim.com/news/view/20261011000097" target="_blank" rel="noopener">뉴스핌</a> (2026-10-11)</p>
+  </article>
+
+  <article id="a-2026-10-12-5" data-cat="북한·안보" data-me="북한이 조용하면 접경 긴장도 한숨 돌리지만, 지뢰 문제는 그대로야.">
+    <h4><span class="upd">새 전개</span>北 노동당 창건 81주년, 결국 열병식 없이… 김정은은 주애·리설주와 공연 관람</h4>
+    <p>어제 "열병식 실제 개최 여부는 아직 확인되지 않았다"고 했는데, 결론이 나왔어. 북한은 10일 평양체육관에서 당 창건 81주년 경축 공연만 열었고 열병식은 하지 않았어. 김정은 총비서는 딸 주애, 부인 리설주와 함께 공연을 봤지만 따로 연설이나 담화는 없었어.</p>
+    <p class="why"><b>왜 중요?</b> 대규모 무력 과시 없이 '차분하게' 넘어갔다는 게 포인트야. 북한이 왜 조용히 갔는지는 보도에 나오지 않았고, DMZ 지뢰 문제는 그대로라 대남 메시지는 계속 지켜봐야 해.</p>
+    <p class="src">출처: <a href="https://www.seoul.co.kr/news/politics/north/2026/10/12/20261012005004" target="_blank" rel="noopener">서울신문</a> (2026-10-11), <a href="https://view.asiae.co.kr/article/2026101117000516001" target="_blank" rel="noopener">아시아경제</a> (2026-10-11), <a href="https://www.fnnews.com/news/202610110708201743" target="_blank" rel="noopener">파이낸셜뉴스</a> (2026-10-11)</p>
+  </article>
+
+  <div class="group">해외</div>
+
+  <article id="a-2026-10-12-6" data-cat="국제" data-issue="이란·호르무즈와 유가" data-me="중동 하늘길이 불안하면 유럽행 항공권·유류할증료도 출렁여.">
+    <h4><span class="upd">새 전개</span>사우디 리야드 공항에 후티 공격… 12명 사망·약 300명 부상, 美 "합류 검토"</h4>
+    <p>10일(현지시간) 사우디 수도 리야드의 킹칼리드 국제공항이 공격을 받아 최소 12명이 숨지고 약 300명이 다쳤어. 이번 주에만 세 번째 공항 공격이고, 사우디는 10여 년 사이 자국을 겨냥한 가장 치명적인 공격이라고 했어. 사우디는 예멘 후티 반군<span class="term">(이란의 지원을 받는 예멘 무장세력)</span>을 지목했고, 11일 저녁엔 4터미널에 또 발사체가 떨어져 부상자가 늘었어. 사망자 중엔 미국인 1명도 있어.</p>
+    <p>트럼프 대통령은 "끔찍하다"며 후티를 상대로 한 작전에 미국이 합류할지 "검토하겠다"고 했어. 구테흐스 유엔 사무총장도 강하게 규탄했어.</p>
+    <p class="why"><b>왜 중요?</b> 지난주 '3명 사망' 공격 때보다 피해가 훨씬 커졌고 미국 참전까지 거론돼, 중동 전쟁이 걸프 지역 전체로 번질 위험이 커졌어. 유가와 중동 경유 항공편에도 바로 영향이 가.</p>
+    <p class="src">출처: <a href="https://www.aljazeera.com/news/2026/10/11/world-condemns-deadly-houthi-attack-on-saudi-arabias-riyadh-airport" target="_blank" rel="noopener">Al Jazeera</a> (현지시간 2026-10-11), <a href="https://www.aljazeera.com/news/liveblog/2026/10/11/iran-war-live-12-killed-in-riyadh-us-weighs-joining-fight-against-houthis" target="_blank" rel="noopener">Al Jazeera 라이브</a> (현지시간 2026-10-11), <a href="https://news.sbs.co.kr/news/endPage.do?news_id=N1008791919" target="_blank" rel="noopener">SBS 8뉴스 예고</a> (2026-10-11)</p>
+  </article>
+
+  <article id="a-2026-10-12-7" data-cat="국제" data-issue="우크라이나 전쟁과 휴전" data-me="진짜 지켜지면 경유값이 안정될 수 있어. 아직은 말뿐이야.">
+    <h4>트럼프 "러·우 '에너지 휴전' 즉시 발효"… 젤렌스키 "처음 듣는 얘기"</h4>
+    <p>트럼프 대통령은 11일(현지시간) 트루스소셜에 "지금부터 러시아·우크라이나 전쟁에 에너지 휴전이 발효된다"고 썼어. 서로의 발전소·정유시설 같은 에너지 시설을 공격하지 않는다는 뜻이야. 그런데 크렘린의 확인은 없었고, 악시오스는 지난달에도 비슷한 발표가 있었지만 양쪽 모두 공격을 계속했다고 짚었어.</p>
+    <ol class="tl" aria-label="최근 사흘 미국·우크라이나 흐름 타임라인">
+      <li><b>10월 9일(현지)</b>트럼프, 기름값 잡으려 러시아산 경유 제재 완화 발표 → 우크라이나 반발</li>
+      <li><b>10월 10일(현지)</b>트럼프 "우크라이나는 지도자를 바꿔야"</li>
+      <li class="now"><b>10월 11일(현지)</b>젤렌스키 "러시아가 60일 휴전하면 선거 가능" · 트럼프 "에너지 휴전 즉시 발효"</li>
+    </ol>
+    <p>젤렌스키 대통령은 악시오스에 "나도 처음 듣는 소식"이라며, 러시아가 동의하면 우크라이나도 따르겠으니 언제 시작하는지 알려 달라고 했어. 러시아가 에너지 시설 공격을 멈추면 우크라이나도 러시아 정유시설 공격을 멈추겠다는 입장이야.</p>
+    <p class="why"><b>왜 중요?</b> 실제로 지켜지면 겨울을 앞두고 에너지 공격이 멈추지만, 지금은 '발표'뿐이야. 미국이 기름값을 낮추려고 러시아에 유화적으로 움직이는 흐름과 함께 봐야 해.</p>
+    <p class="src">출처: <a href="https://www.axios.com/2026/10/11/trump-russia-ukraine-energy-ceasefire-zelensky" target="_blank" rel="noopener">Axios</a> (현지시간 2026-10-11), <a href="https://www.euronews.com/video/2026/10/11/latest-news-bulletin-october-11th-2026-evening" target="_blank" rel="noopener">Euronews</a> (2026-10-11)</p>
+  </article>
+
+  <article id="a-2026-10-12-8" data-cat="경제·증시" data-me="세계 경기 전망이 어두워지면 내년 채용 분위기도 움츠러들 수 있어.">
+    <h4>IMF·세계은행 연차총회 오늘 방콕 개막… "겨울이 온다" 경고</h4>
+    <p>국제통화기금(IMF)·세계은행 연차총회가 12~18일 태국 방콕에서 열려. 약 1만 8천 명이 등록했고, 신현송 한은 총재도 G20 재무장관·중앙은행총재 회의와 함께 참석해. IMF는 올해 세계 성장률을 3% 정도로 보고 있고, 13일 새 세계경제전망을 내놔.</p>
+    <p>최대 의제는 중동 전쟁과 빚이야. 로이터에 따르면 이란이 호르무즈 해협<span class="term">(평소 세계 석유의 약 20%가 지나는 바닷길)</span>을 막은 뒤 비축유가 10억 배럴 넘게 풀렸지만 꺼내 쓸 수 있는 재고가 줄고 있어. IMF는 세계 공공부채가 2차대전 이후 최고이고 2030년 전에 GDP의 100%를 넘을 거라고 봐. 게오르기에바 IMF 총재는 "겨울이 온다"고 경고했고, 미국 재무장관은 회의에 불참해.</p>
+    <p class="why"><b>왜 중요?</b> 13일 IMF 전망이 나오면 유가·금리·환율이 한꺼번에 반응할 수 있어. 원유를 거의 다 수입하는 한국엔 '에너지 충격'이 가장 큰 변수야.</p>
+    <p class="src">출처: <a href="https://kuwaittimes.com/article/51418/top-stories/middle-east-war-high-debt-levels-to-dominate-imf-world-bank-meetings/" target="_blank" rel="noopener">Kuwait Times(Reuters)</a> (현지시간 2026-10-11), <a href="https://www.nationthailand.com/business/economy/40072081" target="_blank" rel="noopener">The Nation Thailand – 일정</a> (2026-10-10), <a href="https://www.newspim.com/news/view/20261008001274" target="_blank" rel="noopener">뉴스핌 – 주간 금융일정</a> (2026-10-08)</p>
+  </article>
+</section>
+<section>
+  <h3>🎓 내 관심 분야 <small>AI · 사업기획</small></h3>
+
+  <article id="a-2026-10-12-9" data-cat="AI·테크" data-me="공짜로 쓸 수 있는 고성능 공개 AI가 늘면 창업 비용이 확 낮아져.">
+    <h4>엔비디아, '미국판 딥시크' 리플렉션 AI 인수 협상… 사람·기술만 사는 '어크하이어'도 검토</h4>
+    <p>파이낸셜타임스(FT)는 10일(현지시간) 엔비디아가 미국 오픈소스 AI 스타트업 리플렉션 AI 인수를 협상 중이라고 보도했어. 회사를 통째로 사서 규제 심사를 받는 대신, 직원을 채용하고 기술 라이선스를 사는 '어크하이어'<span class="term">(acqui-hire, 인재·기술만 데려오는 사실상의 인수)</span> 방식도 거론돼. 인수가 어려우면 추가 투자나 칩 제공으로 관계를 키울 수도 있고, 결론은 몇 주 안에 나올 전망이래. 논의는 초기 단계야.</p>
+    <p>리플렉션은 구글 제미나이 개발 핵심 인력이 세운 회사로, 3월 기업가치가 250억 달러였고 엔비디아도 이미 8억 달러를 투자했어. 오픈 웨이트 모델<span class="term">(누구나 내려받아 자기 서버에서 고쳐 쓸 수 있게 공개한 AI)</span>을 만들어 딥시크 같은 중국 저가 모델의 대항마로 꼽혀. 엔비디아는 9월 허깅페이스를 130억 달러에 사기로 합의한 데 이어 AI 모델 쪽으로 영역을 넓히는 중이야.</p>
+    <p class="why"><b>AI·사업기획 관점:</b> 칩만 팔던 엔비디아가 '모델·플랫폼'까지 쥐려는 수직 확장이야. 규제를 피하려고 회사 대신 사람과 기술만 사는 어크하이어가 빅테크의 단골 인수 전략이 됐다는 것도 기억할 포인트야.</p>
+    <p class="src">출처: <a href="https://www.fnnews.com/news/202610110407583153" target="_blank" rel="noopener">파이낸셜뉴스(FT 인용)</a> (2026-10-11), <a href="https://zdnet.co.kr/view/?no=20261011084533" target="_blank" rel="noopener">ZDNet Korea</a> (2026-10-11), <a href="https://www.etoday.co.kr/news/view/2634304" target="_blank" rel="noopener">이투데이</a> (2026-10-11)</p>
+  </article>
+  <p class="src">뷰티·여행 분야는 최근 브리핑에서 다룬 것 말고 새로 달라진 소식이 확인되지 않아 오늘은 쉬어.</p>
+</section>
+<section id="c-2026-10-12">
+  <h3>💰 오늘의 경제 개념</h3>
+  <p class="concept-name">통화정책과 재정정책</p>
+  <div class="step"><div class="k">쉬운 뜻</div><div>경기를 조절하는 두 개의 손잡이야. <b>통화정책</b>은 중앙은행(한국은행)이 기준금리와 시중의 돈 양을 조절하는 것이고, <b>재정정책</b>은 정부와 국회가 예산(지출)과 세금을 조절하는 거야. 물가가 너무 뛰면 둘 다 '브레이크'(금리 인상, 지출 축소)를, 경기가 식으면 '액셀'(금리 인하, 지출 확대·감세)을 밟는 게 교과서적인 방향이야.</div></div>
+  <div class="step"><div class="k">일상 속</div><div>2인용 자전거를 떠올려 봐. 뒷사람(한은)이 내리막에서 브레이크를 꽉 잡는데 앞사람(정부)이 페달을 세게 밟으면? 속도는 생각만큼 안 줄고 브레이크만 닳아. 그래서 두 사람이 방향을 맞추는 걸 '정책 공조'라고 하고, 어긋나면 '엇박자'라고 해.</div></div>
+  <div class="step"><div class="k">숫자 예시</div><div>
+    <p style="margin:0 0 6px">나라 전체의 1년 씀씀이(수요)를 100이라고 해 볼게(설명용 가상 수치).</p>
+    <div class="tbl"><table>
+      <tr><th>무슨 일</th><th>수요 변화</th><th>합계</th></tr>
+      <tr><td>시작</td><td>—</td><td>100</td></tr>
+      <tr><td>한은 금리 인상 → 대출 줄고 소비·투자 감소</td><td>−4</td><td>96</td></tr>
+      <tr><td>정부 지출 확대 → 공공사업·지원금으로 수요 증가</td><td>+6</td><td><b>102</b></td></tr>
+    </table></div>
+    <p style="margin:6px 0 0">물가를 잡으려고 금리를 올렸는데, 정부가 그보다 크게 돈을 풀면 전체 수요는 오히려 2 늘어. 브레이크 효과가 상쇄된 거야. 반대로 둘이 같이 브레이크를 밟으면 수요가 크게 줄어 경기가 너무 식을 수도 있고.</p>
+  </div></div>
+  <div class="step"><div class="k">오늘 뉴스</div><div>한은은 물가 때문에 7월·8월 연속으로 기준금리를 올려 연 3.00%가 됐어(브레이크). 그런데 정부는 내년 총지출을 820조 9천억 원, 올해 본예산보다 12.8% 늘려 짰어(액셀 쪽). 그래서 오늘 신현송 총재의 첫 국감 쟁점에 '통화·재정 공조'가 들어가 있어. 물론 정부 지출은 취약계층 지원·AI 투자처럼 목적이 있어서 늘린다고 무조건 나쁜 건 아니고, 어디에 쓰느냐에 따라 물가 영향도 달라. 이번 주 방콕 IMF 총회에서 '나라 빚'이 큰 의제인 것도 같은 맥락이야.</div></div>
+  <div class="step"><div class="k">한 문장</div><div class="memo">"금리는 한국은행, 예산은 정부 — 둘이 같은 방향을 볼 때 경제 운전이 부드러워진다."</div></div>
+  <p class="src" style="margin-top:8px">참고: <a href="https://edaily.co.kr/News/Read?mediaCodeNo=257&amp;newsId=01525206645611608" target="_blank" rel="noopener">이데일리 – 한은 국감 쟁점</a> (2026-10-10), <a href="https://www.fntimes.com/html/view.php?ud=202608271438163943179ad43907_18" target="_blank" rel="noopener">한국금융신문 – 8월 금리 인상</a> (2026-08-27). 표의 숫자는 설명용 가상 수치야. 한국은행은 정부와 독립적으로 금리를 정하도록 법으로 정해져 있어.</p>
+</section>
+  <p class="note">뉴스는 보도 내용을 요약한 것이고, 특정 종목의 매수·매도를 추천하지 않아. 날짜는 모두 한국시간 기준이며, 해외 보도는 현지 날짜를 함께 표시했어. 해킹 누적 규모(100만 명 이상)는 여러 기관의 신고를 합친 언론 집계이고, 여의도순복음교회 85만 명은 '유출 가능성'이야. 리야드 공항 공격 주체는 사우디 발표 기준이며 후티의 공식 주장은 확인되지 않았어. 러·우 '에너지 휴전'은 트럼프 대통령 발표 단계로 러시아 측 확인은 없어. 엔비디아-리플렉션 AI 협상은 FT의 소식통 인용 보도야.</p>
+  </details>
+</div>
+<!--DAY 2026-10-12 END-->
 <!--DAY 2026-10-11 START-->
 <div class="day" id="d-2026-10-11">
-  <div class="day-head"><h2 class="day-title">2026년 10월 11일 일요일</h2><span class="new">최신</span></div>
+  <div class="day-head"><h2 class="day-title">2026년 10월 11일 일요일</h2></div>
   <p class="lede">미국이 "정보·방첩에서 동맹 기준 지켜라"라며 한국을 공개적으로 콕 집었고, 대구에선 마트 천장이 무너져 36명이 다쳤어. 밖에선 파나마에 규모 7.7 지진, 미국은 국제형사재판소(ICC)를 통째로 제재했어. AI 쪽에선 앤트로픽이 "우리 AI 에이전트가 웹사이트를 뚫었다"고 털어놨고. 일요일 아침 핵심만.</p>
   <div class="tiles" aria-label="오늘의 숫자">
   <div class="tile"><span class="tag">국내</span><div class="lb">한미 정보공유 일부 제한</div><div class="v">6<small>개월+</small></div><div class="d">4월 초부터 지속</div></div>
@@ -386,7 +1128,7 @@ h4{font-weight:700;letter-spacing:-.015em}
     <li>오늘의 경제 개념은 '무역수지'. K-뷰티가 9월에 월 수출 15억 달러를 처음 넘겼는데, 이런 수출이 쌓여 나라 전체의 '번 돈 − 쓴 돈'이 돼.</li>
   </ol>
 </div>
-  <details class="full" open><summary>전체 브리핑 접기/펼치기</summary>
+  <details class="full"><summary>전체 브리핑 펼쳐 보기</summary>
 <section>
   <h3>📰 오늘의 주요 뉴스</h3>
 
@@ -1618,40 +2360,56 @@ h4{font-weight:700;letter-spacing:-.015em}
   "date": "2026-10-10"
  },
  "금융권 해킹": {
-  "now": "은행에서 저축은행·카드·보험까지 피해 점검이 번졌고, 금융위원장이 \"기본부터 미흡\"이라며 책임을 따지는 중.",
-  "date": "2026-10-09"
+  "now": "은행을 넘어 교육 시스템 업체를 통해 국방부·대학·교회·한전까지 번졌어. 누적 유출 신고는 100만 명 이상으로 집계돼.",
+  "date": "2026-10-12"
  },
  "국정감사": {
-  "now": "6일 개막해 진행 중. 대법원장 증인선서 거부, 대미투자, 해킹 책임이 핵심 쟁점이야.",
-  "date": "2026-10-10"
+  "now": "국감이 반환점을 돌았어. 대법관 재제청·DMZ 지뢰 공방에 '쇼츠 국감' 비판이 나오고, 기업 총수 증인 채택을 두고 여야가 대립 중이야.",
+  "date": "2026-10-16"
  },
  "이란·호르무즈와 유가": {
-  "now": "호르무즈 봉쇄가 이어지는 가운데 미국은 제재를 일부 풀고 러시아산 경유까지 들여오기로 했어. 고유가는 계속되는 중.",
-  "date": "2026-10-10"
+  "now": "호르무즈에서 공격받은 화물선 2척이 결국 침몰했고, 지난 한 주 상선 공격은 12건으로 주간 최다야. 브렌트유는 104~106달러대.",
+  "date": "2026-10-16"
  },
  "브라질 대선": {
   "now": "1차 투표에서 플라비우 보우소나루가 1위. 25일 룰라와 결선 투표가 남아 있어.",
   "date": "2026-10-06"
  },
  "K-뷰티 수출": {
-  "now": "9월 화장품 수출이 약 15억 달러로 월간 최대를 찍었고, 미국 대형마트 매대까지 들어갔어.",
-  "date": "2026-10-11"
+  "now": "9월 월 수출 최대 이후 15~17일 킨텍스 K-뷰티엑스포(679개사, 60개국 바이어 220곳 상담)가 열려.",
+  "date": "2026-10-13"
  },
  "오픈AI": {
-  "now": "\"매출이 기대보다 적다\"는 보도 뒤 \"연말 연환산 700억 달러 예상\" 보도로 분위기가 반전됐어. ChatGPT 이미지 광고도 시범 도입 예정.",
-  "date": "2026-10-10"
+  "now": "미국 8개 주가 '챗GPT 안전성을 속였다'며 오픈AI를 소비자보호법 위반으로 제소했어(소송 제기 단계). 직원 도청 기소 사건과는 별개야.",
+  "date": "2026-10-16"
  },
  "코스피 흐름": {
-  "now": "연휴로 사흘만 열린 지난주에 5.4% 빠져 6,625. 12일(월) 다시 열리고, 미국 물가 발표가 다음 변수야.",
-  "date": "2026-10-10"
+  "now": "15일 '검은 목요일': 코스피 7.57% 폭락한 5,554(서킷브레이커 발동), 7거래일 연속 하락으로 10월 2일 7,000선에서 약 21% 빠졌어. 외국인은 8거래일 연속 매도, 금융위는 빚투 자제를 경고했어.",
+  "date": "2026-10-16"
  },
  "한미 관계": {
   "now": "미국이 \"정보·방첩 분야 동맹 기준을 지켜라\"라고 공개 언급했어. 일부 정보 공유 제한은 6개월째.",
   "date": "2026-10-11"
  },
  "검찰 개혁": {
-  "now": "10월 2일 검찰청이 폐지되고 공소청·중수청이 출범했어. 첫날엔 수기 접수로 혼선이 있었어.",
-  "date": "2026-10-03"
+  "now": "이재명 대통령이 중수청·공소청장의 국무회의 참석은 헌법·정부조직법상 당연하다며 독립성 훼손 비판에 반박했어. 중수청은 아직 직무대행 체제.",
+  "date": "2026-10-14"
+ },
+ "우크라이나 전쟁과 휴전": {
+  "now": "젤렌스키가 FT 인터뷰에서 러시아 정유시설 공격 재개를 선언하며 미국의 정보 차단·스타링크 제한을 비판했어. '에너지 휴전'은 사실상 깨진 상태.",
+  "date": "2026-10-16"
+ },
+ "북한 미사일 발사": {
+  "now": "12일 평양 일대에서 동해로 탄도미사일 여러 발(일부 900km+), 올해 16번째. 안보실은 안보리 결의 위반이라며 중단을 촉구했어.",
+  "date": "2026-10-13"
+ },
+ "미국 물가와 금리": {
+  "now": "9월 미국 소비자물가가 3.7%로 예상(3.6%)을 넘었어. 시장은 10월 27~28일 연준 회의에서 추가 인상 가능성을 50%로 보고 있어.",
+  "date": "2026-10-16"
+ },
+ "인천 흉기 난동": {
+  "now": "전자발찌 착용자의 범행으로 드러나 청와대가 15일 범죄 대책회의를 열었어. 피의자 구속 여부는 16일 오후 법원 심사로 결정돼.",
+  "date": "2026-10-16"
  }
 }
 </script>
@@ -1664,6 +2422,10 @@ h4{font-weight:700;letter-spacing:-.015em}
   <p class="score" id="score"></p>
   <ol>
     <!--CONCEPTS:START-->
+    <li data-q="서킷브레이커가 발동되면 그날 주식시장은 바로 문을 닫는다." data-a="X" data-x="1·2단계는 20분 멈춘 뒤 다시 열려. 그날 장을 끝내는 건 20% 넘게 빠진 3단계뿐이야."><a href="#c-2026-10-16"><span class="cd">10.16</span>서킷브레이커 (주식시장 비상 브레이크)</a></li>
+    <li data-q="내년 성장률 전망이 3.3%에서 2.8%로 낮아지면, 내년 한국 경제 규모는 올해보다 줄어든다." data-a="X" data-x="2.8%만큼 여전히 커져. 커지는 속도가 느려질 뿐이고, 규모가 줄어드는 건 성장률이 마이너스일 때야."><a href="#c-2026-10-14"><span class="cd">10.14</span>경제성장률 (GDP 성장률)</a></li>
+    <li data-q="포워드 가이던스는 중앙은행이 실제로 기준금리를 바꾼 뒤에야 시장 금리에 영향을 준다." data-a="X" data-x="미리 말하는 것만으로 사람들의 기대가 바뀌어 시장 금리가 먼저 움직여."><a href="#c-2026-10-13"><span class="cd">10.13</span>포워드 가이던스 (선제적 안내)</a></li>
+    <li data-q="기준금리를 정하는 건 정부(재정경제부)가 하는 재정정책이다." data-a="X" data-x="기준금리는 한국은행의 통화정책이야. 정부는 예산·세금으로 하는 재정정책을 맡아."><a href="#c-2026-10-12"><span class="cd">10.12</span>통화정책과 재정정책</a></li>
     <li data-q="수출이 늘었으면 무역수지는 무조건 흑자다." data-a="X" data-x="수입이 더 많이 늘면 수출이 늘어도 적자가 될 수 있어."><a href="#c-2026-10-11"><span class="cd">10.11</span>무역수지</a></li>
     <li data-q="한국은행 소비자심리지수가 100보다 낮으면 평소보다 경기를 나쁘게 본다는 뜻이다." data-a="O" data-x="장기 평균이 100이라, 100 아래면 비관이 더 많은 거야."><a href="#c-2026-10-10"><span class="cd">10.10</span>소비자심리지수</a></li>
     <li data-q="좋은 소식이 발표된 날에도 주가가 떨어질 수 있다." data-a="O" data-x="기대가 이미 주가에 반영돼 있으면, 발표 날 오히려 팔고 나가는 사람이 많아."><a href="#c-2026-10-09"><span class="cd">10.09</span>선반영과 셀온(Sell on the news)</a></li>
@@ -1677,6 +2439,1112 @@ h4{font-weight:700;letter-spacing:-.015em}
     <!--CONCEPTS:END-->
   </ol>
 </section>
+</div>
+
+<div id="p-english" role="tabpanel" aria-labelledby="t-english" hidden>
+  <h2 class="panel-h">영어 뉴스 공부</h2>
+  <p class="panel-p">하루 15분. 영어 뉴스 3개 훑고, 하나는 읽기 → 표현 → 쉐도잉 → 말하기까지.</p>
+  <div class="vbox" id="vbox">
+    <div class="vhead"><b>표현 단어장</b><span id="vcount"></span></div>
+    <div class="search"><label for="vq" hidden>표현 검색</label><input id="vq" type="search" placeholder="표현이나 뜻으로 찾기 (예: cut back, 줄이다)" autocomplete="off"></div>
+    <ul class="vlist" id="vlist"></ul>
+    <button type="button" class="vmore" id="vmore" hidden>더 보기</button>
+  </div>
+<!--EN:START-->
+<!--EN 2026-10-16 START-->
+<div class="en-day" id="e-2026-10-16">
+  <div class="day-head"><h3 class="en-date">10월 16일 금요일</h3><span class="new">최신</span></div>
+  <p class="en-focus"><span>집중 학습</span>미국 물가 3.7% — 기름값이 끌어올린 인플레이션</p>
+  <p class="lede">금요일도 15분. 뉴스 3개 훑고, 그중 "미국 물가 3.7%, 범인은 기름값" 뉴스로 읽기 → 표현 → 쉐도잉 → 말하기까지 가볼게요.</p>
+  <details class="full" open><summary>학습지 접기/펼치기</summary>
+<section>
+  <div class="x-label">Part 1</div>
+  <h3>오늘의 뉴스 3개</h3>
+
+  <article class="x-news">
+    <div class="x-label">① AI·테크</div>
+    <h4>TSMC Posts Another Record Profit as AI Chip Demand Stays Strong</h4>
+    <p class="x-en">TSMC, the world's biggest contract chipmaker, reported a record profit for the third quarter, its sixth record quarter in a row. Its net profit rose about 69% from a year earlier to around 23.6 billion US dollars, beating analysts' expectations. Strong demand for chips used in AI data centers drove the results. The company expects sales to keep growing in the last quarter of the year and is considering building more factories in the US.</p>
+    <p class="x-ko">다른 회사가 설계한 칩을 대신 만들어 주는 세계 최대 반도체 위탁생산 기업, 대만 TSMC가 3분기(7~9월)에 또 사상 최대 이익을 냈어요. 6분기 연속 신기록이에요. 순이익은 7,630억 대만달러(약 235억 달러)로 1년 전보다 약 69% 늘었고, 증권가 예상치(7,463억 대만달러)도 넘었어요. 매출은 1.49조 대만달러로 약 50% 늘었어요. 이유는 AI 데이터센터용 칩 수요가 아주 강해서예요. 4분기 매출 전망은 523억~543억 달러로 1년 전보다 약 58% 늘어나는 수준이고, 올해 투자 예산(600억~650억 달러)은 그대로 유지했어요. 웨이저자(C.C. Wei) CEO는 미국 생산 능력을 늘리려고 "매우 열심히 노력 중"이라며 텍사스 등 추가 공장 후보지를 검토하고 있다고 했지만, 위치·시기는 아직 정해지지 않았대요.</p>
+    <p class="x-diff">출처별 차이: 매출 증가율을 Yahoo Finance는 '50%', Grafa는 '50.9%'로 적었어요(반올림 차이). Yahoo는 올해 연간 매출 증가율을 약 44%로 전망했다는 점을, Grafa는 경영진이 2027년에 대해선 경기 불확실성 때문에 조심스러운 태도를 보였다는 점을 강조했어요. 'AI가 매출의 몇 %인지'는 두 기사 모두 구체적인 숫자를 적지 않아 여기서도 넣지 않았어요.</p>
+    <div class="x-src">
+      <a href="https://finance.yahoo.com/technology/ai/articles/tsmc-reports-record-q3-profit-102421693.html">Yahoo Finance – TSMC Reports Record Q3 Profit of $23.55 Billion as AI Demand Drives Growth</a><span>보도: 2026-10-15</span>
+      <a href="https://grafa.com/en/news/united-states/tsmc-q3-2026-profit-surges-record-high">Grafa – TSMC Reports Record Q3 Profit of NT$763 Billion</a><span>보도: 2026-10-15</span>
+    </div>
+  </article>
+
+  <article class="x-news">
+    <div class="x-label">② 경제·일자리</div>
+    <h4>US Inflation Climbs to 3.7% as Gas Prices Jump</h4>
+    <p class="x-en">Consumer prices in the US rose 3.7% in September compared with a year earlier, up from 3.4% in August and a little higher than economists expected. Gasoline prices jumped about 9% in one month, mainly because of the war involving Iran. Food prices did not change from August. The Federal Reserve could raise interest rates again at its meeting later this month.</p>
+    <p class="x-ko">미국 9월 소비자물가가 1년 전보다 3.7% 올랐어요. 8월(3.4%)보다 높고, 전문가 예상보다도 살짝 높았어요. 넉 달 만에 가장 높은 수준이에요. 가장 큰 원인은 휘발유예요. 한 달 새 9.1% 뛰어 전체 물가 상승분의 절반 이상을 차지했어요. 이란 전쟁 전엔 갤런당 3달러가 안 됐는데 지금은 4.30달러가 넘어요. 항공료도 1년 새 약 22% 올랐어요. 반면 식료품 값은 8월과 같았어요. 변동이 큰 식품·에너지를 뺀 '근원물가'는 2.6%(8월 2.4%)예요. 미국 중앙은행(연준)은 지난달 2023년 이후 처음으로 금리를 올렸는데, 이달 28일 회의에서 또 올릴 가능성이 커졌어요. 아래 집중 학습에서 자세히 다뤄요.</p>
+    <p class="x-diff">출처별 차이: 이달 금리 인상 가능성을 Axios는 CME FedWatch 기준 44%(전날 22%에서 상승)로, ABC News는 '약 45%'로 적었어요. 집계 시점 차이로 보여요. 원자료인 미국 노동통계국(BLS) 발표 페이지는 이번 실행에서 열리지 않아 언론 보도 두 곳의 숫자를 서로 맞춰 확인했어요.</p>
+    <div class="x-src">
+      <a href="https://abcnews.com/Business/inflation-report-provide-snapshot-prices-midterms-approach/story?id=137221675">ABC News – Inflation climbs in September as gas prices surge</a><span>보도: 2026-10-14 (미국 현지)</span>
+      <a href="https://www.axios.com/2026/10/14/cpi-september-inflation-trump">Axios – Inflation heats up as gas prices surge</a><span>보도: 2026-10-14 (미국 현지)</span>
+    </div>
+  </article>
+
+  <article class="x-news">
+    <div class="x-label">③ 과학</div>
+    <h4>A Fossil Kept in a Museum for Decades Turns Out to Be a New Dinosaur</h4>
+    <p class="x-en">Scientists in London have identified a new meat-eating dinosaur from a small piece of skull found on the Isle of Wight. The fossil had been stored at the Natural History Museum for many years before anyone realized what it was. The dinosaur, named Invictibellatrix amberina, lived about 120 million years ago and was probably three to four meters long. It is the first dinosaur of its group, called megaraptorans, ever found in Europe.</p>
+    <p class="x-ko">영국 UCL(런던대학교)과 자연사박물관 연구팀이 영국 남쪽 와이트섬에서 나온 두개골 조각으로 새로운 육식 공룡을 찾아냈어요. 이름은 '인빅티벨라트릭스 암베리나'. 아마추어 화석 수집가가 캐낸 뒤 박물관에 보관만 돼 있다가 이번에 CT 촬영으로 3D 모델을 만들어 분석했대요. 약 1억 2천만 년 전에 살았고, 몸길이 3~4m, 키는 1.5m 정도, 발톱은 10~20cm로 추정돼요. 긴 발톱이 특징인 '메가랍토르류' 공룡이 유럽에서 확인된 건 처음이에요. 연구자는 "당시 최상위 포식자는 아니었지만, 사람에게는 티라노사우루스보다 더 위험했을 것"이라고 말했어요.</p>
+    <p class="x-diff">출처별 차이: ScienceDaily(UCL 자료)는 화석이 박물관에 '수십 년' 있었다고 썼고, 스위스 blue News는 '1924년에 수집돼 거의 100년 동안' 서랍에 있었다고 더 구체적으로 적었어요. 주의할 점: 증거는 두개골 조각 하나뿐이라 몸 크기·깃털·발톱 길이는 가까운 친척 공룡을 보고 추정한 값이에요. "사람에게 더 위험했을 것"도 가정에 따른 비교예요(공룡과 사람은 같은 시대에 살지 않았어요).</p>
+    <div class="x-src">
+      <a href="https://www.sciencedaily.com/releases/2026/10/261014015457.htm">ScienceDaily (UCL 자료) – A forgotten fossil reveals a fearsome dinosaur with giant claws</a><span>게재: 2026-10-14</span>
+      <a href="https://www.bluewin.ch/en/lifestyle/nearly-100-years-in-a-drawer-fossil-turns-out-to-be-a-new-species-of-dinosaur-li.3633682">blue News – Nearly 100 years in a drawer: fossil turns out to be a new species of dinosaur</a><span>보도: 2026-10-13</span>
+    </div>
+  </article>
+</section>
+
+<section>
+  <div class="x-label">Part 2 · 집중 학습</div>
+  <h3>미국 물가 3.7% — 기름값이 끌어올린 인플레이션</h3>
+  <p class="x-intro">고른 이유: "요즘 다 비싸다"는 누구나 영어로 한마디 할 수 있는 주제라서요. 숫자 읽기(3.7%, $4.30)랑 비교 표현도 같이 연습할 수 있어요.</p>
+
+  <div class="x-step">
+    <div class="x-label">Step 1 · 영어로 읽기</div>
+    <h4>Why Are Prices Rising Again in the US?</h4>
+    <div class="x-meta">180 words · 소리 내서 한 번, 눈으로 한 번</div>
+    <div class="x-article">
+      <p>Prices in the United States are rising faster than expected. According to government data released on October 14, consumer prices in September were 3.7% higher than a year earlier, up from 3.4% in August. Economists had expected a slightly smaller increase.</p>
+      <p>The main reason was gasoline. Gas prices jumped more than 9% in just one month, and they made up more than half of the overall increase. Before the war with Iran began, the national average was below $3 a gallon. Now it is above $4.30. Airfares are also about 22% higher than a year ago. On the other hand, food prices stayed flat in September.</p>
+      <p>Why does this matter? Last month, the Federal Reserve raised interest rates for the first time since 2023, and it may raise them again at its next meeting. Fed Chair Kevin Warsh has said that inflation "is too high and has been for too long." Rising prices are also a top concern for voters ahead of the midterm elections in early November. For ordinary people, the worry is simple: everyday costs keep going up.</p>
+    </div>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 2 · 내용 이해하기</div>
+    <p>미국 물가가 예상보다 빨리 오르고 있어요. 10월 14일 나온 정부 자료를 보면, 9월 소비자물가는 1년 전보다 3.7% 높았어요. 8월엔 3.4%였고, 경제학자들은 이보다 조금 덜 오를 거라고 봤어요.</p>
+    <p>가장 큰 이유는 휘발유예요. 기름값이 한 달 만에 9% 넘게 뛰었고, 이게 전체 상승분의 절반 이상을 차지했어요. 이란과의 전쟁이 시작되기 전엔 전국 평균이 갤런(약 3.8리터)당 3달러가 안 됐는데, 지금은 4.30달러가 넘어요. 비행기 값도 1년 전보다 약 22% 비싸요. 반면 식료품 값은 9월에 제자리였어요.</p>
+    <p>왜 중요할까요? 미국 중앙은행인 연준은 지난달 2023년 이후 처음으로 금리를 올렸고, 다음 회의에서 또 올릴 수도 있어요. 케빈 워시 연준 의장은 물가가 "너무 높고, 너무 오랫동안 그래 왔다"고 말했어요. 11월 초 중간선거를 앞두고 물가는 유권자들의 가장 큰 걱정거리이기도 해요. 결국 보통 사람들 입장에선 간단해요. 생활비가 계속 오른다는 거죠.</p>
+    <h5>내용 확인 질문 (정답은 맨 아래)</h5>
+    <ol>
+      <li>How much higher were US consumer prices in September than a year earlier?</li>
+      <li>What was the main reason for the price increase?</li>
+    </ol>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 3 · 표현 익히기</div>
+    <ul class="x-vocab">
+      <li><span class="x-term">make up ~<small>(비율·부분을) 차지하다, 구성하다</small></span>
+        <span class="x-ex">International students make up about 10% of our class.</span>
+        <span class="x-exko">우리 반의 약 10%가 유학생이야.</span></li>
+      <li><span class="x-term">on the other hand<small>반면에, 다른 한편으로는</small></span>
+        <span class="x-ex">The dorm is cheap. On the other hand, it's far from my classes.</span>
+        <span class="x-exko">기숙사는 싸. 반면에 강의실이랑 멀어.</span></li>
+      <li><span class="x-term">stay flat<small>(숫자·가격이) 변동 없다, 제자리다</small></span>
+        <span class="x-ex">My part-time pay has stayed flat for two years.</span>
+        <span class="x-exko">내 알바비는 2년째 그대로야.</span></li>
+      <li><span class="x-term">for the first time since ~<small>~ 이후 처음으로</small></span>
+        <span class="x-ex">I went back to my hometown for the first time since high school.</span>
+        <span class="x-exko">고등학교 졸업하고 처음으로 고향에 다녀왔어.</span></li>
+      <li><span class="x-term">a top concern<small>가장 큰 걱정거리, 최우선 관심사</small></span>
+        <span class="x-ex">For many students, finding a job is a top concern.</span>
+        <span class="x-exko">많은 학생들에게 취업은 가장 큰 걱정거리야.</span></li>
+    </ul>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 4 · 쉐도잉하기</div>
+    <p class="x-intro">/ 에서 살짝 끊고, 노란 단어에 힘을 줘서 읽어요. 문장마다 3번씩. 3.7%는 "three point seven percent", $4.30은 "four thirty" 또는 "four dollars and thirty cents"로 읽어요.</p>
+    <ol class="x-shadow">
+      <li><div class="x-s">Prices in the United States / are rising <b>faster</b> / than <b>expected</b>.</div>
+        <div class="x-t">미국 물가가 예상보다 빠르게 오르고 있다.</div></li>
+      <li><div class="x-s">The main reason / was <b>gasoline</b>.</div>
+        <div class="x-t">가장 큰 이유는 휘발유였다.</div></li>
+      <li><div class="x-s">Gas prices jumped / more than <b>nine</b> percent / in just <b>one month</b>.</div>
+        <div class="x-t">기름값이 한 달 만에 9% 넘게 뛰었다.</div></li>
+      <li><div class="x-s">For <b>ordinary</b> people, / the worry is <b>simple</b>: / everyday costs / keep going <b>up</b>.</div>
+        <div class="x-t">보통 사람들에게 걱정은 간단하다. 생활비가 계속 오른다는 것.</div></li>
+    </ol>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 5 · 내 말로 말하기</div>
+    <div class="x-speak">
+      <p class="x-q">How do rising prices affect your daily life as a student? Give one example.</p>
+      <p class="x-intro" style="margin-top:8px">영어로 2문장만. "Rising prices affect me because ~." + "For example, ~." 틀로 시작하면 충분해요. 오늘 배운 on the other hand나 stay flat을 넣어 보면 더 좋아요. 말해본 다음에 맨 아래 모범 답안을 펼쳐 보세요.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="x-label">Answers</div>
+  <h3>정답</h3>
+  <ol>
+    <li>They were 3.7% higher (up from 3.4% in August). <br><span class="x-intro">1년 전보다 3.7% 높았다. (8월은 3.4%)</span></li>
+    <li>Gasoline. Gas prices jumped more than 9% in one month. <br><span class="x-intro">휘발유. 기름값이 한 달 새 9% 넘게 뛰었다.</span></li>
+  </ol>
+  <details id="m-2026-10-16">
+    <summary>모범 답안 펼치기</summary>
+    <p class="x-en">Rising prices make my daily life harder because my part-time pay has stayed flat. For example, my lunch near campus costs much more than last year, so I bring my own food more often.</p>
+    <p class="x-intro" style="margin-top:8px">알바비는 그대로인데 물가가 올라서 생활이 더 빠듯해요. 예를 들어 학교 앞 점심값이 작년보다 훨씬 비싸져서 요즘은 도시락을 더 자주 싸 와요.</p>
+  </details>
+</section>
+  </details>
+</div>
+<!--EN 2026-10-16 END-->
+<!--EN 2026-10-14 START-->
+<div class="en-day" id="e-2026-10-14">
+  <div class="day-head"><h3 class="en-date">10월 14일 수요일</h3></div>
+  <p class="en-focus"><span>집중 학습</span>"세탁기도 AI보다 규칙이 많다" — AI 안전 규칙 논쟁</p>
+  <p class="lede">오늘도 15분. 뉴스 3개 훑고, 그중 "세탁기도 AI보다 안전 규칙이 많다"는 마이크로소프트 사장 발언으로 읽기 → 표현 → 쉐도잉 → 말하기까지 가볼게요.</p>
+  <details class="full"><summary>학습지 펼쳐 보기</summary>
+<section>
+  <div class="x-label">Part 1</div>
+  <h3>오늘의 뉴스 3개</h3>
+
+  <article class="x-news">
+    <div class="x-label">① AI·테크</div>
+    <h4>Microsoft's Brad Smith: AI Has Fewer Safety Rules Than a Washing Machine</h4>
+    <p class="x-en">Microsoft President Brad Smith says AI needs global safety rules, because everyday products like washing machines and milk face more checks than AI does. He proposed an emergency brake for AI that controls devices or infrastructure, required reports when AI agents cause problems, and expert checks before powerful models are released. He said companies' voluntary promises are a good step but no longer enough. He also said the UK is best placed to lead these rules.</p>
+    <p class="x-ko">마이크로소프트 사장 브래드 스미스가 BBC 팟캐스트 인터뷰에서 "지금은 세탁기가 AI보다 안전 규칙을 더 많이 적용받는다"며 세계 공통의 AI 안전 규칙이 필요하다고 했어요. 제안은 세 가지예요. ① 기계나 전력망 같은 기반 시설을 움직이는 AI엔 '비상 브레이크'를 달 것 ② AI 에이전트가 다른 시스템에 침입하면 개인정보 유출 때처럼 피해자에게 알릴 것 ③ 강력한 새 모델은 출시 전에 전문가 검사를 받을 것. 그는 ③이 가장 중요하다고 했어요. 우유나 여객기도 검사를 거쳐야 시장에 나오는 것처럼요. AI 기업들의 '자율 약속'은 좋은 출발이지만 이제는 부족하다는 입장이고, AI 안전 시험 능력이 가장 뛰어난 영국이 규칙 만들기를 이끌 적임자라고 했어요. 아래 집중 학습에서 자세히 다뤄요.</p>
+    <p class="x-diff">출처별 차이: The Next Web은 이 발언이 10월 11일 공개된 BBC 'Big Boss Interview' 팟캐스트에서 나왔다고 썼고, Quartz는 "월요일(10월 12일)에 촉구했다"고 날짜를 적었어요. 공개 시점과 보도 시점 차이로 보여요. 또 세 번째 제안을 The Next Web은 '정부의 출시 전 승인'으로, Quartz는 '독립 평가자의 출시 전 검토'로 표현했어요. The Next Web은 스미스가 10월 8일 ITV 인터뷰에서 "부주의로 큰 피해가 나면 개발사가 법적 책임을 져야 한다"고 말한 내용도 덧붙였어요.</p>
+    <div class="x-src">
+      <a href="https://thenextweb.com/news/brad-smith-ai-less-regulated-than-milk-bbc">The Next Web – Microsoft's Brad Smith says AI needs global safety rules, led by UK</a><span>보도: 2026-10-13</span>
+      <a href="https://qz.com/microsoft-brad-smith-ai-safety-regulations-101226">Quartz – Microsoft president Brad Smith calls for global AI safety rules</a><span>보도: 2026-10-12 (미국 현지)</span>
+    </div>
+  </article>
+
+  <article class="x-news">
+    <div class="x-label">② 경제·일자리</div>
+    <h4>IMF Raises Its 2026 Growth Forecast, but Warns of an Uneven World</h4>
+    <p class="x-en">The IMF now expects the world economy to grow 3.1% in 2026, a little higher than its July forecast but slower than 3.5% in 2025. Growth is expected to pick up to 3.4% in 2027. AI investment is helping some economies, but high energy prices caused by the war involving Iran are hurting others. The IMF says global inflation could reach 4.7% this year and warns that AI-related stock prices could fall sharply.</p>
+    <p class="x-ko">IMF(국제통화기금)가 새 세계경제전망을 냈어요. 올해 세계 성장률은 3.1%로, 7월 전망보다 조금 올렸지만 작년(3.5%)보다는 느려요. 내년엔 3.4%로 다시 오를 거래요. 미국은 올해·내년 모두 2.3%, 중국은 4.5%, 인도는 7%예요. 핵심은 '고르지 않다'는 거예요. AI 투자 덕을 보는 나라(미국·중국, 그리고 한국·대만처럼 AI 반도체 공급망에 있는 나라)는 잘 버티지만, 2월에 시작된 미국-이란 전쟁으로 에너지 값이 오르면서 에너지 수입국과 저소득국은 힘들어요. 올해 유가는 배럴당 평균 96달러, 세계 물가 상승률은 4.7%로 예상했어요. AP에 따르면 세계 성장의 95%를 단 32개국이 만들고 있대요. 위험 요인으로는 AI 관련 주가가 갑자기 떨어지는 것, 국채 금리 상승, 사이버 공격 등을 꼽았어요.</p>
+    <p class="x-diff">출처별 차이: Euronews는 이번 3.1%가 7월보다 0.2%p 올린 거라고 썼는데, AP(Fortune 게재)는 7월 전망을 3.0%로 적어 0.1%p 상향으로 읽혀요. 또 AP는 IMF가 호르무즈 해협 운송이 "3월까지" 재개된다고 가정했다고만 썼고, 말레이시아 Bernama(The Star 게재)는 그 시점을 '2027년 3월'로 명확히 적었어요. AP는 보고서가 나온 날 아시아 증시가 급락해 코스피가 장중 7%까지 빠졌다가 5.5% 하락 마감했다고 전했지만, 하락 원인이 IMF 보고서라고 하진 않았어요. IMF 공식 페이지는 이번 실행에서 열리지 않아 언론 보도로 확인했어요.</p>
+    <div class="x-src">
+      <a href="https://fortune.com/2026/10/13/imf-global-growth-forecast-2026-ai-economic-divide/">AP (via Fortune) – IMF raises 2026 global growth forecast to 3.1% as economic inequality widens</a><span>보도: 2026-10-13 (미국 현지)</span>
+      <a href="https://www.euronews.com/2026/10/13/imf-forecasts-31-global-growth-in-2026-with-eurozone-at-11">Euronews – IMF forecasts 3.1% global growth in 2026, with eurozone at 1.1%</a><span>보도: 2026-10-13</span>
+      <a href="https://www.thestar.com.my/business/business-news/2026/10/13/global-economy-to-decelerate-to-31-in-2026-in-2026-before-recovering-to-34-in-2027---imf">Bernama (via The Star) – Global economy to decelerate to 3.1% in 2026 before recovering to 3.4% in 2027</a><span>보도: 2026-10-13</span>
+    </div>
+  </article>
+
+  <article class="x-news">
+    <div class="x-label">③ 과학</div>
+    <h4>Scientists Map 539 Chemical "Zones" in the Mouse Brain</h4>
+    <p class="x-en">Researchers at EPFL in Switzerland have made a 3D map of the mouse brain based on fats called lipids. Using a laser-based scanning method and machine learning, they found 539 chemically different areas, which they call "lipizones." Some of these areas match known brain regions, but others show boundaries that older maps missed. The team also found that the brain's lipids change a lot during pregnancy.</p>
+    <p class="x-ko">스위스 로잔공대(EPFL) 연구팀이 뇌를 '지방(지질) 성분'으로 나눈 3D 지도를 만들어 과학 저널 네이처에 발표했어요. 쥐 11마리의 뇌 조각 109장을 레이저로 한 점씩 훑어 지질 172종의 위치를 쟀고(측정값 약 700만 개), 머신러닝으로 합쳤어요. 그 결과 성분이 서로 다른 구역 539개('리피존')를 찾았어요. 일부는 이미 알려진 뇌 구조와 맞았지만, 기존 지도엔 없던 경계도 나왔어요. 연구자는 "지질은 우편번호처럼, 멀리 떨어졌지만 연결된 뇌 부위에 같은 화학 주소를 붙인다"고 했어요. 임신한 쥐에선 뇌 여러 곳의 지질 구성이 크게 바뀌었대요.</p>
+    <p class="x-diff">주의할 점: 이건 쥐 뇌 지도라서 사람에게 그대로 적용할 수 없어요. 연구자도 "사람에게 옮겨갈 수 있는 건 지도가 아니라 방법"이라고 했어요. 알츠하이머·우울증과의 관련 가능성도 언급됐지만, 이번 연구에서 직접 검증한 건 아니에요. ScienceDaily는 EPFL 자료를 10월 13일 게재했고, 논문의 정확한 네이처 출간일은 기사에 나오지 않아요.</p>
+    <div class="x-src">
+      <a href="https://www.sciencedaily.com/releases/2026/10/261012185011.htm">ScienceDaily (EPFL 자료) – Scientists uncover a hidden map of the brain with 539 distinct regions</a><span>게재: 2026-10-13</span>
+    </div>
+  </article>
+</section>
+
+<section>
+  <div class="x-label">Part 2 · 집중 학습</div>
+  <h3>"세탁기도 AI보다 규칙이 많다" — AI 안전 규칙 논쟁</h3>
+  <p class="x-intro">고른 이유: 매일 쓰는 AI를 "누가, 어떻게 검사해야 하나?"는 전공과 상관없이 영어로 의견 말하기 좋은 주제라서요. 우유·세탁기 비유 덕분에 단어도 쉬운 편이에요.</p>
+
+  <div class="x-step">
+    <div class="x-label">Step 1 · 영어로 읽기</div>
+    <h4>Should AI Be Checked Like Milk?</h4>
+    <div class="x-meta">182 words · 소리 내서 한 번, 눈으로 한 번</div>
+    <div class="x-article">
+      <p>Microsoft President Brad Smith says artificial intelligence needs much stronger safety rules. On the BBC's Big Boss Interview podcast, he said, "Right now, your washing machine is subject to more safety rules than AI." He also warned that AI is moving "faster than the speed of safety."</p>
+      <p>Smith suggested three main ideas. First, AI systems that control machines or important infrastructure should have an emergency brake that can shut them down. Second, if an AI agent breaks into other systems, the people affected should be told, just like after a data breach. Third, independent experts should check powerful new models before they are released. Smith called this last idea the most important. He pointed out that products like milk and passenger planes already go through inspection before they reach the public.</p>
+      <p>Why does this matter? Leading AI companies have made voluntary safety promises, but Smith said such promises are no longer enough. He also said the UK, with its AI Security Institute, is best placed to lead global rules. In the US, however, President Trump has said the industry should regulate itself.</p>
+    </div>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 2 · 내용 이해하기</div>
+    <p>마이크로소프트 사장 브래드 스미스는 AI에 훨씬 강한 안전 규칙이 필요하다고 말해요. BBC 팟캐스트 'Big Boss Interview'에서 "지금은 세탁기가 AI보다 더 많은 안전 규칙을 적용받는다"고 했고, AI가 "안전의 속도보다 빠르게" 움직이고 있다고 경고했어요. 쉽게 말해 기술 발전을 안전장치가 못 따라가고 있다는 거죠.</p>
+    <p>그가 낸 아이디어는 세 가지예요. 첫째, 기계나 중요한 기반 시설(전력망 같은 것)을 움직이는 AI엔 멈출 수 있는 '비상 브레이크'를 달자. 둘째, AI 에이전트가 다른 시스템에 침입하면, 개인정보 유출 사고 때처럼 피해를 본 사람들에게 알리자. 셋째, 강력한 새 모델은 출시 전에 독립적인 전문가가 검사하자. 스미스는 이 세 번째가 가장 중요하다고 했어요. 우유나 여객기도 사람들에게 닿기 전에 검사를 거친다는 점을 짚으면서요.</p>
+    <p>왜 중요할까요? 주요 AI 기업들은 '자발적으로' 안전을 지키겠다고 약속해 왔지만, 스미스는 그걸로는 이제 부족하다고 봐요. 또 AI 안전연구소(AI Security Institute)를 가진 영국이 세계 규칙을 이끌기에 가장 좋은 위치라고 했어요. 반면 미국의 트럼프 대통령은 업계가 스스로 규제해야 한다는 입장이에요. 그러니까 "AI를 누가 검사하냐"를 두고 생각이 갈리고 있는 거예요.</p>
+    <h5>내용 확인 질문 (정답은 맨 아래)</h5>
+    <ol>
+      <li>Which everyday product did Smith say has more safety rules than AI?</li>
+      <li>Which of his three ideas did Smith call the most important?</li>
+    </ol>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 3 · 표현 익히기</div>
+    <ul class="x-vocab">
+      <li><span class="x-term">be subject to ~<small>~의 적용을 받다, ~의 대상이다</small></span>
+        <span class="x-ex">All students are subject to the same attendance rules.</span>
+        <span class="x-exko">모든 학생은 똑같은 출석 규정을 적용받아.</span></li>
+      <li><span class="x-term">shut ~ down<small>~을 멈추다, (기계·시스템을) 끄다</small></span>
+        <span class="x-ex">My laptop got so hot that I had to shut it down for a while.</span>
+        <span class="x-exko">노트북이 너무 뜨거워져서 잠깐 꺼둬야 했어.</span></li>
+      <li><span class="x-term">point out<small>지적하다, 짚어 말하다</small></span>
+        <span class="x-ex">My professor pointed out a small mistake in my report.</span>
+        <span class="x-exko">교수님이 내 리포트의 작은 실수를 짚어 주셨어.</span></li>
+      <li><span class="x-term">go through ~<small>~을 거치다, 겪다</small></span>
+        <span class="x-ex">New members have to go through a short interview before joining the club.</span>
+        <span class="x-exko">새 멤버는 동아리에 들어오기 전에 짧은 면접을 거쳐야 해.</span></li>
+      <li><span class="x-term">be best placed to ~<small>~하기에 가장 좋은 위치에 있다, ~할 적임자다</small></span>
+        <span class="x-ex">Since she lived in Japan, she's best placed to plan our trip to Osaka.</span>
+        <span class="x-exko">걔가 일본에 살았으니까 우리 오사카 여행 계획 짜기엔 딱이야.</span></li>
+    </ul>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 4 · 쉐도잉하기</div>
+    <p class="x-intro">/ 에서 살짝 끊고, 노란 단어에 힘을 줘서 읽어요. 문장마다 3번씩. subject는 이 뜻일 때 앞에 힘을 줘서 '써브젝트'처럼 읽어요.</p>
+    <ol class="x-shadow">
+      <li><div class="x-s">Right now, / your <b>washing machine</b> / is subject to <b>more</b> safety rules / than <b>AI</b>.</div>
+        <div class="x-t">지금은 세탁기가 AI보다 더 많은 안전 규칙을 적용받는다.</div></li>
+      <li><div class="x-s">AI is moving / <b>faster</b> / than the speed of <b>safety</b>.</div>
+        <div class="x-t">AI는 안전의 속도보다 빠르게 움직이고 있다.</div></li>
+      <li><div class="x-s"><b>Independent</b> experts / should <b>check</b> powerful new models / <b>before</b> they are released.</div>
+        <div class="x-t">독립적인 전문가가 강력한 새 모델을 출시 전에 검사해야 한다.</div></li>
+      <li><div class="x-s">Products like <b>milk</b> and passenger <b>planes</b> / already go through <b>inspection</b> / before they reach the public.</div>
+        <div class="x-t">우유나 여객기 같은 제품은 이미 대중에게 닿기 전에 검사를 거친다.</div></li>
+    </ol>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 5 · 내 말로 말하기</div>
+    <div class="x-speak">
+      <p class="x-q">Should powerful AI models be checked by experts before they are released? Why or why not?</p>
+      <p class="x-intro" style="margin-top:8px">영어로 2문장만. "I think they should / shouldn't, because ~." + "For example, ~." 틀로 시작하면 충분해요. 말해본 다음에 맨 아래 모범 답안을 펼쳐 보세요.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="x-label">Answers</div>
+  <h3>정답</h3>
+  <ol>
+    <li>A washing machine. (He also compared AI to milk.) <br><span class="x-intro">세탁기. (우유와도 비교했다.)</span></li>
+    <li>Having independent experts check powerful new models before they are released. <br><span class="x-intro">강력한 새 모델을 출시 전에 독립적인 전문가가 검사하는 것.</span></li>
+  </ol>
+  <details id="m-2026-10-14">
+    <summary>모범 답안 펼치기</summary>
+    <p class="x-en">I think they should, because millions of people use AI every day, just like they drink milk. If food has to go through safety checks, a powerful AI model should be subject to them too.</p>
+    <p class="x-intro" style="margin-top:8px">해야 한다고 생각해요. 사람들이 우유를 마시듯 수백만 명이 매일 AI를 쓰니까요. 음식도 안전 검사를 거쳐야 하는데, 강력한 AI 모델도 당연히 검사를 받아야죠.</p>
+  </details>
+</section>
+  </details>
+</div>
+<!--EN 2026-10-14 END-->
+<!--EN 2026-10-13 START-->
+<div class="en-day" id="e-2026-10-13">
+  <div class="day-head"><h3 class="en-date">10월 13일 화요일</h3></div>
+  <p class="en-focus"><span>집중 학습</span>"AI는 신입 일자리부터 흔든다" — IMF의 경고</p>
+  <p class="lede">오늘도 15분. 뉴스 3개 훑고, 그중 'AI가 신입 일자리부터 흔든다'는 IMF 경고로 읽기 → 표현 → 쉐도잉 → 말하기까지 가볼게요.</p>
+  <details class="full"><summary>학습지 펼쳐 보기</summary>
+<section>
+  <div class="x-label">Part 1</div>
+  <h3>오늘의 뉴스 3개</h3>
+
+  <article class="x-news">
+    <div class="x-label">① AI·테크</div>
+    <h4>OpenAI Will Add Hidden Watermarks to ChatGPT Text in the EU</h4>
+    <p class="x-en">OpenAI says it will add an invisible watermark to text written by ChatGPT and Codex for users in the European Union. The move is meant to follow the EU AI Act, which requires AI-made content to be marked in a way that machines can recognize. The watermark works by slightly shaping the AI's word choices, and for now only approved researchers can use the detector. OpenAI admits that editing can weaken it: changing 10% of the words lowered detection from about 92% to 66%.</p>
+    <p class="x-ko">OpenAI가 EU(유럽연합) 사용자에게 ChatGPT·Codex가 쓴 글에 '눈에 안 보이는 워터마크'를 넣기로 했어요. EU AI법이 "AI가 만든 콘텐츠는 기계가 알아볼 수 있게 표시하라"고 요구하기 때문이에요. 방식은 글자에 무슨 표시를 붙이는 게 아니라, AI가 단어를 고르는 방식을 살짝 틀어서 사람 눈엔 안 보이지만 탐지기는 찾아낼 수 있는 패턴을 남기는 거예요. 복사·붙여넣기를 해도 남아요. 다만 탐지기는 일단 승인받은 연구자·전문기관만 쓸 수 있고, 단어 10%만 비슷한 말로 바꿔도 탐지율이 약 92%에서 66%로 떨어진대요. OpenAI도 "워터마크가 없다고 사람이 썼다는 증거는 아니다"라고 했어요. 앞으로 몇 주에 걸쳐 EU에서만 적용되고, 다른 지역은 아직 기본 적용이 아니에요.</p>
+    <p class="x-diff">출처별 차이: TechCrunch는 EU AI법 투명성 규정이 8월 2일부터 시행됐다고만 썼고, The Next Web은 Engadget을 인용해 "이미 서비스 중인 업체는 12월 2일까지" 맞추면 된다고 기한을 덧붙였어요. 또 The Next Web은 단어 4분의 1을 바꾸면 탐지율이 17%까지 떨어진다는 수치도 전했어요. 발표는 미국 시간 10월 5일로, 일주일쯤 된 소식이에요.</p>
+    <div class="x-src">
+      <a href="https://techcrunch.com/2026/10/05/openai-will-start-watermarking-chatgpts-text-in-the-eu/">TechCrunch – OpenAI will start watermarking ChatGPT's text in the EU</a><span>보도: 2026-10-05 (미국 현지)</span>
+      <a href="https://thenextweb.com/news/openai-text-watermarking-chatgpt-codex-eu-ai-act">The Next Web – OpenAI brings text watermarking to ChatGPT and Codex in the EU</a><span>보도: 2026-10-05</span>
+    </div>
+  </article>
+
+  <article class="x-news">
+    <div class="x-label">② 경제·일자리</div>
+    <h4>IMF Chief Calls AI a "Slow-Moving Tsunami" for Workers</h4>
+    <p class="x-en">At the IMF and World Bank annual meetings in Bangkok, IMF Managing Director Kristalina Georgieva said AI investment is helping keep global growth near 3%. But she warned that AI could affect about 40% of jobs worldwide and about 60% in advanced economies. She said young people entering the job market should be the first concern, because AI is taking over the routine tasks of entry-level jobs. She also warned that governments could lose tax revenue if income shifts from workers to capital owners.</p>
+    <p class="x-ko">태국 방콕에서 열린 IMF·세계은행 연차총회에서 IMF 총재 크리스탈리나 게오르기에바가 AI를 '천천히 밀려오는 쓰나미'에 비유했어요. 지금은 데이터센터 같은 AI 투자 덕분에 세계 경제가 3% 정도 성장하고 있지만, 길게 보면 전 세계 일자리의 약 40%(선진국은 약 60%)가 AI 영향을 받는다는 거예요. 좋아지는 일자리도 있지만, 격이 낮아지거나 없어지는 일자리도 있고요. 가장 걱정되는 건 막 사회에 나오는 청년층이래요. 신입이 하던 반복 업무를 AI가 가져가고 있어서요. 싱가포르 대통령도 대졸 첫 일자리 수요가 이미 줄고 있다고 했어요. 아래 집중 학습에서 자세히 다뤄요.</p>
+    <p class="x-diff">출처별 차이: Decrypt는 AI 도입이 선진국 성장률을 연 0.5~1%p 끌어올릴 수 있다고 썼는데, Techstrong은 같은 숫자를 '아시아 선진국'에 대한 전망으로 소개했어요. 또 '40%·60%'는 이번에 새로 나온 숫자가 아니라 IMF가 2024년 1월부터 써온 연구 수치예요(당시 AFP 보도). 저소득국은 약 23%로 낮은데, 게오르기에바는 위험이 적어서가 아니라 AI 도입이 느려서라고 설명했어요. IMF의 새 세계경제전망은 미국 시간 10월 13일 나와요.</p>
+    <div class="x-src">
+      <a href="https://decrypt.co/380789/ai-hit-40-percent-jobs-imf-warns-young-people-first">Decrypt – AI Will Hit 40% of Jobs, IMF Warns. Young People Are First in Line</a><span>보도: 2026-10-12 (현지)</span>
+      <a href="https://techstrong.ai/agentic-ai/imf-boss-warns-ai-labor-threat-is-a-slow-moving-tsunami-to-jobs-and-tax-revenue/">Techstrong.ai – IMF Boss Warns AI Labor Threat Is a 'Slow-Moving Tsunami' to Jobs and Tax Revenue</a><span>보도: 2026-10-12</span>
+    </div>
+  </article>
+
+  <article class="x-news">
+    <div class="x-label">③ 과학·국제</div>
+    <h4>Vienna and Beijing Teams Build the First Nuclear Clocks</h4>
+    <p class="x-en">Two separate research teams, one in Vienna and one in Beijing, say they have built the world's first working nuclear clocks. Normal atomic clocks measure changes in an atom's electrons, but these clocks use a laser to change the energy of thorium-229 nuclei held inside crystals. Both teams published their results in the journal Nature. The clocks are not yet better than the best atomic clocks, but they could one day help with satellite navigation and physics research.</p>
+    <p class="x-ko">오스트리아 빈공대(TU Wien)와 중국 칭화대 연구팀이 각자 따로 '원자핵 시계'를 처음으로 작동시켰다고 과학 저널 네이처에 발표했어요. 우리가 아는 원자시계는 원자 속 '전자'의 에너지 변화를 재는데, 이번 시계는 결정(크리스털) 안에 넣은 토륨-229의 '원자핵'을 레이저로 건드려 시간을 재요. 핵은 원자보다 1만 배 넘게 작아서 바깥 방해를 덜 받는 게 장점이에요. 아직은 최고 성능의 원자시계보다 정확하진 않지만, 앞으로 GPS 같은 위성 내비게이션, 데이터 동기화, 기초 물리학 연구에 쓰일 수 있대요. 빈 연구팀은 2008년부터 이 목표를 좇아왔다고 해요.</p>
+    <p class="x-diff">출처별 차이: TU Wien 발표(ScienceDaily 게재)는 빈 시계의 정밀도를 약 10⁻¹⁵, 즉 "3천만 년에 1초 오차" 수준으로 소개했지만, Reuters는 새 시계의 구체적인 정확도 수치는 쓰지 않고 "목표 성능과는 아직 거리가 멀다"는 연구자 말을 전했어요. 또 Reuters는 빈 팀의 암흑물질 탐색 실험에서 시계가 최고 원자시계 수준으로 작동했다고 썼는데, 이건 그 실험에 한정된 얘기예요. 일부 매체가 쓴 "중국 시계가 6배 더 안정적"이라는 내용은 Reuters·ANS에선 확인되지 않아 뺐어요.</p>
+    <div class="x-src">
+      <a href="https://www.933thedrive.com/2026/10/07/scientists-in-vienna-and-beijing-create-worlds-first-nuclear-clocks/">Reuters (via 93.3 The Drive) – Scientists in Vienna and Beijing create world's first nuclear clocks</a><span>보도: 2026-10-07 (미국 현지)</span>
+      <a href="https://www.ans.org/news/article-8477/researchers-in-vienna-and-beijing-report-nuclear-clock-milestone/">ANS Nuclear Newswire – Researchers in Vienna and Beijing report nuclear clock "milestone"</a><span>보도: 2026-10-09</span>
+      <a href="https://www.sciencedaily.com/releases/2026/10/261008102701.htm">ScienceDaily (TU Wien 자료) – Scientists build a nuclear clock that could make atomic clocks obsolete</a><span>게재: 2026-10-10</span>
+    </div>
+  </article>
+</section>
+
+<section>
+  <div class="x-label">Part 2 · 집중 학습</div>
+  <h3>"AI는 신입 일자리부터 흔든다" — IMF의 경고</h3>
+  <p class="x-intro">고른 이유: 곧 취업 시장에 나갈 대학생한테 가장 직접적인 이야기라서요. "AI 시대에 첫 직장은 어떻게 될까?"는 영어로 의견 나누기에도 좋은 주제예요.</p>
+
+  <div class="x-step">
+    <div class="x-label">Step 1 · 영어로 읽기</div>
+    <h4>AI and Jobs: Why Young Workers Come First</h4>
+    <div class="x-meta">173 words · 소리 내서 한 번, 눈으로 한 번</div>
+    <div class="x-article">
+      <p>At the yearly meetings of the International Monetary Fund (IMF) and the World Bank in Bangkok, Thailand, IMF chief Kristalina Georgieva gave a clear warning about artificial intelligence. She called AI a "slow-moving tsunami" for workers.</p>
+      <p>According to IMF research, AI could affect about 40% of jobs around the world. In advanced economies, the number rises to about 60%. Some of these jobs will get better with AI, but others could be downgraded or disappear.</p>
+      <p>Georgieva said the people to worry about first are young people who are just entering the job market. AI is taking over many of the routine tasks that entry-level jobs depend on. That could make it harder for graduates to find a first job and gain experience. Singapore's president, Tharman Shanmugaratnam, added that demand for graduates' first jobs is already falling.</p>
+      <p>Why does this matter? If AI moves income from workers to the owners of capital, governments could collect less tax. Georgieva called on countries to watch job trends closely, support lifelong learning and review their tax systems.</p>
+    </div>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 2 · 내용 이해하기</div>
+    <p>태국 방콕에서 열린 IMF·세계은행 연례 회의에서 IMF 총재 크리스탈리나 게오르기에바가 AI에 대해 분명한 경고를 했어요. AI를 노동자에게 '천천히 밀려오는 쓰나미'라고 부른 거죠. 한 번에 확 덮치진 않지만, 서서히 그리고 크게 밀려온다는 뜻이에요.</p>
+    <p>IMF 연구에 따르면 AI는 전 세계 일자리의 약 40%에 영향을 줄 수 있고, 선진국에선 그 비율이 약 60%로 올라가요. 여기서 '영향'은 꼭 사라진다는 뜻만은 아니에요. AI 덕분에 더 나아지는 일도 있고, 격이 낮아지거나 아예 없어지는 일도 있어요.</p>
+    <p>게오르기에바는 가장 먼저 걱정해야 할 사람이 이제 막 취업 시장에 들어오는 청년이라고 했어요. 신입 일자리가 맡던 반복적인 업무를 AI가 가져가고 있어서, 졸업생이 첫 직장을 구하고 경력을 쌓기가 더 어려워질 수 있다는 거죠. 싱가포르 대통령 타르만 샨무가라트남도 대졸자 첫 일자리 수요가 이미 줄고 있다고 덧붙였어요. 마지막으로, 돈이 노동자 대신 자본을 가진 쪽(회사·투자자)으로 몰리면 정부가 걷는 세금도 줄 수 있어요. 그래서 그는 각국에 일자리 변화를 잘 지켜보고, 평생 학습을 지원하고, 세금 제도를 다시 살펴보라고 촉구했어요.</p>
+    <h5>내용 확인 질문 (정답은 맨 아래)</h5>
+    <ol>
+      <li>What did Georgieva compare AI to?</li>
+      <li>Why could it be harder for young graduates to find their first job?</li>
+    </ol>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 3 · 표현 익히기</div>
+    <ul class="x-vocab">
+      <li><span class="x-term">entry-level<small>신입의, 초급 단계의</small></span>
+        <span class="x-ex">She got an entry-level job at a small design company after graduation.</span>
+        <span class="x-exko">그녀는 졸업하고 작은 디자인 회사에 신입으로 들어갔어.</span></li>
+      <li><span class="x-term">take over ~<small>(일·역할을) 대신 맡다, 넘겨받다</small></span>
+        <span class="x-ex">When our team leader got sick, I had to take over the presentation.</span>
+        <span class="x-exko">조장이 아파서 내가 발표를 대신 맡아야 했어.</span></li>
+      <li><span class="x-term">gain experience<small>경험을 쌓다</small></span>
+        <span class="x-ex">I'm doing an internship this winter to gain experience in marketing.</span>
+        <span class="x-exko">마케팅 경험 쌓으려고 이번 겨울에 인턴 해.</span></li>
+      <li><span class="x-term">call on ~ to ...<small>~에게 …하라고 촉구하다, 요청하다</small></span>
+        <span class="x-ex">Students called on the school to keep the library open until midnight.</span>
+        <span class="x-exko">학생들이 학교에 도서관을 자정까지 열어 달라고 요구했어.</span></li>
+      <li><span class="x-term">lifelong learning<small>평생 학습</small></span>
+        <span class="x-ex">My grandma started learning English at 70 — that's real lifelong learning.</span>
+        <span class="x-exko">우리 할머니는 일흔에 영어를 시작하셨어. 이게 진짜 평생 학습이지.</span></li>
+    </ul>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 4 · 쉐도잉하기</div>
+    <p class="x-intro">/ 에서 살짝 끊고, 노란 단어에 힘을 줘서 읽어요. 문장마다 3번씩. 숫자는 이렇게: 40% = forty percent, 60% = sixty percent. tsunami는 미국식으로 보통 '수나미'에 가깝게 읽어요.</p>
+    <ol class="x-shadow">
+      <li><div class="x-s">She called AI / a <b>slow-moving</b> <b>tsunami</b> / for <b>workers</b>.</div>
+        <div class="x-t">그녀는 AI를 노동자에게 '천천히 밀려오는 쓰나미'라고 불렀다.</div></li>
+      <li><div class="x-s">AI could affect / about <b>forty</b> percent of jobs / around the <b>world</b>.</div>
+        <div class="x-t">AI는 전 세계 일자리의 약 40%에 영향을 줄 수 있다.</div></li>
+      <li><div class="x-s">AI is <b>taking over</b> / many of the <b>routine</b> tasks / that <b>entry-level</b> jobs / depend on.</div>
+        <div class="x-t">AI가 신입 일자리가 의지하던 반복 업무를 많이 가져가고 있다.</div></li>
+      <li><div class="x-s">That could make it <b>harder</b> / for graduates / to find a <b>first</b> job / and gain <b>experience</b>.</div>
+        <div class="x-t">그 때문에 졸업생이 첫 직장을 구하고 경력을 쌓기가 더 어려워질 수 있다.</div></li>
+    </ol>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 5 · 내 말로 말하기</div>
+    <div class="x-speak">
+      <p class="x-q">How could AI change the first job you want to get? What can you do now to prepare?</p>
+      <p class="x-intro" style="margin-top:8px">영어로 2문장만. "I think AI might ~." + "So I'm going to ~." 틀로 시작하면 충분해요. 말해본 다음에 맨 아래 모범 답안을 펼쳐 보세요.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="x-label">Answers</div>
+  <h3>정답</h3>
+  <ol>
+    <li>She compared AI to a "slow-moving tsunami" for workers. <br><span class="x-intro">AI를 노동자에게 '천천히 밀려오는 쓰나미'에 비유했다.</span></li>
+    <li>Because AI is taking over many of the routine tasks that entry-level jobs depend on. <br><span class="x-intro">신입 일자리가 맡던 반복 업무를 AI가 많이 가져가고 있기 때문이다.</span></li>
+  </ol>
+  <details id="m-2026-10-13">
+    <summary>모범 답안 펼치기</summary>
+    <p class="x-en">I think AI might take over a lot of the simple tasks that new employees usually do in my field. So I'm going to gain experience through internships and learn how to use AI tools well, not just compete with them.</p>
+    <p class="x-intro" style="margin-top:8px">제 분야에서 신입이 보통 하는 단순한 일을 AI가 많이 가져갈 것 같아요. 그래서 인턴십으로 경험을 쌓고, AI랑 경쟁만 하는 게 아니라 AI 도구를 잘 쓰는 법을 배우려고 해요.</p>
+  </details>
+</section>
+  </details>
+</div>
+<!--EN 2026-10-13 END-->
+<!--EN 2026-10-12 START-->
+<div class="en-day" id="e-2026-10-12">
+  <div class="day-head"><h3 class="en-date">10월 12일 월요일</h3></div>
+  <p class="en-focus"><span>집중 학습</span>"AI 쓰면 금방 포기한다?" — 버클리 연구</p>
+  <p class="lede">오늘도 15분. 뉴스 3개 훑고, 그중 'AI 쓰다 보면 금방 포기하게 된다?' 연구로 읽기 → 표현 → 쉐도잉 → 말하기까지 가볼게요.</p>
+  <details class="full"><summary>학습지 펼쳐 보기</summary>
+<section>
+  <div class="x-label">Part 1</div>
+  <h3>오늘의 뉴스 3개</h3>
+
+  <article class="x-news">
+    <div class="x-label">① AI·테크</div>
+    <h4>Relying on AI May Make People Give Up Sooner</h4>
+    <p class="x-en">A new study involving researchers from UC Berkeley found that relying on ChatGPT can make people less persistent on hard tasks. In three experiments with 1,222 online participants, people who used AI and then lost access to it became less accurate and skipped more questions. People who never had AI kept trying and did better. The peer-reviewed paper was presented at the Conference on Language Modeling this month.</p>
+    <p class="x-ko">UC버클리·카네기멜런·MIT·옥스퍼드·UCLA 연구자들이 온라인 참가자 1,222명으로 실험을 세 번 했어요. 한 그룹은 ChatGPT에 답을 물어볼 수 있게 하고, 다른 그룹은 혼자 풀게 했죠. 그러다 중간에 AI를 빼버렸더니, AI를 쓰던 사람들은 정답률이 바로 떨어지고 문제를 건너뛰거나 포기하는 경우가 확 늘었어요. 처음부터 혼자 푼 사람들은 끝까지 버텨서 결과가 더 좋았고요. 연구팀은 빠른 답이 '배움에 도움이 되는 고생(productive struggle)'을 없앤다고 봐요. 아래 집중 학습에서 자세히 다뤄요.</p>
+    <p class="x-diff">출처별 차이: 버클리 보도자료와 EurekAlert 제목은 "AI를 단 10분만 써도"라고 했지만, 본문은 실험을 시간이 아니라 '문제 개수'(분수 15문제 중 12번째까지 AI 사용)로 설명해요. '10분'을 어떻게 쟀는지는 자료에 안 나와요. 또 두 자료 모두 정확한 퍼센트 수치는 공개하지 않았어요.</p>
+    <div class="x-src">
+      <a href="https://news.berkeley.edu/2026/10/09/using-ai-for-just-10-minutes-erodes-your-ability-to-persist-at-hard-things/">Berkeley News – Using AI for just 10 minutes erodes your ability to persist at hard things</a><span>공식 발표: 2026-10-09 (미국 현지)</span>
+      <a href="https://www.eurekalert.org/news-releases/1147258">EurekAlert! – Using AI for just 10 minutes erodes your ability to persist at hard things</a><span>보도: 2026-10-09</span>
+    </div>
+  </article>
+
+  <article class="x-news">
+    <div class="x-label">② 경제·일자리</div>
+    <h4>Apple Reportedly Cuts iPhone 18 Pro Orders</h4>
+    <p class="x-en">Apple has told some suppliers to make fewer parts for the iPhone 18 Pro and Pro Max, according to Nikkei Asia. October orders were cut by at least 15% because demand has been weaker than expected. Memory chips have become much more expensive as AI data centers buy up supply, and that has pushed device prices higher. Both new models cost $100 more than last year's versions.</p>
+    <p class="x-ko">일본 경제매체 닛케이아시아 보도에 따르면, 애플이 아이폰18 프로·프로 맥스 부품 주문을 10월에 최소 15% 줄였어요. 8월 말부터 수요가 예상보다 약했기 때문이에요. 배경엔 '메모리 반도체 가격 폭등'이 있어요. AI 데이터센터가 메모리를 대량으로 사들이면서 폰·노트북에 쓸 물량이 부족해지고 값이 올랐죠. 그래서 아이폰18 프로는 1,199달러, 프로 맥스는 1,299달러로 작년보다 100달러씩 비싸졌어요. 애플은 6월에 맥·아이패드 가격도 올렸어요. 시장조사업체 IDC는 올해 전 세계 스마트폰 출하량이 16.7% 줄어 역대 최대 감소폭이 될 거라고 봤어요.</p>
+    <p class="x-diff">출처별 차이: Reuters는 "보도 내용을 바로 확인할 수 없었고 애플은 답하지 않았다"고 썼고, 감축 폭은 "최소 15%"로만 전했어요. Fortune은 임원급 소식통을 인용해 "15~20%"라고 썼어요. 또 닛케이는 수요 부진이 애플의 출시 일정 변경(일반 모델은 내년 봄 출시) 때문일 수도 있다고 했는데, Fortune이 인용한 공급업체들은 그것만으로는 설명이 안 된다고 했어요. 애플은 공식 확인하지 않았어요.</p>
+    <div class="x-src">
+      <a href="https://ca.investing.com/news/stock-market-news/apple-cuts-iphone-18-pro-orders-due-to-soft-demand-nikkei-asia-reports-4872803">Reuters (via Investing.com) – Apple cuts iPhone 18 Pro orders due to soft demand, Nikkei Asia reports</a><span>보도: 2026-10-09 (미국 현지)</span>
+      <a href="https://fortune.com/2026/10/10/apple-iphone-18-pro-orders-cut-price-hike-memory-chip-shortage/">Fortune – A $100 price hike may be all it takes to scare off iPhone buyers in this economy</a><span>보도: 2026-10-10</span>
+    </div>
+  </article>
+
+  <article class="x-news">
+    <div class="x-label">③ 과학·국제</div>
+    <h4>Four Astronauts Return to Earth After 237 Days in Space</h4>
+    <p class="x-en">The four members of NASA's Crew-12 splashed down in the Pacific Ocean off Los Angeles on October 8 in a SpaceX Dragon capsule. The crew included two NASA astronauts, one from the European Space Agency and one from Russia. They spent 237 days in space, a few weeks longer than planned because the next crew's launch was delayed. During the mission, Sophie Adenot became the first French woman to walk in space.</p>
+    <p class="x-ko">국제우주정거장(ISS)에 있던 Crew-12 우주비행사 4명이 미국 시간 10월 8일(한국 시간 9일 새벽) 스페이스X 드래건 캡슐을 타고 LA 앞바다에 내려앉았어요. 미국 NASA의 제시카 메이어·잭 해서웨이, 유럽우주국(ESA)의 프랑스인 소피 아드노, 러시아의 안드레이 페댜예프가 함께였어요. 미국·유럽·러시아가 한 팀으로 일한 거죠. 2월 13일에 출발해 237일 동안 우주에 있었어요. 폐렴균 연구, 우주에서 수액 만들기, 식물 키우기 같은 실험을 했고, 아드노는 프랑스 여성 최초로 우주 유영을 했어요.</p>
+    <p class="x-diff">출처별 차이: Space.com은 다음 팀(Crew-13)의 드래건 캡슐에 추진 장치 문제가 생겨 발사가 늦어졌고, 그래서 Crew-12가 몇 주 더 머물렀다고 설명해요. 호주 ABC는 왜 길어졌는지는 안 다뤘고, 대신 진행한 실험 목록을 자세히 실었어요. 참고로 Space.com 본문 한 곳엔 "거의 10개월"이라는 표현이 있는데, 제목과 237일이라는 숫자에 맞는 건 "약 8개월"이에요.</p>
+    <div class="x-src">
+      <a href="https://www.space.com/space-exploration/international-space-station/spacex-crew-12-iss-astronaut-mission-return-to-earth">Space.com – Splashdown! Crew-12 astronauts return to Earth after nearly 8 months in space</a><span>보도: 2026-10-08 (미국 현지)</span>
+      <a href="https://www.abc.net.au/news/2026-10-08/nasa-spacex-crew-12-return-to-earth-explained/107239878">ABC News (Australia) – NASA Crew-12 astronauts return to Earth after 8 months in space</a><span>보도: 2026-10-08</span>
+    </div>
+  </article>
+</section>
+
+<section>
+  <div class="x-label">Part 2 · 집중 학습</div>
+  <h3>"AI 쓰면 금방 포기한다?" — 버클리 연구</h3>
+  <p class="x-intro">고른 이유: 과제·공부에 ChatGPT 쓰는 대학생한테 바로 와닿는 이야기라서요. "AI가 공부에 도움이 될까?"는 영어로 이야기 나누기에도 딱 좋은 주제예요.</p>
+
+  <div class="x-step">
+    <div class="x-label">Step 1 · 영어로 읽기</div>
+    <h4>Does Using AI Make Us Give Up Faster?</h4>
+    <div class="x-meta">178 words · 소리 내서 한 번, 눈으로 한 번</div>
+    <div class="x-article">
+      <p>Many students now ask chatbots like ChatGPT for help with homework. But a new study suggests that relying on AI, even for a short time, may make people less willing to keep trying on their own.</p>
+      <p>Researchers from UC Berkeley, Carnegie Mellon, MIT, Oxford and UCLA ran three experiments with 1,222 people online. In one test, participants solved 15 simple fraction problems. One group could ask ChatGPT for answers, and the other group could not. After the 12th problem, the researchers took the AI away.</p>
+      <p>At first, the AI group was more accurate. But once the tool was gone, their accuracy dropped almost right away, and many people skipped questions or gave up. The group without AI kept trying and finished with better results. A test with SAT reading questions showed the same pattern.</p>
+      <p>Why does this matter? The researchers say quick answers can remove "productive struggle," the hard work that helps us learn. One of the authors, Brian Christian, says AI should act more like a tutor that teaches, not a machine that simply hands out answers.</p>
+    </div>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 2 · 내용 이해하기</div>
+    <p>요즘 과제할 때 ChatGPT 같은 챗봇에 도움을 받는 학생이 많죠. 그런데 새 연구에 따르면, AI에 잠깐만 의존해도 혼자 계속 해보려는 마음이 약해질 수 있대요.</p>
+    <p>버클리·카네기멜런·MIT·옥스퍼드·UCLA 연구자들이 온라인으로 1,222명을 모아 실험을 세 번 했어요. 그중 하나는 쉬운 분수 문제 15개 풀기였어요. 한 그룹은 ChatGPT에 답을 물어볼 수 있었고, 다른 그룹은 못 했죠. 그리고 12번째 문제가 끝나자 AI를 치워버렸어요.</p>
+    <p>처음엔 AI 그룹이 더 많이 맞혔어요. 그런데 AI가 사라지자마자 정답률이 거의 바로 떨어졌고, 문제를 건너뛰거나 포기하는 사람이 많았어요. AI 없이 푼 그룹은 계속 시도해서 결과가 더 좋았고요. SAT 독해 문제로 한 실험에서도 똑같은 패턴이 나왔어요. 연구팀은 빠른 답이 '배움에 도움이 되는 고생(productive struggle)'을 없앤다고 말해요. 저자 중 한 명인 브라이언 크리스천은 AI가 답만 툭 던져주는 기계가 아니라, 가르쳐주는 '과외 선생님'처럼 작동해야 한다고 했어요.</p>
+    <h5>내용 확인 질문 (정답은 맨 아래)</h5>
+    <ol>
+      <li>How many people took part in the three experiments?</li>
+      <li>What happened to the AI group after the researchers took the AI away?</li>
+    </ol>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 3 · 표현 익히기</div>
+    <ul class="x-vocab">
+      <li><span class="x-term">rely on ~<small>~에 의존하다, 기대다</small></span>
+        <span class="x-ex">I rely on my phone's calendar to remember all my assignment deadlines.</span>
+        <span class="x-exko">과제 마감일 다 기억하려고 폰 캘린더에 의존해.</span></li>
+      <li><span class="x-term">keep trying<small>계속 시도하다, 포기하지 않다</small></span>
+        <span class="x-ex">I failed my driving test twice, but I kept trying and finally passed.</span>
+        <span class="x-exko">운전면허 시험 두 번 떨어졌는데, 계속 도전해서 결국 붙었어.</span></li>
+      <li><span class="x-term">take ~ away<small>~을 치우다, 빼앗다</small></span>
+        <span class="x-ex">My mom took my phone away so I could focus on studying.</span>
+        <span class="x-exko">공부에 집중하라고 엄마가 내 폰을 가져가 버렸어.</span></li>
+      <li><span class="x-term">at first<small>처음에는</small></span>
+        <span class="x-ex">At first, living alone was fun, but now I miss my family's cooking.</span>
+        <span class="x-exko">처음엔 자취가 재밌었는데, 지금은 집밥이 그리워.</span></li>
+      <li><span class="x-term">give up<small>포기하다</small></span>
+        <span class="x-ex">Don't give up on Spanish just because the grammar is hard.</span>
+        <span class="x-exko">문법 어렵다고 스페인어 포기하지 마.</span></li>
+    </ul>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 4 · 쉐도잉하기</div>
+    <p class="x-intro">/ 에서 살짝 끊고, 노란 단어에 힘을 줘서 읽어요. 문장마다 3번씩. 숫자는 이렇게: 1,222 = one thousand two hundred twenty-two, 12th = twelfth.</p>
+    <ol class="x-shadow">
+      <li><div class="x-s">After the <b>twelfth</b> problem, / the researchers / <b>took</b> the AI <b>away</b>.</div>
+        <div class="x-t">12번째 문제가 끝난 뒤, 연구자들은 AI를 치워버렸다.</div></li>
+      <li><div class="x-s">At <b>first</b>, / the AI group / was <b>more</b> accurate.</div>
+        <div class="x-t">처음에는 AI 그룹이 더 정확했다.</div></li>
+      <li><div class="x-s">The group <b>without</b> AI / <b>kept</b> trying / and finished / with <b>better</b> results.</div>
+        <div class="x-t">AI 없이 한 그룹은 계속 시도했고, 더 좋은 결과로 끝냈다.</div></li>
+      <li><div class="x-s">AI should act / more like a <b>tutor</b> that <b>teaches</b>, / not a machine / that simply hands out <b>answers</b>.</div>
+        <div class="x-t">AI는 답만 나눠주는 기계가 아니라, 가르쳐주는 과외 선생님처럼 작동해야 한다.</div></li>
+    </ol>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 5 · 내 말로 말하기</div>
+    <div class="x-speak">
+      <p class="x-q">Does using AI for homework help you learn, or does it make you give up more easily? Why?</p>
+      <p class="x-intro" style="margin-top:8px">영어로 2문장만. "I think AI helps me / hurts me because ~." 틀로 시작하면 충분해요. 말해본 다음에 맨 아래 모범 답안을 펼쳐 보세요.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="x-label">Answers</div>
+  <h3>정답</h3>
+  <ol>
+    <li>1,222 people took part in the three experiments. <br><span class="x-intro">세 실험에 1,222명이 참여했다.</span></li>
+    <li>Their accuracy dropped almost right away, and many people skipped questions or gave up. <br><span class="x-intro">정답률이 거의 바로 떨어졌고, 많은 사람이 문제를 건너뛰거나 포기했다.</span></li>
+  </ol>
+  <details id="m-2026-10-12">
+    <summary>모범 답안 펼치기</summary>
+    <p class="x-en">I think AI helps me when I use it to check my work, but it hurts me when I just copy the answers. So I try to solve problems on my own first and ask AI only when I'm really stuck.</p>
+    <p class="x-intro" style="margin-top:8px">AI로 내가 한 걸 확인할 땐 도움이 되지만, 답만 베끼면 오히려 손해인 것 같아요. 그래서 먼저 혼자 풀어보고, 정말 막혔을 때만 AI한테 물어보려고 해요.</p>
+  </details>
+</section>
+  </details>
+</div>
+<!--EN 2026-10-12 END-->
+<!--EN 2026-10-11 START-->
+<div class="en-day" id="e-2026-10-11">
+  <div class="day-head"><h3 class="en-date">10월 11일 일요일</h3></div>
+  <p class="en-focus"><span>집중 학습</span>"요즘 너무 비싸" — 미국인들의 물가 스트레스</p>
+  <p class="lede">오늘도 15분. 뉴스 3개 훑고, 그중 '미국인들의 물가 스트레스' 이야기로 읽기 → 표현 → 쉐도잉 → 말하기까지 가볼게요.</p>
+  <details class="full"><summary>학습지 펼쳐 보기</summary>
+<section>
+  <div class="x-label">Part 1</div>
+  <h3>오늘의 뉴스 3개</h3>
+
+  <article class="x-news">
+    <div class="x-label">① AI·테크</div>
+    <h4>Most Americans Say AI Is Moving Too Fast</h4>
+    <p class="x-en">A new AP-NORC poll found that 64% of U.S. adults think artificial intelligence is developing too fast. Only 27% said the pace is about right, and 8% said it is too slow. About 8 in 10 said it is very important for the government to keep AI under human control and to protect workers. Adults under 30 were more worried about the speed than those aged 60 and older.</p>
+    <p class="x-ko">AP통신과 시카고대 연구기관 NORC가 미국 성인 2,140명에게 물었더니(9월 24~28일 조사, 오차 ±2.9%p) 64%가 "AI 발전이 너무 빠르다"고 답했어요. "적당하다"는 27%, "너무 느리다"는 8%뿐이었어요. 10명 중 8명 정도는 정부가 AI를 사람 통제 아래 두는 것, 그리고 일자리(노동자)를 보호하는 게 매우 중요하다고 했어요. 민주당 지지자는 약 4분의 3, 공화당 지지자는 약 절반이 "너무 빠르다"고 해서 정당별 차이도 있었고요. 흥미로운 점은 30세 미만이 60세 이상보다 오히려 더 걱정한다는 거예요. 트럼프 대통령의 AI 대응엔 67%가 반대했어요.</p>
+    <p class="x-diff">출처별 차이: 같은 AP 기사지만, Fast Company 판은 조사 방법(기간·인원·오차)까지 실었고, Scripps 계열 NBC26 판은 이 부분이 빠진 대신 트럭 운전사·교사 등 인터뷰 인용을 더 살렸어요. 30세 미만이 더 걱정한다는 내용은 두 판 모두 구체적인 퍼센트 없이 나와요.</p>
+    <div class="x-src">
+      <a href="https://fastcompany.com/91620704/how-america-feeling-about-ai-boom-new-poll-reveals-data">Fast Company (Associated Press) – What Americans think about the AI boom according to AP's poll</a><span>보도: 2026-10-08 (미국 현지)</span>
+      <a href="https://www.nbc26.com/science-and-tech/artificial-intelligence/most-americans-think-artificial-intelligence-is-developing-too-fast-a-new-ap-norc-poll-finds">NBC26 (AP) – Most Americans think artificial intelligence is developing too fast</a><span>보도: 2026-10-08</span>
+    </div>
+  </article>
+
+  <article class="x-news">
+    <div class="x-label">② 경제·일자리</div>
+    <h4>U.S. Consumer Sentiment Falls Near a Record Low</h4>
+    <p class="x-en">The University of Michigan's consumer sentiment index dropped to 46.3 in early October, down from 48.1 in September. It was worse than economists expected and the second-lowest reading ever. Americans said high prices and expensive loans make it a bad time to buy big items. They also expect prices to rise 4.7% over the next year, up from 4.6% last month.</p>
+    <p class="x-ko">미국 미시간대가 매달 발표하는 '소비자심리지수'(사람들이 경제를 얼마나 좋게/나쁘게 느끼는지 숫자로 나타낸 것)가 10월 예비치 46.3으로 떨어졌어요. 9월(48.1)보다 낮고, 전문가 예상(47.6)보다도 나빴어요. 역대 이보다 낮았던 건 올해 5월(44.8) 한 번뿐이에요. 특히 '지금 형편' 지수는 44.7로 한 달 새 12% 넘게 빠져 역대 최저였어요. 이유는 생활비 부담이에요. 휘발유값이 1년 전보다 40% 넘게 비싸고, 대출 이자도 높아서 차·가구 같은 큰 물건을 사기 어렵다는 거죠. 앞으로 1년 물가가 4.7% 오를 거라고 예상해서, 10월 27~28일 연준(미국 중앙은행) 회의에도 신경 쓰이는 숫자예요.</p>
+    <p class="x-diff">출처별 차이: Advisor Perspectives·Bloomberg는 "5개월 만의 최저"라고 썼고, Benzinga는 "역대 두 번째로 낮다"고 썼어요. 둘 다 맞는 말이에요 — 유일하게 더 낮았던 게 5개월 전인 올해 5월(44.8)이라서요. 미시간대 공식 발표 페이지는 이번 실행에서 열리지 않아 두 언론 보도로 교차 확인했어요.</p>
+    <div class="x-src">
+      <a href="https://www.advisorperspectives.com/dshort/updates/2026/10/09/consumer-sentiment-falls-again-in-october">Advisor Perspectives – Consumer Sentiment Falls to Five-Month Low</a><span>보도: 2026-10-09 (미국 현지)</span>
+      <a href="https://www.benzinga.com/news/26/10/62274578/consumer-sentiment-second-lowest-ever-inflation-expectations-4-7-percent">Benzinga – Consumer Sentiment Falls To 46.3, Second-Lowest Ever</a><span>보도: 2026-10-09</span>
+    </div>
+  </article>
+
+  <article class="x-news">
+    <div class="x-label">③ 과학</div>
+    <h4>Webb Telescope Finds the Home of the Most Distant Radio Burst</h4>
+    <p class="x-en">Astronomers used NASA's James Webb Space Telescope to find the galaxy where the most distant fast radio burst ever seen came from. A fast radio burst is a flash of radio waves that lasts only a few milliseconds. This one left its galaxy when the universe was only about 3 billion years old. The host was a small, young galaxy, which suggests the burst came from a magnetar, a highly magnetic dead star.</p>
+    <p class="x-ko">'고속 전파 폭발(FRB)'은 우주 저 멀리서 1000분의 몇 초 동안 번쩍하는 강한 전파 신호예요. 2007년에 처음 발견됐지만 아직 정체가 확실하지 않아요. 남아공 MeerKAT 전파망원경이 2024년 3월에 잡은 신호를, 제임스 웹 우주망원경이 추적해서 신호가 나온 은하를 찾아냈어요. 우주 나이가 약 30억 살일 때 나온 신호로, 출처 은하가 확인된 FRB 중 가장 멀어요. 그 은하는 예상보다 훨씬 작고 젊은 은하였어요. 그래서 연구팀은 중성자별 두 개가 충돌한 게 아니라(그건 수십억 년이 걸려요) 초신성 폭발 뒤 남은 '자기장이 엄청 센 별(마그네타)'에서 나왔을 가능성이 크다고 봤어요. 연구는 과학 학술지 『사이언스』에 실렸어요.</p>
+    <p class="x-diff">출처별 차이: NASA는 거리를 '적색편이 2.148, 빅뱅 후 약 30억 년'으로 표현했고, Live Science는 '100억 광년 이상 떨어져 있고, 기존 기록을 두 배 넘게 경신했다'고 썼어요. 일부 매체는 '110억 광년'이라고도 하는데, 우주가 팽창해서 거리 계산 방식에 따라 숫자가 달라질 수 있어요. 이 학습지에서는 두 출처가 공통으로 말하는 '우주 나이 약 30억 년일 때'를 기준으로 했어요.</p>
+    <div class="x-src">
+      <a href="https://science.nasa.gov/missions/webb/webb-measures-distance-to-farthest-fast-radio-burst-suggesting-origin/">NASA Science – Webb Measures Distance to Farthest Fast Radio Burst, Suggesting Origin</a><span>공식 발표: 2026-10-08</span>
+      <a href="https://www.livescience.com/space/astronomy/james-webb-telescope-pinpoints-the-most-distant-fast-radio-burst-ever-seen-more-than-doubling-the-previous-record">Live Science – James Webb telescope pinpoints the most distant 'fast radio burst' ever seen</a><span>보도: 2026-10-08</span>
+    </div>
+  </article>
+</section>
+<section>
+  <div class="x-label">Part 2 · 집중 학습</div>
+  <h3>"요즘 너무 비싸" — 미국인들의 물가 스트레스</h3>
+  <p class="x-intro">고른 이유: 물가·생활비는 나라 상관없이 대학생도 매일 느끼는 주제라 영어로 말할 거리가 많아요. 최근 이틀 연속 AI 주제였으니 오늘은 경제로 바꿔봤어요.</p>
+
+  <div class="x-step">
+    <div class="x-label">Step 1 · 영어로 읽기</div>
+    <h4>Americans Are Feeling Gloomy About the Economy</h4>
+    <div class="x-meta">188 words · 소리 내서 한 번, 눈으로 한 번</div>
+    <div class="x-article">
+      <p>Every month, the University of Michigan asks Americans how they feel about the economy. In early October, the answer was not good. Its consumer sentiment index fell to 46.3, down from 48.1 in September and lower than experts expected. In the survey's history, only one reading has been lower: 44.8 in May of this year.</p>
+      <p>The biggest problem is the cost of living. Prices are still high, and gasoline costs about 40 percent more than a year ago. Borrowing money has also become expensive, so many people say it is a bad time to buy big items like cars or furniture.</p>
+      <p>The survey also asked what people would do if prices rose sharply. Only 31 percent said they would keep buying as usual. More than half said they would cut back, and 16 percent said they would stop buying. Lower-income consumers felt the pressure most, because they have less money to absorb price increases.</p>
+      <p>Why does this matter? Americans now expect prices to rise 4.7 percent over the next year, the highest since May. The survey's director warned that frustration over the cost of living "continues to mount."</p>
+    </div>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 2 · 내용 이해하기</div>
+    <p>미시간대는 매달 미국인들에게 "경제 어떻게 느껴요?"라고 물어서 '소비자심리지수'를 내요. 10월 초 결과는 46.3으로, 9월(48.1)보다 떨어졌고 전문가 예상보다도 나빴어요. 조사 역사상 이보다 낮았던 건 올해 5월(44.8) 딱 한 번이에요.</p>
+    <p>가장 큰 원인은 '생활비'예요. 물가가 여전히 높고 휘발유는 1년 전보다 40% 정도 비싸요. 대출 이자도 비싸져서, 차나 가구 같은 큰 물건을 사기엔 안 좋은 때라는 사람이 많아요.</p>
+    <p>"물가가 확 오르면 어떻게 할 거냐"는 질문엔 평소처럼 산다는 사람이 31%뿐이었고, 절반 넘게는 줄이겠다, 16%는 아예 안 사겠다고 했어요. 소득이 낮은 사람일수록 오른 가격을 감당할 여유가 없어서 더 힘들어했고요. 게다가 앞으로 1년 물가가 4.7% 오를 거라고 예상하는데, 5월 이후 가장 높은 숫자예요. 조사 책임자는 "생활비에 대한 불만이 계속 쌓이고 있다"고 경고했어요.</p>
+    <h5>내용 확인 질문 (정답은 맨 아래)</h5>
+    <ol>
+      <li>What was the consumer sentiment index in early October, and was it higher or lower than in September?</li>
+      <li>Why did lower-income consumers feel the pressure most?</li>
+    </ol>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 3 · 표현 익히기</div>
+    <ul class="x-vocab">
+      <li><span class="x-term">the cost of living<small>생활비, 생계비</small></span>
+        <span class="x-ex">The cost of living in Seoul is a big reason I still live with my parents.</span>
+        <span class="x-exko">서울 생활비가 비싼 게 내가 아직 부모님이랑 사는 큰 이유야.</span></li>
+      <li><span class="x-term">lower than expected<small>예상보다 낮은</small></span>
+        <span class="x-ex">My TOEIC score was lower than expected, so I'm taking it again next month.</span>
+        <span class="x-exko">토익 점수가 예상보다 낮게 나와서 다음 달에 다시 볼 거야.</span></li>
+      <li><span class="x-term">as usual<small>평소처럼, 늘 그렇듯</small></span>
+        <span class="x-ex">As usual, the library was packed during exam week.</span>
+        <span class="x-exko">늘 그렇듯 시험 기간엔 도서관이 꽉 찼어.</span></li>
+      <li><span class="x-term">cut back (on ~)<small>(~을) 줄이다</small></span>
+        <span class="x-ex">I'm trying to cut back on delivery food to save money.</span>
+        <span class="x-exko">돈 아끼려고 배달 음식을 줄이려는 중이야.</span></li>
+      <li><span class="x-term">absorb (a cost / price increase)<small>(비용·인상분을) 감당하다, 떠안다</small></span>
+        <span class="x-ex">The café couldn't absorb the higher rent, so it raised its coffee prices.</span>
+        <span class="x-exko">그 카페는 오른 월세를 감당할 수 없어서 커피값을 올렸어.</span></li>
+    </ul>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 4 · 쉐도잉하기</div>
+    <p class="x-intro">/ 에서 살짝 끊고, 노란 단어에 힘을 줘서 읽어요. 문장마다 3번씩. 숫자는 이렇게: 46.3 = forty-six point three, 31 percent = thirty-one percent.</p>
+    <ol class="x-shadow">
+      <li><div class="x-s">The <b>biggest</b> problem / is the <b>cost</b> of living.</div>
+        <div class="x-t">가장 큰 문제는 생활비다.</div></li>
+      <li><div class="x-s">Borrowing money / has also become <b>expensive</b>, / so many people say / it is a <b>bad</b> time / to buy <b>big</b> items.</div>
+        <div class="x-t">돈을 빌리는 것도 비싸져서, 많은 사람들이 지금은 큰 물건을 사기에 안 좋은 때라고 말한다.</div></li>
+      <li><div class="x-s"><b>Only</b> thirty-one percent said / they would keep buying / as <b>usual</b>.</div>
+        <div class="x-t">평소처럼 계속 사겠다고 한 사람은 31%뿐이었다.</div></li>
+      <li><div class="x-s">They have <b>less</b> money / to <b>absorb</b> / price increases.</div>
+        <div class="x-t">그들은 가격 인상을 감당할 돈이 더 적다.</div></li>
+    </ol>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 5 · 내 말로 말하기</div>
+    <div class="x-speak">
+      <p class="x-q">When prices go up, what is the first thing you would cut back on? Why?</p>
+      <p class="x-intro" style="margin-top:8px">영어로 2문장만. "I would cut back on ~ first, because ~." 틀로 시작하면 충분해요. 말해본 다음에 맨 아래 모범 답안을 펼쳐 보세요.</p>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="x-label">Answers</div>
+  <h3>정답</h3>
+  <ol>
+    <li>It was 46.3, which was lower than in September (48.1). <br><span class="x-intro">46.3으로, 9월(48.1)보다 낮았다.</span></li>
+    <li>Because they have less money to absorb price increases. <br><span class="x-intro">오른 가격을 감당할 돈이 더 적기 때문이다.</span></li>
+  </ol>
+  <details id="m-2026-10-11">
+    <summary>모범 답안 펼치기</summary>
+    <p class="x-en">I would cut back on eating out and ordering delivery food first. It's easy to spend a lot of money on it without noticing, and I can cook simple meals at home instead.</p>
+    <p class="x-intro" style="margin-top:8px">저는 외식이랑 배달 음식부터 줄일 것 같아요. 모르는 사이에 돈을 많이 쓰게 되는데, 대신 집에서 간단히 해 먹을 수 있으니까요.</p>
+  </details>
+</section>
+  </details>
+</div>
+<!--EN 2026-10-11 END-->
+<!--EN 2026-10-10 START-->
+<div class="en-day" id="e-2026-10-10">
+  <div class="day-head"><h3 class="en-date">10월 10일 토요일</h3></div>
+  <p class="en-focus"><span>집중 학습</span>런던에서 붙은 '로보택시 경쟁'</p>
+  <p class="lede">오늘도 15분 정도. 뉴스 3개 훑고, 그중 런던 로보택시 이야기로 읽기 → 표현 → 쉐도잉 → 말하기까지 가볼게요.</p>
+  <details class="full"><summary>학습지 펼쳐 보기</summary>
+<section>
+  <div class="x-label">Part 1</div>
+  <h3>오늘의 뉴스 3개</h3>
+
+  <article class="x-news">
+    <div class="x-label">① AI·테크</div>
+    <h4>Uber and Pony.ai Plan to Test Robotaxis in London</h4>
+    <p class="x-en">Uber and the Chinese self-driving company Pony.ai said on October 8 that they will bring Pony.ai's seventh-generation robotaxis to London. Road tests are expected to begin in the coming weeks. The two companies already run robotaxi rides in Zagreb, Croatia, and plan to deploy more than 2,000 robotaxis in Europe. In London, they will compete with Wayve, Waymo and Baidu, which are also testing there.</p>
+    <p class="x-ko">우버가 중국 자율주행 회사 포니AI의 7세대 로보택시(운전자 없이 달리는 택시)를 런던에 들여온다고 발표했어요. 몇 주 안에 도로 테스트를 시작할 예정이에요. 두 회사는 이미 크로아티아 자그레브에서 우버 앱으로 로보택시를 부를 수 있게 운영 중이고, 8월엔 유럽에 2,000대 넘게 깔겠다는 계획도 냈어요. 런던엔 이미 영국 회사 웨이브(Wayve, 우버와 협력), 구글 계열 웨이모, 바이두(리프트와 협력)가 테스트 중이라 경쟁이 꽤 치열해요. 다만 영국에선 완전 무인 서비스를 하려면 2024년에 만든 자율주행차법에 따라 정부 승인을 받아야 해요.</p>
+    <p class="x-diff">출처별 차이: Zag Daily는 "우버의 기존 파트너 웨이브와 경쟁하게 됐다"는 런던 경쟁 구도를 중심으로 썼고, 중국 매체 Gasgoo는 유럽 <b>5개 도시</b> 2,000대 계획과 중국 정부의 해외 진출 지원 정책 쪽을 더 강조했어요. 포니AI가 런던 테스트에서 안전요원을 태울지는 두 기사 모두 밝히지 않았어요.</p>
+    <div class="x-src">
+      <a href="https://zagdaily.com/connected/uber-to-bring-pony-ais-robotaxis-to-london-network-alongside-wayve/">Zag Daily – Uber to bring Pony AI's robotaxis to London network alongside Wayve</a><span>보도: 2026-10-08 (영국 현지)</span>
+      <a href="https://autonews.gasgoo.com/articles/news/ponyai-officially-announces-expansion-into-london-2108498709842456577">Gasgoo – Pony.ai Officially Announces Expansion into London</a><span>보도: 2026-10-09</span>
+    </div>
+  </article>
+
+  <article class="x-news">
+    <div class="x-label">② 경제·일자리</div>
+    <h4>Canada Loses 68,000 Jobs, Young Workers Hit Hardest</h4>
+    <p class="x-en">Canada lost about 68,000 jobs in September, according to Statistics Canada. It was the second month in a row of job losses, and the unemployment rate rose from 6.4% to 6.5%. Young people aged 15 to 24 lost 48,000 jobs, the largest share of the drop. Economists had expected a small gain, but some said the steady unemployment rate showed the job market was not collapsing.</p>
+    <p class="x-ko">캐나다에서 9월 한 달 동안 일자리가 약 6만 8천 개 줄었어요. 8월(약 4만 2천 개 감소)에 이어 두 달 연속 감소고, 실업률은 6.4% → 6.5%로 올랐어요. 특히 15~24세 청년 일자리가 4만 8천 개 줄어서 감소분의 대부분을 차지했어요. 분야별로는 교육(-3만 5천), 보건·사회복지(-2만 3천), 제조업(-1만 3천)이 많이 줄었어요. 경제학자들은 오히려 9천 개쯤 늘 거라고 예상했는데 크게 빗나간 거예요. 그래도 실업률이 크게 튀지 않아서 "고용시장이 무너지는 건 아니다"라는 평가도 있어요. 캐나다 중앙은행은 10월 28일 금리를 결정해요(현재 2.25%).</p>
+    <p class="x-diff">출처별 차이: Global News(캐나다 통신 CP)는 "6만 8천 개", BabyPips는 "6만 8,300개"로 적었는데 반올림 차이예요. 분야도 Global News는 교육·보건을 나눠서(3만 5천 + 2만 3천), BabyPips는 합쳐서(5만 8,400) 표기했어요. 예상치는 BabyPips가 로이터 설문 기준 "+9,000"이라고 했어요. 통계청(Statistics Canada) 원문 페이지는 이번 실행에서 열리지 않아 두 언론 보도로 교차 확인했어요.</p>
+    <div class="x-src">
+      <a href="https://globalnews.ca/news/12094093/canada-jobs-september-2026/">Global News (The Canadian Press) – Canada lost 68K jobs in September, Statistics Canada says</a><span>보도: 2026-10-09 (캐나다 현지)</span>
+      <a href="https://www.babypips.com/news/headline-canada-jobs-report-september-2026-job-losses-unemployment-2026-10-09">BabyPips – Canada Loses 68,300 Jobs in September 2026</a><span>보도: 2026-10-09</span>
+      <a href="https://www.bnnbloomberg.ca/business/economics/2026/10/09/canada-sheds-68000-jobs-unemployment-rate-up-to-65-in-september/">BNN Bloomberg (The Canadian Press) – Canada sheds 68,000 jobs, unemployment rate up to 6.5%</a><span>보도: 2026-10-09</span>
+    </div>
+  </article>
+
+  <article class="x-news">
+    <div class="x-label">③ 사회·국제</div>
+    <h4>Former UN Human Rights Chief Navi Pillay Wins Nobel Peace Prize</h4>
+    <p class="x-en">The 2026 Nobel Peace Prize was awarded to Navi Pillay, an 85-year-old South African judge and former UN High Commissioner for Human Rights. The Norwegian Nobel Committee honored her "for her efforts to promote peace and international law." Early in her career, she defended Nelson Mandela and other anti-apartheid activists. The committee said it wanted to show that the rule of law is the basis for solving conflicts peacefully.</p>
+    <p class="x-ko">올해 노벨 평화상은 남아프리카공화국 출신 법조인 나비 필레이(85세)가 받았어요. 유엔 인권최고대표를 지냈고, 젊을 때는 넬슨 만델라 같은 인종차별(아파르트헤이트) 반대 운동가들을 변호했어요. 남아공 고등법원 최초의 유색인 여성 판사이기도 해요. 노벨위원회는 "평화와 국제법을 위해 노력한 공로"로 상을 준다고 했고, 국제법이 압박받는 요즘 '법의 지배'가 평화로운 분쟁 해결의 바탕이라는 걸 강조하고 싶었다고 밝혔어요. 시상식은 12월 10일 오슬로에서 열려요.</p>
+    <p class="x-diff">출처별 차이: Newsweek는 위원장 발언("국제 법정에서 법적 노력이 전쟁과 폭력을 막을 수 있다는 걸 보여줬다")과 위원회가 발표 전 본인과 연락이 닿지 않았다는 점을 다뤘고, Al Jazeera는 그녀가 이끈 유엔 팔레스타인 점령지 조사위원회 경력 등 이력을 더 자세히 소개했어요. 노벨재단 공식 보도자료 페이지는 이번 실행에서 열리지 않았어요.</p>
+    <div class="x-src">
+      <a href="https://www.aljazeera.com/news/2026/10/9/2026-nobel-peace-prize-awarded-to-navi-pillay">Al Jazeera – 2026 Nobel Peace Prize awarded to Navi Pillay</a><span>보도: 2026-10-09 (오슬로 발표일)</span>
+      <a href="https://www.newsweek.com/nobel-peace-prize-2026-winner-trump-award-12541915">Newsweek – Navi Pillay Wins Nobel Peace Prize</a><span>보도: 2026-10-09</span>
+      <a href="https://www.nobelprize.org/prizes/peace/2026/press-release/">NobelPrize.org – Press release: Nobel Peace Prize 2026</a><span>공식 발표: 2026-10-09</span>
+    </div>
+  </article>
+</section>
+<section>
+  <div class="x-label">Part 2 · 집중 학습</div>
+  <h3>런던에서 붙은 '로보택시 경쟁'</h3>
+  <p class="x-intro">고른 이유: 자율주행은 AI가 우리 일상에 들어오는 가장 눈에 보이는 사례라, "타 볼래?" 같은 질문으로 영어 대화 꺼내기 딱 좋아요. 한국에서도 시범 운행 중이라 남 얘기가 아니에요.</p>
+
+  <div class="x-step">
+    <div class="x-label">Step 1 · 영어로 읽기</div>
+    <h4>The Race for Robotaxis Reaches London</h4>
+    <div class="x-meta">191 words · 소리 내서 한 번, 눈으로 한 번</div>
+    <div class="x-article">
+      <p>Uber and the Chinese self-driving company Pony.ai announced on October 8 that they plan to bring Pony.ai's seventh-generation robotaxis to London. Testing on the city's roads is expected to start in the coming weeks.</p>
+      <p>The two companies are not new partners. They first teamed up in 2025, and people in Zagreb, Croatia, can already book Pony.ai cars through the Uber app. In August, they also announced plans to put more than 2,000 robotaxis on the roads of European cities.</p>
+      <p>London, however, is getting crowded. Uber already offers rides there with Wayve, a British company, with a safety driver on board. Waymo, owned by Google's parent company Alphabet, is testing in the city and aims for fully driverless rides by the end of 2026. Baidu is testing with Lyft and is aiming for 2027.</p>
+      <p>Fully driverless services still need government approval under the UK's Automated Vehicles Act of 2024. Pony.ai's CEO, James Peng, said he welcomes the competition because it gives passengers more choice.</p>
+      <p>Why does this matter? London is one of the world's biggest ride-hailing markets. How these companies do there could show whether robotaxis are ready for busy European cities.</p>
+    </div>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 2 · 내용 이해하기</div>
+    <p>로보택시는 사람 운전기사 없이 AI가 운전하는 택시예요. 우버(차량 호출 앱)와 중국 자율주행 회사 포니AI가 10월 8일, 포니AI의 7세대 로보택시를 런던에 들여오겠다고 발표했어요. 몇 주 안에 런던 도로에서 테스트를 시작할 예정이에요.</p>
+    <p>두 회사는 2025년부터 손잡았고, 크로아티아 자그레브에선 이미 우버 앱으로 포니AI 차를 부를 수 있어요. 8월엔 유럽 도시들에 로보택시를 2,000대 넘게 깔겠다는 계획도 발표했고요.</p>
+    <p>그런데 런던은 벌써 붐벼요. 우버는 영국 회사 웨이브와 함께 안전요원이 타는 방식으로 이미 운행 중이고, 구글 계열 웨이모는 2026년 말까지 완전 무인 운행을, 바이두는 리프트와 함께 2027년을 목표로 해요. 영국에선 완전 무인 서비스에 정부 승인이 필요하고요. 포니AI CEO는 "경쟁은 환영한다, 승객 선택지가 늘어나니까"라고 했어요. 런던은 세계에서 손꼽히는 차량 호출 시장이라, 여기서의 성적이 "로보택시가 복잡한 유럽 도시에서도 통하나?"를 보여줄 수 있어요.</p>
+    <h5>내용 확인 질문 (정답은 맨 아래)</h5>
+    <ol>
+      <li>In which city can people already book Pony.ai cars through the Uber app?</li>
+      <li>What do fully driverless services in the UK still need?</li>
+    </ol>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 3 · 표현 익히기</div>
+    <ul class="x-vocab">
+      <li><span class="x-term">in the coming weeks<small>앞으로 몇 주 안에</small></span>
+        <span class="x-ex">We'll get our midterm results in the coming weeks.</span>
+        <span class="x-exko">앞으로 몇 주 안에 중간고사 성적이 나올 거야.</span></li>
+      <li><span class="x-term">team up (with)<small>(~와) 손잡다, 협력하다</small></span>
+        <span class="x-ex">I teamed up with two classmates to enter a startup contest.</span>
+        <span class="x-exko">과 동기 두 명이랑 손잡고 창업 공모전에 나갔어.</span></li>
+      <li><span class="x-term">on board<small>(차·배·비행기 등에) 타고 있는</small></span>
+        <span class="x-ex">There were only five people on board the last bus to campus.</span>
+        <span class="x-exko">학교 가는 막차에 다섯 명밖에 안 타고 있었어.</span></li>
+      <li><span class="x-term">aim for ~<small>~을 목표로 하다</small></span>
+        <span class="x-ex">I'm aiming for an A in statistics this semester.</span>
+        <span class="x-exko">이번 학기 통계학에서 A를 목표로 하고 있어.</span></li>
+      <li><span class="x-term">give ~ more choice<small>~에게 선택지를 더 주다</small></span>
+        <span class="x-ex">The new food court gives students more choice at lunchtime.</span>
+        <span class="x-exko">새 푸드코트 덕분에 학생들이 점심때 고를 게 많아졌어.</span></li>
+    </ul>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 4 · 쉐도잉하기</div>
+    <p class="x-intro">/ 에서 살짝 끊고, 노란 단어에 힘을 줘서 읽어요. 문장마다 3번씩. 연도는 이렇게: 2026 = twenty twenty-six, 2,000 = two thousand.</p>
+    <ol class="x-shadow">
+      <li><div class="x-s">Testing on the city's roads / is expected to <b>start</b> / in the <b>coming</b> weeks.</div>
+        <div class="x-t">런던 도로에서의 테스트는 앞으로 몇 주 안에 시작될 예정이다.</div></li>
+      <li><div class="x-s">London, <b>however</b>, / is getting <b>crowded</b>.</div>
+        <div class="x-t">그런데 런던은 점점 붐비고 있다.</div></li>
+      <li><div class="x-s">Waymo is testing in the city / and <b>aims</b> for fully <b>driverless</b> rides / by the end of <b>2026</b>.</div>
+        <div class="x-t">웨이모는 런던에서 테스트 중이며, 2026년 말까지 완전 무인 운행을 목표로 한다.</div></li>
+      <li><div class="x-s">He <b>welcomes</b> the competition / because it gives passengers / <b>more choice</b>.</div>
+        <div class="x-t">그는 경쟁을 환영한다. 승객에게 선택지를 더 주기 때문이다.</div></li>
+    </ol>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 5 · 내 말로 말하기</div>
+    <div class="x-speak">
+      <p class="x-q">Would you feel comfortable riding in a taxi with no driver? Why or why not?</p>
+      <p class="x-intro" style="margin-top:8px">영어로 2문장만. "I would / wouldn't feel comfortable because ~." 틀로 시작하면 충분해요. 말해본 다음에 맨 아래 모범 답안을 펼쳐 보세요.</p>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="x-label">Answers</div>
+  <h3>정답</h3>
+  <ol>
+    <li>In Zagreb, Croatia. <br><span class="x-intro">크로아티아 자그레브.</span></li>
+    <li>They still need government approval (under the Automated Vehicles Act of 2024). <br><span class="x-intro">2024년 자율주행차법에 따른 정부 승인이 필요하다.</span></li>
+  </ol>
+  <details id="m-2026-10-10">
+    <summary>모범 답안 펼치기</summary>
+    <p class="x-en">I think I would feel a little nervous at first, especially on busy city roads. But if the robotaxi had a good safety record, I would try it, because it could be cheaper and available late at night.</p>
+    <p class="x-intro" style="margin-top:8px">처음엔 좀 긴장될 것 같아요. 특히 복잡한 도심 도로에서는요. 그래도 로보택시 안전 기록이 좋다면 타볼 거예요. 더 싸고 늦은 밤에도 탈 수 있을 테니까요.</p>
+  </details>
+</section>
+  </details>
+</div>
+<!--EN 2026-10-10 END-->
+<!--EN 2026-10-08 START-->
+<div class="en-day" id="e-2026-10-08">
+  <div class="day-head"><h3 class="en-date">10월 8일 목요일</h3></div>
+  <p class="en-focus"><span>집중 학습</span>미국 연준, "연말까지 금리 한 번 더 올릴 듯"</p>
+  <p class="lede">오늘 분량도 15분 정도. 뉴스 3개 훑고, 그중 미국 연준(Fed) 금리 이야기로 읽기 → 표현 → 쉐도잉 → 말하기까지 해봐요.</p>
+  <details class="full"><summary>학습지 펼쳐 보기</summary>
+<section>
+  <div class="x-label">Part 1</div>
+  <h3>오늘의 뉴스 3개</h3>
+
+  <article class="x-news">
+    <div class="x-label">① AI·테크</div>
+    <h4>ChatGPT Gets GPT-6 and Answers That Look Like Mini Apps</h4>
+    <p class="x-en">OpenAI started rolling out GPT-6 in ChatGPT on October 7. The update comes with "Intelligent UI," a feature that lets the AI decide how each answer should look, using buttons, forms, charts or plain text. Users can ask it to build small tools right inside the chat, such as a savings calculator or a bill splitter for dinner with friends. Paid plans got GPT-6 first, and Free and Go users were set to get it the next day.</p>
+    <p class="x-ko">OpenAI가 ChatGPT에 GPT-6를 넣기 시작했어요. 핵심은 '인텔리전트 UI'인데, 질문에 따라 AI가 답의 모양을 직접 골라요. 글로만 답하는 게 아니라 버튼, 입력 폼, 차트를 섞어서 보여주고, "저축 계산기 만들어줘", "친구들이랑 저녁값 나누는 계산기 만들어줘" 하면 채팅창 안에서 바로 작은 도구를 만들어줘요. 유료 요금제(Plus·Pro·Business·Enterprise)가 먼저, 무료·Go 요금제는 하루 뒤에 받는 순서예요. 웹에서는 '레이아웃 및 시각 요소' 설정을 끌 수도 있어요.</p>
+    <p class="x-diff">출처별 차이: OpenAI 공식 X 계정은 "모두에게(for everyone) 배포 중"이라고 썼지만, Search Engine Journal은 유료 요금제가 먼저이고 무료·Go는 <b>다음 날</b> 받는다고 구체적으로 정리했어요. 결국 "모두에게 가는 중이지만 순서가 있다"는 뜻이에요.</p>
+    <div class="x-src">
+      <a href="https://www.searchenginejournal.com/chatgpt-gpt-6-intelligent-ui/592249/">Search Engine Journal – ChatGPT Gets GPT-6 And Intelligent UI For Interactive Answers</a><span>보도: 2026-10-07 (미국 현지)</span>
+      <a href="https://x.com/OpenAI/status/2107894997538525580">OpenAI 공식 X 게시물 – GPT-6 and Intelligent UI, now rolling out in ChatGPT</a><span>게시: 2026-10-07</span>
+    </div>
+  </article>
+
+  <article class="x-news">
+    <div class="x-label">② 경제·일자리</div>
+    <h4>Fed Minutes: Most Officials See One More Rate Hike This Year</h4>
+    <p class="x-en">The U.S. Federal Reserve released the minutes of its September meeting on October 7. The notes showed that all 19 officials backed the decision to raise interest rates by a quarter point, to 3.75%–4%. Most officials said another increase would likely make sense by the end of the year, mainly because inflation has stayed above the Fed's 2% goal for more than five years. After a weak September jobs report, however, markets now think a hike at the October meeting is less likely.</p>
+    <p class="x-ko">미국 중앙은행(연준, Fed)이 9월 회의 의사록을 공개했어요. 9월에 금리를 0.25%p 올렸는데(3.75~4%), 투표권 없는 위원까지 19명 전원이 찬성했대요. 대부분은 "연말까지 한 번 더 올리는 게 맞을 것"이라고 봤어요. 이유는 물가 상승률이 5년 넘게 목표치 2%를 넘고 있어서예요. 다만 9월 일자리가 2만 9천 개밖에 안 늘어서, 시장에선 10월 회의(10/27~28) 인상 가능성을 37.6% → 17.2%로 낮춰 보고 있어요(CME FedWatch 기준).</p>
+    <p class="x-diff">출처별 차이: CFO Dive는 회의 날짜를 "9월 28일"로 적었지만, 연준 공식 페이지와 Epoch Times는 <b>9월 15~16일</b> 회의라고 해요. 공식 자료 기준으로 9월 16일 결정이 맞아요. 또 Epoch Times는 이란 전쟁에 따른 에너지 가격 상승 우려를 강조했고, CFO Dive는 사람들의 물가 기대 심리(앞으로 물가가 오를 거라는 생각)에 대한 우려를 더 자세히 다뤘어요.</p>
+    <div class="x-src">
+      <a href="https://finance.yahoo.com/economy/policy/articles/fed-officials-backed-vote-hike-193748797.html">CFO Dive (Yahoo Finance) – All Fed officials backed vote to hike benchmark rate: FOMC minutes</a><span>보도: 2026-10-07 (미국 현지)</span>
+      <a href="https://theepochtimes.com/business/fed-expects-another-rate-hike-before-end-of-2026-minutes-6100699">The Epoch Times – Fed Expects Another Rate Hike Before End of 2026: Minutes</a><span>보도: 2026-10-07</span>
+      <a href="https://www.federalreserve.gov/monetarypolicy/fomcpresconf20260916.htm">Federal Reserve (공식) – September 15–16, 2026 FOMC Meeting</a><span>공식 자료</span>
+    </div>
+  </article>
+
+  <article class="x-news">
+    <div class="x-label">③ 사회·과학·국제</div>
+    <h4>Nobel Prize in Chemistry Honors Scientists Who Solved a "Mirror Molecule" Mystery</h4>
+    <p class="x-en">The 2026 Nobel Prize in Chemistry went to Henri B. Kagan of France and Kenso Soai of Japan. Many molecules come in two mirror-image forms, like your left and right hands, and the two forms can act very differently. Kagan showed in the 1980s that reactions could be designed to favor one form, and Soai later created the first reaction that produces only one form. Their work helps drug makers produce the right version of a molecule, because the wrong one can be useless or even harmful.</p>
+    <p class="x-ko">올해 노벨 화학상은 프랑스의 앙리 카강(95세, 파리-쉬드 대학)과 일본의 소아이 겐소(도쿄이과대학)가 받았어요. 많은 분자는 왼손·오른손처럼 거울에 비친 두 가지 모양으로 존재하는데, 모양만 다를 뿐인데 성질은 완전히 달라요. 예를 들어 '카르본'이라는 분자는 한쪽은 민트 향, 다른 쪽은 캐러웨이(향신료) 향이 나요. 약도 마찬가지라 한쪽은 병을 고치고 다른 쪽은 해로울 수 있어요. 두 사람은 원하는 한쪽 모양만 만들어내는 방법을 찾았고, 이게 오늘날 신약 개발의 기반이 됐어요. 소아이 교수는 집 근처에서 장 보다가 수상 전화를 받았대요. 상금은 1,200만 스웨덴 크로나.</p>
+    <p class="x-diff">출처별 차이: AP는 카강의 발견 시기를 "1980년대"라고만 썼고, 영국왕립화학회(RSC)는 <b>1985년</b>이라고 구체적으로 적었어요. 상금도 AP는 약 120만 달러, RSC는 약 90만 4천 파운드로 환산했는데 원래 금액(1,200만 크로나)은 같아요.</p>
+    <div class="x-src">
+      <a href="https://spectrumlocalnews.com/nc/triad/science/2026/10/07/nobel-prize-in-chemistry-henri-b--kagan-and-kenso-soai-mirror-images-in-chemical-molecules">AP (Spectrum News 게재) – Nobel Prize in chemistry goes to Kagan and Soai for 'mirror image' research</a><span>보도: 2026-10-07 (스톡홀름 현지 발표일)</span>
+      <a href="https://www.rsc.org/news/nobel-prize-for-chemistry-2026">Royal Society of Chemistry – Henri Kagan and Kenso Soai win 2026 Chemistry Nobel Prize</a><span>보도: 2026-10-07</span>
+      <a href="https://www.nobelprize.org/prizes/chemistry/2026/press-release/">NobelPrize.org – Press release: Nobel Prize in Chemistry 2026</a><span>공식 발표: 2026-10-07</span>
+    </div>
+  </article>
+</section>
+<section>
+  <div class="x-label">Part 2 · 집중 학습</div>
+  <h3>미국 연준, "연말까지 금리 한 번 더 올릴 듯"</h3>
+  <p class="x-intro">고른 이유: 미국 금리는 환율, 주식, 취업 시장까지 영향을 주는 뉴스라 경제 기사에 매일 나와요. "interest rate", "inflation" 같은 단어는 면접이나 시사 토론에서도 자주 써요.</p>
+
+  <div class="x-step">
+    <div class="x-label">Step 1 · 영어로 읽기</div>
+    <h4>The Fed Signals One More Rate Hike This Year</h4>
+    <div class="x-meta">188 words · 소리 내서 한 번, 눈으로 한 번</div>
+    <div class="x-article">
+      <p>In September, the U.S. Federal Reserve raised its key interest rate by a quarter point, to a range of 3.75% to 4%. It was the Fed's first rate hike since July 2023. On October 7, the Fed released the minutes, or official notes, of that meeting. They showed that all 19 officials supported the decision.</p>
+      <p>The minutes also showed that most officials expect another increase by the end of the year. Their main worry is inflation. Prices have been rising faster than the Fed's 2% target for more than five years, and officials fear that the war in Iran could push up energy prices even further. Some warned that high inflation could change what people expect prices to do in the future.</p>
+      <p>Still, officials said they would approach each meeting with an open mind. After a weak September jobs report, with only 29,000 new jobs, some Fed leaders said they were in no hurry to raise rates again.</p>
+      <p>Why does this matter? When the Fed raises rates, borrowing money usually becomes more expensive for people and businesses. So the Fed's next decision matters to many households and companies.</p>
+    </div>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 2 · 내용 이해하기</div>
+    <p>연준(Fed)은 미국의 중앙은행이에요. 물가가 너무 오르면 금리를 올려서 돈 빌리기를 어렵게 만들고, 그렇게 소비를 식혀 물가를 잡으려고 해요. 9월에 연준은 금리를 0.25%p 올렸는데, 2023년 7월 이후 처음 올린 거예요.</p>
+    <p>10월 7일에 그 회의의 '의사록(minutes)', 즉 회의에서 무슨 얘기가 오갔는지 적은 공식 기록이 공개됐어요. 내용을 보면 19명 전원이 인상에 찬성했고, 대부분 "연말까지 한 번 더 올릴 것 같다"고 봤어요. 가장 큰 걱정은 물가예요. 5년 넘게 목표(2%)보다 빨리 오르고 있고, 이란 전쟁 때문에 에너지 가격이 더 뛸 수도 있거든요. 물가가 계속 높으면 사람들이 "앞으로도 오르겠지" 하고 생각하게 되는 것도 걱정거리고요.</p>
+    <p>그래도 "회의마다 열린 마음으로 판단하겠다"고 했고, 9월 일자리 지표가 약하게 나오자 일부 연준 인사들은 "급하게 올릴 필요는 없다"고 말했어요. 금리가 오르면 대출 이자가 비싸지니까, 연준의 다음 결정은 많은 가정과 기업에 영향을 줘요.</p>
+    <h5>내용 확인 질문 (정답은 맨 아래)</h5>
+    <ol>
+      <li>How many Fed officials supported the rate hike in September?</li>
+      <li>What could push up energy prices, according to Fed officials?</li>
+    </ol>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 3 · 표현 익히기</div>
+    <ul class="x-vocab">
+      <li><span class="x-term">rate hike<small>금리 인상</small></span>
+        <span class="x-ex">My bank sent me an email about the rate hike on my savings account.</span>
+        <span class="x-exko">은행에서 내 예금 계좌 금리 인상에 대한 이메일을 보냈다.</span></li>
+      <li><span class="x-term">push up (prices)<small>(가격 등을) 끌어올리다</small></span>
+        <span class="x-ex">The new café near campus pushed up coffee prices in the whole area.</span>
+        <span class="x-exko">캠퍼스 근처에 새로 생긴 카페가 동네 전체의 커피값을 끌어올렸다.</span></li>
+      <li><span class="x-term">by the end of the year<small>연말까지</small></span>
+        <span class="x-ex">I want to get a TOEIC score of 900 by the end of the year.</span>
+        <span class="x-exko">연말까지 토익 900점을 받고 싶어.</span></li>
+      <li><span class="x-term">approach ~ with an open mind<small>~에 열린 마음으로 임하다</small></span>
+        <span class="x-ex">Try to approach your new group project with an open mind.</span>
+        <span class="x-exko">새 조별 과제에 열린 마음으로 임해 봐.</span></li>
+      <li><span class="x-term">be in no hurry to ~<small>서두를 생각이 없다, 급할 게 없다</small></span>
+        <span class="x-ex">I'm in no hurry to choose my major. I still have a year.</span>
+        <span class="x-exko">전공 고르는 건 급하지 않아. 아직 1년 남았거든.</span></li>
+    </ul>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 4 · 쉐도잉하기</div>
+    <p class="x-intro">/ 에서 살짝 끊고, 노란 단어에 힘을 줘서 읽어요. 3번씩 따라 해보기. 숫자는 이렇게 읽어요: 3.75% = three point seven five percent.</p>
+    <ol class="x-shadow">
+      <li><div class="x-s">The U.S. Federal Reserve / <b>raised</b> its key interest rate / by a <b>quarter</b> point, / to a range of <b>3.75%</b> to <b>4%</b>.</div>
+        <div class="x-t">미국 연준은 기준금리를 0.25%p 올려 3.75~4% 범위로 만들었다.</div></li>
+      <li><div class="x-s">Most officials expect / <b>another</b> increase / by the <b>end</b> of the year.</div>
+        <div class="x-t">대부분의 위원은 연말까지 한 번 더 인상할 것으로 예상한다.</div></li>
+      <li><div class="x-s">Officials fear / that the war in Iran / could <b>push up</b> energy prices / even <b>further</b>.</div>
+        <div class="x-t">위원들은 이란 전쟁이 에너지 가격을 더 끌어올릴 수 있다고 우려한다.</div></li>
+      <li><div class="x-s">Some Fed leaders said / they were in <b>no hurry</b> / to raise rates <b>again</b>.</div>
+        <div class="x-t">일부 연준 인사들은 금리를 다시 올리는 데 서두를 생각이 없다고 말했다.</div></li>
+    </ol>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 5 · 내 말로 말하기</div>
+    <div class="x-speak">
+      <p class="x-q">If interest rates go up, how might it change the way young people spend or save money?</p>
+      <p class="x-intro" style="margin-top:8px">영어로 2문장만. "If rates go up, I think people will ~." 틀로 시작해도 충분해요. 말해본 다음에 맨 아래 모범 답안을 펼쳐 보세요.</p>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="x-label">Answers</div>
+  <h3>정답</h3>
+  <ol>
+    <li>All 19 officials supported it. <br><span class="x-intro">19명 전원이 찬성했다.</span></li>
+    <li>The war in Iran. <br><span class="x-intro">이란 전쟁.</span></li>
+  </ol>
+  <details id="m-2026-10-08">
+    <summary>모범 답안 펼치기</summary>
+    <p class="x-en">If interest rates go up, I think young people will borrow less and think twice before buying expensive things. On the other hand, saving money in the bank might become more attractive.</p>
+    <p class="x-intro" style="margin-top:8px">금리가 오르면 젊은 사람들은 돈을 덜 빌리고, 비싼 물건을 사기 전에 한 번 더 생각할 것 같아요. 반대로 은행에 저축하는 건 더 매력적으로 느껴질 수 있고요.</p>
+  </details>
+</section>
+  </details>
+</div>
+<!--EN 2026-10-08 END-->
+<!--EN 2026-10-07 START-->
+<div class="en-day" id="e-2026-10-07">
+  <div class="day-head"><h3 class="en-date">10월 7일 수요일</h3></div>
+  <p class="en-focus"><span>집중 학습</span>뉴욕시의회 AI 청문회: "완벽한 안전은 약속 못 해"</p>
+  <p class="lede">오늘 분량은 15분 정도. 뉴스 3개 훑어보고, 그중 하나(뉴욕시의회 AI 청문회)로 읽기 → 표현 → 쉐도잉 → 말하기까지 해봐요.</p>
+  <details class="full"><summary>학습지 펼쳐 보기</summary>
+<section>
+  <div class="x-label">Part 1</div>
+  <h3>오늘의 뉴스 3개</h3>
+
+  <article class="x-news">
+    <div class="x-label">① AI·테크</div>
+    <h4>Top AI Companies Decline to Promise Perfect Safety at NYC Hearing</h4>
+    <p class="x-en">On October 5, the New York City Council questioned executives from OpenAI, Anthropic, Google and Meta about the risks of AI. Council Speaker Julie Menin asked them to guarantee, under oath, that their AI agents would always follow safety guardrails. None of the four companies gave that guarantee, saying no technology can be completely free of risk. The council is reviewing 10 bills on issues such as shutdown controls and chatbot privacy.</p>
+    <p class="x-ko">뉴욕시의회가 AI 위험을 따지는 청문회를 열고 빅테크 4곳 임원을 불렀어요. "AI가 항상 안전장치를 지킨다고 선서하고 보장할 수 있냐"는 질문에 네 회사 모두 "위험이 0인 기술은 없다"며 보장은 못 한다고 답했어요. 시의회는 AI 비상 정지 장치, 챗봇 개인정보 보호 같은 내용을 담은 법안 10개를 검토 중이에요.</p>
+    <p class="x-diff">출처별 차이: CBS는 임원들이 <b>화상으로(원격) 증언</b>했다고 전했고, Quartz는 대형 AI 기업이 입법기관 앞에서 <b>선서 증언을 한 첫 사례</b>라고 표현했어요. CBS는 "미국 최초(보도에 따르면 세계 최초)의 AI 감독 청문회"라고 썼어요.</p>
+    <div class="x-src">
+      <a href="https://www.cbsnews.com/newyork/news/new-york-city-council-ai-oversight-hearing/">CBS New York – New York City Council holds landmark AI oversight hearing</a><span>보도: 2026-10-05 (미국 현지)</span>
+      <a href="https://www.foxnews.com/live-news/ai-super-intelligence-safety-10-06">Fox News – OpenAI, Anthropic, Meta, Google stop short of AI safety guarantee</a><span>보도: 2026-10-05~06</span>
+      <a href="https://qz.com/openai-anthropic-google-meta-nyc-council-ai-hearing-100526">Quartz – OpenAI, Anthropic, Google, Meta testify at NYC AI hearing</a><span>보도: 2026-10-05</span>
+    </div>
+  </article>
+
+  <article class="x-news">
+    <div class="x-label">② 경제·일자리</div>
+    <h4>U.S. Hiring Slows to Just 29,000 Jobs in September</h4>
+    <p class="x-en">The U.S. economy added only 29,000 jobs in September, far fewer than economists had expected. The unemployment rate rose slightly to 4.2% from 4.1%. Job numbers for July and August were also revised down by a combined 60,000. Health care and construction added jobs, while government and financial firms cut positions.</p>
+    <p class="x-ko">미국 노동부(BLS)가 발표한 9월 고용지표에서 일자리가 2만 9천 개밖에 안 늘었어요. 실업률은 4.1% → 4.2%로 조금 올랐고, 7·8월 숫자도 합쳐서 6만 개 하향 수정됐어요(7월은 아예 마이너스 1만). 시간당 임금은 1년 전보다 3.0% 올랐어요. Axios는 실업률 상승이 "일자리를 찾으러 노동시장에 새로 들어온 사람이 늘어난 영향"도 있다고 설명했어요. 한 줄 요약: 미국 고용시장이 무너지진 않았지만 확실히 느려지는 중.</p>
+    <p class="x-diff">출처별 차이: 경제학자 예상치를 Axios는 <b>8만 4천 개</b>, Fox Business는 <b>9만 개</b>로 적었어요(조사 기관이 달라서 생기는 차이). 헬스케어 증가분은 BLS 요약 1만 7천, Fox Business 1만 6,700으로 반올림 차이예요.</p>
+    <div class="x-src">
+      <a href="https://www.bls.gov/news.release/empsit.nr0.htm">BLS (미국 노동통계국) – Employment Situation Summary, September 2026</a><span>공식 발표: 2026-10-02</span>
+      <a href="https://www.axios.com/2026/10/02/september-jobs-federal-reserve-trump">Axios – U.S. adds 29,000 jobs in September, unemployment edges up</a><span>보도: 2026-10-02</span>
+      <a href="https://www.foxbusiness.com/economy/us-jobs-report-september-2026">Fox Business – US economy added 29,000 jobs in September</a><span>보도: 2026-10-02</span>
+    </div>
+  </article>
+
+  <article class="x-news">
+    <div class="x-label">③ 사회·과학·국제</div>
+    <h4>Nobel Prize in Physics Goes to Scientist Who Used Antarctic Ice to Catch "Ghost" Particles</h4>
+    <p class="x-en">The 2026 Nobel Prize in Physics was awarded to Francis Halzen, an 82-year-old Belgian-born physicist at the University of Wisconsin–Madison. He was honored for his work on neutrinos, tiny particles that carry clues about how the universe changes over time. Halzen played a key role in building IceCube, an observatory that uses a cubic kilometer of ice at the South Pole as a detector. In 2013, IceCube detected the first high-energy neutrinos from outside our solar system.</p>
+    <p class="x-ko">올해 노벨 물리학상은 미국 위스콘신대 프랜시스 할전 교수(82세, 벨기에 출신)가 받았어요. 중성미자(neutrino)는 전기를 띠지 않고 질량도 아주 작아서 우리 몸을 1초에 수조 개씩 그냥 통과하는 '유령 입자'예요. 할전 교수는 남극 얼음 1㎦를 통째로 탐지기로 쓰는 '아이스큐브' 관측소를 만드는 데 핵심 역할을 했고, 덕분에 은하 밖에서 온 고에너지 중성미자를 처음 잡아냈어요. 상금은 1,200만 스웨덴 크로나(약 120만 달러).</p>
+    <div class="x-src">
+      <a href="https://www.pbs.org/newshour/science/watch-live-winner-of-the-2026-nobel-prize-in-physics-is">PBS NewsHour (AP) – Nobel Prize in physics awarded to Francis Halzen</a><span>보도: 2026-10-06 (스웨덴 현지 발표일)</span>
+      <a href="https://news.wisc.edu/university-of-wisconsin-madison-professor-francis-halzen-named-2026-nobel-laureate-in-physics/">UW–Madison News – Francis Halzen named 2026 Nobel laureate in physics</a><span>발표: 2026-10-06</span>
+    </div>
+  </article>
+</section>
+<section>
+  <div class="x-label">Part 2 · 집중 학습</div>
+  <h3>뉴욕시의회 AI 청문회: "완벽한 안전은 약속 못 해"</h3>
+  <p class="x-intro">고른 이유: AI는 대학생이 매일 쓰는 도구라 의견 말하기 쉽고, "누가 AI를 규제해야 하나"는 토론·면접에도 자주 나오는 주제예요.</p>
+
+  <div class="x-step">
+    <div class="x-label">Step 1 · 영어로 읽기</div>
+    <h4>AI Giants Face Tough Questions in New York</h4>
+    <div class="x-meta">186 words · 소리 내서 한 번, 눈으로 한 번</div>
+    <div class="x-article">
+      <p>On Monday, October 5, the New York City Council held a public hearing on the risks of artificial intelligence. Council Speaker Julie Menin said the council had to step in because the federal government allows AI companies to regulate themselves. Executives from OpenAI, Anthropic, Google and Meta testified under oath, joining the hearing remotely.</p>
+      <p>Menin asked the four companies a direct question: could they guarantee that their AI agents would always follow the safety rules meant to prevent catastrophic harm? None of them made that promise. OpenAI's representative said no technology can be guaranteed to be free of risk, and Google's representative said promising perfection would not be possible. Menin answered that the council was not asking for perfection, only for accountability, transparency and safety.</p>
+      <p>Council members also asked how an emergency "kill switch" would work and whether the companies would accept legal responsibility if their AI caused harm. The council is now considering 10 bills, including rules on human shutdown controls and chatbot data privacy.</p>
+      <p>The hearing matters because it shows local lawmakers trying to hold powerful tech companies accountable when national rules are limited.</p>
+    </div>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 2 · 내용 이해하기</div>
+    <p>쉽게 말하면 이래요. 뉴욕시의회 의장 줄리 메닌은 "연방정부가 AI 회사들한테 알아서 규제하라고 맡겨놨으니 우리가 나선다"며 청문회를 열었어요. OpenAI·Anthropic·구글·메타 임원들이 화상으로 참석해 선서하고 증언했죠.</p>
+    <p>핵심 장면은 "당신들 AI가 대형 사고를 막는 안전 규칙을 <b>항상</b> 지킨다고 보장할 수 있냐"는 질문. 네 회사 모두 "위험 없는 기술은 없다, 완벽은 약속 못 한다"고 답했어요. 의장은 "완벽을 요구하는 게 아니라 책임·투명성·안전을 요구하는 것"이라고 받아쳤고요.</p>
+    <p>그 밖에 AI를 비상 정지시키는 '킬 스위치'가 실제로 작동하는지, AI가 피해를 주면 회사가 법적 책임을 지는지도 물었어요. 시의회는 관련 법안 10개를 검토 중이에요. 국가 차원 규칙이 부족한 상황에서 도시가 직접 빅테크에 책임을 묻기 시작했다는 게 이 뉴스의 의미예요.</p>
+    <h5>내용 확인 질문 (정답은 맨 아래)</h5>
+    <ol>
+      <li>Why did Julie Menin say the city council needed to hold this hearing?</li>
+      <li>According to Menin, what was the council asking the companies for, if not perfection?</li>
+    </ol>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 3 · 표현 익히기</div>
+    <ul class="x-vocab">
+      <li><span class="x-term">testify under oath<small>선서하고 증언하다</small></span>
+        <span class="x-ex">The witness testified under oath that she had never seen the contract.</span>
+        <span class="x-exko">그 증인은 그 계약서를 본 적이 없다고 선서하고 증언했다.</span></li>
+      <li><span class="x-term">regulate themselves (self-regulate)<small>스스로 규제하다, 자율 규제하다</small></span>
+        <span class="x-ex">Many online communities regulate themselves with their own posting rules.</span>
+        <span class="x-exko">많은 온라인 커뮤니티는 자체 게시 규칙으로 스스로 규제한다.</span></li>
+      <li><span class="x-term">guarantee<small>보장하다, 장담하다</small></span>
+        <span class="x-ex">I can't guarantee I'll finish the report by Friday, but I'll try.</span>
+        <span class="x-exko">금요일까지 보고서 끝낸다고 장담은 못 하지만 해볼게.</span></li>
+      <li><span class="x-term">hold someone accountable<small>~에게 책임을 묻다</small></span>
+        <span class="x-ex">Students should hold the student council accountable for how it spends the budget.</span>
+        <span class="x-exko">학생들은 학생회가 예산을 어떻게 쓰는지 책임을 물어야 한다.</span></li>
+      <li><span class="x-term">kill switch<small>(비상) 정지 장치, 강제 종료 기능</small></span>
+        <span class="x-ex">The new e-scooter has a kill switch that stops the motor instantly.</span>
+        <span class="x-exko">새 전동킥보드에는 모터를 즉시 멈추는 비상 정지 장치가 있다.</span></li>
+    </ul>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 4 · 쉐도잉하기</div>
+    <p class="x-intro">/ 에서 살짝 끊고, 노란 단어에 힘을 줘서 읽어요. 3번씩 따라 해보기.</p>
+    <ol class="x-shadow">
+      <li><div class="x-s">Executives from <b>OpenAI</b>, <b>Anthropic</b>, <b>Google</b> and <b>Meta</b> / testified under <b>oath</b>, / joining the hearing <b>remotely</b>.</div>
+        <div class="x-t">OpenAI, Anthropic, 구글, 메타의 임원들이 원격으로 청문회에 참석해 선서하고 증언했다.</div></li>
+      <li><div class="x-s">Could they <b>guarantee</b> / that their AI agents would <b>always</b> follow the safety rules / meant to prevent <b>catastrophic</b> harm?</div>
+        <div class="x-t">그들의 AI 에이전트가 대형 참사를 막기 위한 안전 규칙을 항상 따를 거라고 보장할 수 있는가?</div></li>
+      <li><div class="x-s">The council was <b>not</b> asking for <b>perfection</b>, / only for <b>accountability</b>, / <b>transparency</b> / and <b>safety</b>.</div>
+        <div class="x-t">시의회는 완벽함을 요구한 게 아니라, 책임성·투명성·안전을 요구했을 뿐이다.</div></li>
+      <li><div class="x-s">It shows local lawmakers / trying to <b>hold</b> powerful tech companies <b>accountable</b> / when national rules are <b>limited</b>.</div>
+        <div class="x-t">이는 국가 차원의 규칙이 부족할 때 지역 의원들이 거대 테크 기업에 책임을 묻으려 한다는 걸 보여준다.</div></li>
+    </ol>
+  </div>
+
+  <div class="x-step">
+    <div class="x-label">Step 5 · 내 말로 말하기</div>
+    <div class="x-speak">
+      <p class="x-q">Should AI companies be allowed to regulate themselves, or should governments make the rules? Why?</p>
+      <p class="x-intro" style="margin-top:8px">영어로 2문장만. "I think ~ because ~." 틀이면 충분해요. 말해본 다음에 맨 아래 모범 답안을 펼쳐 보세요.</p>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="x-label">Answers</div>
+  <h3>정답</h3>
+  <ol>
+    <li>Because the federal government allows AI companies to regulate themselves. <br><span class="x-intro">연방정부가 AI 회사의 자율 규제에 맡겨두고 있어서.</span></li>
+    <li>Accountability, transparency and safety. <br><span class="x-intro">책임성, 투명성, 안전.</span></li>
+  </ol>
+  <details id="m-2026-10-07">
+    <summary>모범 답안 펼치기</summary>
+    <p class="x-en">I think governments should make at least some basic rules, because companies care about profit and may not limit their own products. Still, the rules should be clear and simple so that companies can keep building useful tools.</p>
+    <p class="x-intro" style="margin-top:8px">정부가 최소한의 기본 규칙은 만들어야 한다고 생각해요. 회사는 이익을 중시해서 자기 제품을 스스로 제한하지 않을 수 있으니까요. 그래도 회사들이 계속 유용한 도구를 만들 수 있게 규칙은 명확하고 단순해야 해요.</p>
+  </details>
+</section>
+  </details>
+</div>
+<!--EN 2026-10-07 END-->
+<!--EN:END-->
 </div>
 
 <footer class="site-foot">
@@ -1959,7 +3827,7 @@ h4{font-weight:700;letter-spacing:-.015em}
   });
   /* ---------- masthead stats ---------- */
   (function(){var m=$('#meta'); if(!m) return; var nc=$$('.concepts li').length;
-    m.innerHTML=''; [[days.length,'일째'],[all.length,'개 뉴스'],[nc,'개 경제 개념']].forEach(function(p){var s=document.createElement('span');var b=document.createElement('b');b.textContent=p[0];s.appendChild(b);s.appendChild(document.createTextNode(p[1]));m.appendChild(s)});})();
+    m.innerHTML=''; [[days.length,'일째'],[all.length,'개 뉴스'],[nc,'개 경제 개념'],[$$('.x-vocab li').length,'개 영어 표현']].forEach(function(p){var s=document.createElement('span');var b=document.createElement('b');b.textContent=p[0];s.appendChild(b);s.appendChild(document.createTextNode(p[1]));m.appendChild(s)});})();
   /* ---------- weekly summary panel ---------- */
   (function(){
     if(!days.length) return; var w=weekStats(mondayOf(dateOf(days[0]))), host=$('#weekly');
@@ -2059,10 +3927,42 @@ h4{font-weight:700;letter-spacing:-.015em}
       });
     }).catch(function(){btn.textContent='다시 눌러줘'}).then(function(){btn.removeAttribute('aria-busy');if(btn.textContent==='이미지 만드는 중…')btn.textContent=old});
   }
+
+  /* ---------- english study ---------- */
+  (function(){
+    var edays=$$('#p-english .en-day'), V=[];
+    edays.forEach(function(ed){
+      var d=ed.id.slice(2), terms=$$('.x-vocab li',ed);
+      var ul=document.createElement('ul'); ul.className='en-chips'; ul.setAttribute('aria-label','오늘의 표현');
+      terms.forEach(function(li){var t=$('.x-term',li); if(!t) return; var sm=$('small',t); var term=txt(t).replace(sm?txt(sm):'','').trim(); var mean=sm?txt(sm):'';
+        V.push({d:d,term:term,mean:mean,ex:txt($('.x-ex',li))}); var c=document.createElement('li'); c.textContent=term; ul.appendChild(c)});
+      var lede=$('.lede',ed); if(lede) lede.insertAdjacentElement('afterend',ul);
+    });
+    var list=$('#vlist'), more=$('#vmore'), q=$('#vq'), lim=8;
+    $('#vcount').textContent='지금까지 '+V.length+'개';
+    function render(){
+      var k=(q.value||'').trim().toLowerCase(), rows=V.filter(function(v){return !k||(v.term+' '+v.mean+' '+v.ex).toLowerCase().indexOf(k)>-1});
+      list.innerHTML=''; rows.slice(0,k?999:lim).forEach(function(v){var li=document.createElement('li');li.innerHTML='<span class="cd"></span><a href="#"><span class="vt"></span><span class="vm"></span></a>';
+        $('.cd',li).textContent=fmt(v.d);$('.vt',li).textContent=v.term;$('.vm',li).textContent=v.mean;$('a',li).addEventListener('click',function(e){e.preventDefault();go('e-'+v.d)});list.appendChild(li)});
+      if(!rows.length){var e=document.createElement('li');e.className='empty';e.textContent='찾는 표현이 없어.';list.appendChild(e)}
+      more.hidden=!!k||rows.length<=lim;
+    }
+    more.addEventListener('click',function(){lim=9999;render()}); q.addEventListener('input',render); render();
+    if(!edays.length) $('#vbox').hidden=true;
+  })();
   /* ---------- tabs & deep links ---------- */
   var tabs=$$('.tabs [role=tab]');
-  function show(pid){tabs.forEach(function(t){var on=t.getAttribute('aria-controls')===pid;t.setAttribute('aria-selected',on?'true':'false');$('#'+t.getAttribute('aria-controls')).hidden=!on})}
-  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.getAttribute('aria-controls'));window.scrollTo({top:$('.tabs').offsetTop,behavior:'auto'})})});
+  var lastNews='p-date', secs=$$('.sec button'), nav=$('.navbar');
+  function show(pid){
+    var en=pid==='p-english'; if(!en) lastNews=pid;
+    secs.forEach(function(b){b.setAttribute('aria-selected',(b.dataset.sec==='english')===en?'true':'false')});
+    nav.classList.toggle('en',en); document.body.classList.toggle('en-mode',en);
+    tabs.forEach(function(t){var on=t.getAttribute('aria-controls')===pid;t.setAttribute('aria-selected',on?'true':'false');$('#'+t.getAttribute('aria-controls')).hidden=!on});
+    $('#p-english').hidden=!en;
+  }
+  var toNav=function(){var y=nav.getBoundingClientRect().top+window.scrollY; if(window.scrollY>y) window.scrollTo({top:y,behavior:'auto'})};
+  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.getAttribute('aria-controls'));toNav()})});
+  secs.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.sec==='english'?'p-english':lastNews);toNav()})});
   function go(id){
     var el=document.getElementById(id); if(!el) return;
     var panel=el.closest('[role=tabpanel]'); if(panel) show(panel.id);
@@ -2072,7 +3972,7 @@ h4{font-weight:700;letter-spacing:-.015em}
     try{history.replaceState(null,'','#'+id)}catch(e){}
   }
   window.__go=go;
-  function fromHash(){var h=location.hash.slice(1); if(!h) return; var map={topics:'p-topic',issues:'p-issue',concepts:'p-concept'}; if(map[h]){show(map[h]);return} go(h)}
+  function fromHash(){var h=location.hash.slice(1); if(!h) return; var map={topics:'p-topic',issues:'p-issue',concepts:'p-concept',english:'p-english'}; if(map[h]){show(map[h]);return} go(h)}
   window.addEventListener('hashchange',fromHash); fromHash();
   $$('.concepts a').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();go(a.getAttribute('href').slice(1))})});
   /* ---------- chart tooltips ---------- */
@@ -2091,6 +3991,5 @@ h4{font-weight:700;letter-spacing:-.015em}
   window.addEventListener('scroll',hide,{passive:true});
 })();
 </script>
-
 </body>
 </html>
